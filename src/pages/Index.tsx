@@ -1,11 +1,15 @@
 
 import { useEffect } from 'react';
 import BrandGallery from '@/components/BrandGallery';
+import FashionWeekTable from '@/components/FashionWeekTable';
 import FeedbackTab from '@/components/FeedbackTab';
 import brands from '@/data/brands';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 const Index = () => {
+  const [viewMode, setViewMode] = useState<'gallery' | 'table'>('table');
+  
   useEffect(() => {
     // Add a smooth scroll behavior to the entire page
     document.documentElement.style.scrollBehavior = 'smooth';
@@ -22,7 +26,7 @@ const Index = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="relative py-20 md:py-32 overflow-hidden"
+        className="relative py-16 md:py-24 overflow-hidden"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-background z-0"></div>
         
@@ -31,27 +35,17 @@ const Index = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="flex flex-col items-center text-center max-w-3xl mx-auto px-4"
+            className="flex flex-col items-center text-center max-w-4xl mx-auto px-4"
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-              className="mb-4"
-            >
-              <div className="inline-block text-xs font-medium text-primary bg-primary/10 rounded-full px-3 py-1 mb-4">
-                Discover New Brands
-              </div>
-            </motion.div>
-            
             <motion.h1 
-              className="text-4xl md:text-6xl font-bold mb-6 tracking-tight text-balance"
+              className="text-5xl md:text-7xl font-bold mb-6 tracking-tight text-balance"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
             >
-              Saturn Los Angeles
-              <span className="block text-primary">Brand Gallery</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] animate-pulse-soft">
+                FashionWeek
+              </span>
             </motion.h1>
             
             <motion.p
@@ -60,21 +54,34 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              Explore our curated collection of innovative brands. Discover the latest drops, unique styles, and emerging designers shaping the future of fashion.
+              Explore our curated collection of innovative brands. Track upcoming drops and discover emerging designers shaping the future of fashion.
             </motion.p>
             
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
+              className="flex gap-4"
             >
               <button 
-                onClick={() => {
-                  document.getElementById('brand-gallery')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="bg-primary text-white px-8 py-3 rounded-full font-medium hover:bg-primary/90 transition-all hover:shadow-lg hover:-translate-y-1"
+                onClick={() => setViewMode('table')}
+                className={`px-6 py-2 rounded-full font-medium transition-all ${
+                  viewMode === 'table' 
+                    ? 'bg-primary text-white hover:bg-primary/90'
+                    : 'bg-secondary text-secondary-foreground hover:bg-secondary/90'
+                }`}
               >
-                Explore Brands
+                Table View
+              </button>
+              <button 
+                onClick={() => setViewMode('gallery')}
+                className={`px-6 py-2 rounded-full font-medium transition-all ${
+                  viewMode === 'gallery' 
+                    ? 'bg-primary text-white hover:bg-primary/90'
+                    : 'bg-secondary text-secondary-foreground hover:bg-secondary/90'
+                }`}
+              >
+                Gallery View
               </button>
             </motion.div>
           </motion.div>
@@ -83,7 +90,39 @@ const Index = () => {
       
       {/* Main Content */}
       <main className="container py-10 px-4" id="brand-gallery">
-        <BrandGallery brands={brands} />
+        <div className="mb-8 flex justify-between items-center">
+          <h2 className="text-2xl font-semibold">
+            {viewMode === 'table' ? 'Upcoming Drops' : 'Brand Gallery'}
+          </h2>
+          <div className="text-sm text-muted-foreground">
+            <span className="font-medium text-foreground">{brands.length}</span> brands tracked
+          </div>
+        </div>
+        
+        {viewMode === 'table' ? (
+          <FashionWeekTable brands={brands} />
+        ) : (
+          <BrandGallery brands={brands} />
+        )}
+        
+        {/* Typeform Embed */}
+        <div className="mt-20 py-10 px-6 bg-muted/30 rounded-xl text-center">
+          <h3 className="text-2xl font-bold mb-4">Join Our Fashion Tracker</h3>
+          <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+            Get notified about new drops, collaborations, and exclusive offers from your favorite brands.
+          </p>
+          <a 
+            href="https://form.typeform.com/to/Q5fonbTT" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-8 py-3 bg-primary text-white rounded-full font-medium hover:bg-primary/90 transition-all hover:shadow-lg"
+          >
+            Subscribe Now
+          </a>
+          <p className="text-xs text-muted-foreground mt-4">
+            Join <span className="font-medium">{Math.floor(Math.random() * 500) + 1500}</span> other fashion enthusiasts
+          </p>
+        </div>
       </main>
       
       {/* Footer */}

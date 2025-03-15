@@ -56,18 +56,22 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
       
       if (typeof aValue === 'string' && typeof bValue === 'string') {
         if (sortConfig.field === 'dropDate') {
-          // For dates, convert to timestamp
-          aValue = new Date(aValue).getTime();
-          bValue = new Date(bValue).getTime();
+          // For dates, convert to timestamp for comparison
+          const aDate = new Date(aValue).getTime();
+          const bDate = new Date(bValue).getTime();
+          
+          return sortConfig.direction === 'asc' ? aDate - bDate : bDate - aDate;
         } else {
           // For strings, convert to lowercase for case-insensitive sorting
           aValue = aValue.toLowerCase();
           bValue = bValue.toLowerCase();
+          
+          if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
+          if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
+          return 0;
         }
       }
       
-      if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
-      if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
       return 0;
     });
     
