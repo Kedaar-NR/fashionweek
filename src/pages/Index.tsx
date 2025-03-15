@@ -107,7 +107,7 @@ const Index = () => {
               <div className="text-sm">
                 info@fashionweek.com
               </div>
-              <div className="text-sm">©2025 • <span className="text-[#F97316] font-medium">Join 150,000 readers</span></div>
+              <div className="text-sm">©2025 <span className="text-[#F97316] font-medium">Join 150,000 readers</span></div>
             </motion.div>
           </div>
           
