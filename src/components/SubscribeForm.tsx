@@ -12,7 +12,7 @@ interface SubscribeFormProps {
 
 const SubscribeForm = ({ 
   formId, 
-  height = 280, 
+  height = 280, // Default height increased to allow for email entry
   onClose, 
   onComplete,
   showCloseButton = false 

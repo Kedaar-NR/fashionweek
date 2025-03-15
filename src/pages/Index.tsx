@@ -72,37 +72,19 @@ const Index = () => {
             transition={{ delay: 0.2, duration: 0.5 }}
             className="flex flex-col items-start max-w-5xl mx-auto"
           >
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="mb-6"
-            >
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-[#f97316] to-[#f43f5e] bg-clip-text text-transparent mb-6">
-                Fashion Week
-              </h1>
-              <motion.p 
-                className="text-xl text-[#555] max-w-xl" 
+            <div className="flex flex-col md:flex-row md:justify-between w-full items-center md:items-end gap-8 mb-8">
+              <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                className="md:max-w-xl"
               >
-                Track upcoming drops and discover emerging designers shaping the future of fashion.
-              </motion.p>
-            </motion.div>
-            
-            <div className="flex justify-between w-full items-end mt-8">
-              <div className="flex items-start gap-3">
-                <div className="w-1 h-20 bg-gradient-to-b from-[#f97316] to-[#f43f5e] rounded-full"></div>
-                <div>
-                  <div className="text-xs text-[#777] uppercase mb-1">// VISION</div>
-                  <div className="text-[#333] max-w-md">
-                    Curating the future of fashion through discovery, community, and innovative design.
-                  </div>
-                </div>
-              </div>
+                <p className="text-xl text-[#555] mb-4 md:mb-0 text-center md:text-left">
+                  Track upcoming drops and discover emerging designers shaping the future of fashion.
+                </p>
+              </motion.div>
               
-              <div className="text-right">
+              <div className="text-center md:text-right">
                 <div className="text-xs text-[#777] uppercase">// JOIN</div>
                 <div className="text-5xl font-bold bg-gradient-to-r from-[#f97316] to-[#f43f5e] bg-clip-text text-transparent">320K</div>
                 <div className="text-xs text-[#555] uppercase">CHANGEMAKERS</div>
@@ -152,7 +134,7 @@ const Index = () => {
               <X size={12} />
             </button>
           </div>
-          <SubscribeForm formId="Q5fonbTT" height={220} onComplete={handleSubscribeComplete} />
+          <SubscribeForm formId="Q5fonbTT" height={280} onComplete={handleSubscribeComplete} />
         </div>}
       
       {/* Footer */}
