@@ -1,4 +1,3 @@
-
 import { useState, useMemo, useEffect } from 'react';
 import { Brand, BrandStyle, SortConfig, FilterConfig } from '@/types';
 import { useScrollTrigger } from '@/utils/animations';
@@ -21,17 +20,17 @@ interface BrandGalleryProps {
   brands: Brand[];
 }
 
-// Enhanced style icon and color mapping with vibrant colors
-export const styleConfig: Record<BrandStyle, { icon: JSX.Element, color: string, bgColor: string }> = {
-  'streetwear': { icon: <ShoppingBag size={18} />, color: '#F97316', bgColor: '#FFF7ED' },
-  'goth': { icon: <Scissors size={18} />, color: '#6366F1', bgColor: '#EEF2FF' },
-  'luxury': { icon: <Crown size={18} />, color: '#D946EF', bgColor: '#FAF5FF' },
-  'vintage': { icon: <Clock size={18} />, color: '#8B5CF6', bgColor: '#F3F0FF' },
-  'minimalist': { icon: <Shirt size={18} />, color: '#64748B', bgColor: '#F8FAFC' },
-  'contemporary': { icon: <Palette size={18} />, color: '#0EA5E9', bgColor: '#EFF6FF' },
-  'hypebeast': { icon: <Flame size={18} />, color: '#EC4899', bgColor: '#FDF2F8' },
-  'athletic': { icon: <Dumbbell size={18} />, color: '#14B8A6', bgColor: '#F0FDFA' },
-  'sustainable': { icon: <Leaf size={18} />, color: '#10B981', bgColor: '#ECFDF5' },
+// Style icon and color mapping with improved colors
+export const styleConfig: Record<BrandStyle, { icon: JSX.Element, color: string }> = {
+  'streetwear': { icon: <ShoppingBag size={16} />, color: '#F97316' }, // Orange
+  'goth': { icon: <Scissors size={16} />, color: '#6366F1' }, // Indigo
+  'luxury': { icon: <Crown size={16} />, color: '#D946EF' }, // Pink
+  'vintage': { icon: <Clock size={16} />, color: '#8B5CF6' }, // Purple
+  'minimalist': { icon: <Shirt size={16} />, color: '#94A3B8' }, // Slate
+  'contemporary': { icon: <Palette size={16} />, color: '#0EA5E9' }, // Sky
+  'hypebeast': { icon: <Flame size={16} />, color: '#EC4899' }, // Pink
+  'athletic': { icon: <Dumbbell size={16} />, color: '#14B8A6' }, // Teal
+  'sustainable': { icon: <Leaf size={16} />, color: '#10B981' }, // Emerald
 };
 
 export const BrandGallery = ({ brands }: BrandGalleryProps) => {
@@ -113,36 +112,6 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
     }
   }, [isTriggered]);
 
-  // Show all styles at the top as highlighted tags
-  const StyleTags = () => (
-    <div className="mb-8 flex flex-wrap gap-2">
-      {availableStyles.map(style => {
-        const styleData = styleConfig[style];
-        const isSelected = filterConfig.styles.includes(style);
-        
-        return (
-          <button
-            key={style}
-            onClick={() => {
-              const newStyles = isSelected 
-                ? filterConfig.styles.filter(s => s !== style)
-                : [...filterConfig.styles, style];
-              setFilterConfig({ ...filterConfig, styles: newStyles });
-            }}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full font-medium text-sm transition-all`}
-            style={{ 
-              backgroundColor: isSelected ? styleData.color : styleData.bgColor,
-              color: isSelected ? 'white' : styleData.color,
-              border: `1px solid ${isSelected ? styleData.color : 'transparent'}`,
-            }}
-          >
-            {styleData.icon} {style.charAt(0).toUpperCase() + style.slice(1)}
-          </button>
-        );
-      })}
-    </div>
-  );
-
   return (
     <div className="w-full">
       <FilterBar 
@@ -154,9 +123,6 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
         onSortChange={setSortConfig}
         styleConfig={styleConfig}
       />
-      
-      {/* Add the style tags at the top */}
-      <StyleTags />
       
       {filteredAndSortedBrands.length === 0 ? (
         <motion.div 
