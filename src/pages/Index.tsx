@@ -33,7 +33,7 @@ const Index = () => {
               <div className="text-sm">
                 info@fashionweek.com
               </div>
-              <div className="text-sm">©2025 • Join 150,000 readers</div>
+              <div className="text-sm">©2025 • <span className="text-[#F97316] font-medium">Join 150,000 readers</span></div>
             </div>
           </div>
           
@@ -68,7 +68,7 @@ const Index = () => {
                 onClick={() => setViewMode('table')}
                 className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
                   viewMode === 'table' 
-                    ? 'bg-[#111] text-white hover:bg-black'
+                    ? 'bg-[#F97316] text-white hover:bg-[#F97316]/90'
                     : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'
                 }`}
               >
@@ -78,7 +78,7 @@ const Index = () => {
                 onClick={() => setViewMode('gallery')}
                 className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
                   viewMode === 'gallery' 
-                    ? 'bg-[#111] text-white hover:bg-black'
+                    ? 'bg-[#F97316] text-white hover:bg-[#F97316]/90'
                     : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'
                 }`}
               >
@@ -161,7 +161,7 @@ const Index = () => {
       <div className="fixed bottom-6 right-6 z-40">
         <div className="relative">
           <button 
-            className="bg-[#111] text-white rounded-full p-4 shadow-lg hover:bg-black transition-colors flex items-center justify-center w-14 h-14"
+            className="bg-[#F97316] text-white rounded-full p-4 shadow-lg hover:bg-[#F97316]/90 transition-colors flex items-center justify-center w-14 h-14"
             onClick={() => window.open('https://forms.gle/feedback', '_blank')}
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
