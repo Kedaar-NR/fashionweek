@@ -22,6 +22,9 @@ export const BrandCard = ({ brand, index }: BrandCardProps) => {
     day: 'numeric'
   });
 
+  // Instagram profile URL
+  const instagramUrl = `https://instagram.com/${brand.instagramHandle}`;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -48,7 +51,7 @@ export const BrandCard = ({ brand, index }: BrandCardProps) => {
         
         <div className="brand-overlay absolute inset-0 bg-background/10 backdrop-blur-sm opacity-0 transition-opacity duration-300 flex items-center justify-center">
           <a 
-            href={`https://instagram.com/${brand.instagramHandle}`}
+            href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-full bg-white/90 text-black shadow-md hover:bg-white transition-colors duration-200"
@@ -70,7 +73,16 @@ export const BrandCard = ({ brand, index }: BrandCardProps) => {
       
       <div className="p-4 flex-1 flex flex-col">
         <div className="flex items-start justify-between mb-1">
-          <h3 className="font-medium text-lg leading-tight">{brand.name}</h3>
+          <h3 className="font-medium text-lg leading-tight">
+            <a 
+              href={instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline transition-all hover:text-primary"
+            >
+              {brand.name}
+            </a>
+          </h3>
         </div>
         
         <Badge variant="outline" className="w-fit mb-3 capitalize">

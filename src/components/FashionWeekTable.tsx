@@ -113,7 +113,16 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
                   )}
                 </div>
               </TableCell>
-              <TableCell className="font-medium">{brand.name}</TableCell>
+              <TableCell className="font-medium">
+                <a 
+                  href={`https://instagram.com/${brand.instagramHandle}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline transition-all hover:text-primary"
+                >
+                  {brand.name}
+                </a>
+              </TableCell>
               <TableCell>
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-muted capitalize">
                   {brand.style}
