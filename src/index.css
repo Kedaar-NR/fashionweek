@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
@@ -140,44 +141,5 @@
   
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-muted-foreground;
-  }
-  
-  /* Button hover effect */
-  .feedback-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  }
-  
-  /* Feedback tooltip animation */
-  .feedback-tooltip {
-    animation: pulse 2s infinite;
-  }
-  
-  @keyframes pulse {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-3px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-  
-  /* Custom animation for subscribe form */
-  .subscribe-form-appear {
-    animation: slide-in 0.3s ease-out;
-  }
-  
-  @keyframes slide-in {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 }
