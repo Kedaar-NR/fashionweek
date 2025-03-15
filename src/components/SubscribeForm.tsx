@@ -1,12 +1,20 @@
 
 import { useEffect, useRef } from 'react';
+import { X } from 'lucide-react';
 
 interface SubscribeFormProps {
   formId: string;
   height?: number;
+  onClose?: () => void;
+  showCloseButton?: boolean;
 }
 
-const SubscribeForm = ({ formId, height = 350 }: SubscribeFormProps) => {
+const SubscribeForm = ({ 
+  formId, 
+  height = 280, 
+  onClose, 
+  showCloseButton = false 
+}: SubscribeFormProps) => {
   const formContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,7 +35,16 @@ const SubscribeForm = ({ formId, height = 350 }: SubscribeFormProps) => {
   }, []);
 
   return (
-    <div className="max-w-2xl mx-auto rounded-md overflow-hidden border border-border">
+    <div className="w-full rounded-md overflow-hidden border border-border relative">
+      {showCloseButton && onClose && (
+        <button 
+          onClick={onClose}
+          className="absolute top-2 right-2 z-10 bg-secondary/80 rounded-full p-1 hover:bg-secondary transition-colors"
+          aria-label="Close subscription form"
+        >
+          <X size={16} className="text-secondary-foreground" />
+        </button>
+      )}
       <div 
         ref={formContainerRef}
         style={{ height: `${height}px` }}

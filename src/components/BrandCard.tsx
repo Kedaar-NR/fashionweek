@@ -20,9 +20,9 @@ const BrandCard = ({ brand, index }: BrandCardProps) => {
       className="bg-card rounded-xl overflow-hidden border border-border hover:border-primary/20 hover:shadow-md transition-all group"
     >
       <div className="relative h-48 overflow-hidden">
-        {brand.imageUrl ? (
+        {brand.image ? (
           <img 
-            src={brand.imageUrl} 
+            src={brand.image} 
             alt={brand.name} 
             className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105" 
           />
@@ -58,10 +58,10 @@ const BrandCard = ({ brand, index }: BrandCardProps) => {
           >
             {brand.name}
           </a>
-          {brand.logoUrl ? (
+          {brand.logo ? (
             <div className="w-8 h-8 rounded-full overflow-hidden border border-border">
               <img 
-                src={brand.logoUrl} 
+                src={brand.logo} 
                 alt={`${brand.name} logo`} 
                 className="w-full h-full object-cover" 
               />

@@ -59,23 +59,23 @@ export const FeedbackTab = () => {
   return (
     <>
       <motion.button
-        className="fixed bottom-6 right-6 bg-primary text-white p-4 rounded-full shadow-lg z-50 hover:scale-105 transition-transform"
+        className="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow-lg z-50 hover:scale-105 transition-transform"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(true)}
       >
         <span className="flex items-center">
-          <MessageSquareText className="w-5 h-5" />
+          <MessageSquareText className="w-4 h-4" />
         </span>
       </motion.button>
       
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger id="feedback-trigger" className="hidden" />
-        <SheetContent className="sm:max-w-md">
+        <SheetContent className="sm:max-w-xs">
           <SheetHeader>
             <SheetTitle>Share Your Feedback</SheetTitle>
             <SheetDescription>
-              We'd love to hear your thoughts about our brand gallery.
+              We'd love to hear your thoughts.
             </SheetDescription>
           </SheetHeader>
           
@@ -86,7 +86,7 @@ export const FeedbackTab = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="space-y-6 py-6"
+                className="space-y-4 py-4"
                 onSubmit={handleSubmit}
               >
                 <div className="space-y-2">
@@ -95,10 +95,10 @@ export const FeedbackTab = () => {
                   </label>
                   <Textarea
                     id="feedback"
-                    placeholder="Share your ideas, suggestions, or report any issues..."
+                    placeholder="Share your suggestions..."
                     value={feedback}
                     onChange={(e) => setFeedback(e.target.value)}
-                    rows={6}
+                    rows={4}
                     className="resize-none"
                   />
                 </div>
@@ -108,16 +108,17 @@ export const FeedbackTab = () => {
                     type="submit" 
                     className="w-full"
                     disabled={isSubmitting}
+                    size="sm"
                   >
                     {isSubmitting ? (
                       <div className="flex items-center space-x-2">
-                        <div className="h-4 w-4 rounded-full border-2 border-background border-t-transparent animate-spin" />
+                        <div className="h-3 w-3 rounded-full border-2 border-background border-t-transparent animate-spin" />
                         <span>Submitting...</span>
                       </div>
                     ) : (
                       <div className="flex items-center">
-                        <SendIcon className="h-4 w-4 mr-2" />
-                        <span>Submit Feedback</span>
+                        <SendIcon className="h-3 w-3 mr-2" />
+                        <span>Submit</span>
                       </div>
                     )}
                   </Button>
@@ -129,21 +130,21 @@ export const FeedbackTab = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                className="flex flex-col items-center justify-center h-[50vh]"
+                className="flex flex-col items-center justify-center h-[30vh]"
               >
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                  <MessageSquareText className="h-8 w-8 text-primary" />
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                  <MessageSquareText className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-medium mb-2">Thank You!</h3>
-                <p className="text-center text-muted-foreground mb-4">
-                  Your feedback has been submitted and will help us improve.
+                <h3 className="text-lg font-medium mb-1">Thank You!</h3>
+                <p className="text-center text-muted-foreground text-sm mb-3">
+                  Your feedback has been submitted.
                 </p>
                 <Button 
                   variant="outline" 
                   onClick={() => setIsOpen(false)}
-                  className="mt-4"
+                  size="sm"
                 >
-                  <ArrowRightIcon className="h-4 w-4 mr-2" />
+                  <ArrowRightIcon className="h-3 w-3 mr-2" />
                   Close
                 </Button>
               </motion.div>
@@ -152,9 +153,9 @@ export const FeedbackTab = () => {
         </SheetContent>
       </Sheet>
 
-      {/* Tooltip for the feedback button */}
-      <div className="fixed bottom-20 right-10 bg-popover text-popover-foreground px-4 py-2 rounded-lg shadow-lg z-40 text-sm animate-fade-in">
-        Give us feedback!
+      {/* Smaller tooltip for the feedback button */}
+      <div className="fixed bottom-16 right-6 bg-popover text-popover-foreground px-3 py-1 rounded-lg shadow-lg z-40 text-xs animate-fade-in">
+        Give feedback
       </div>
     </>
   );
