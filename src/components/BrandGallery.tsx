@@ -4,8 +4,8 @@ import { Brand, BrandStyle, SortConfig, FilterConfig } from '@/types';
 import { useScrollTrigger } from '@/utils/animations';
 import BrandCard from './BrandCard';
 import FilterBar from './FilterBar';
-import SubscribeModal from './SubscribeModal';
 import { motion } from 'framer-motion';
+import FeedbackTab from './FeedbackTab';
 
 interface BrandGalleryProps {
   brands: Brand[];
@@ -78,19 +78,17 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
     return result;
   }, [brands, filterConfig, sortConfig]);
   
-  // Scroll trigger for subscribe modal - reduced threshold to trigger sooner
-  const { isTriggered, setIsTriggered } = useScrollTrigger(300, 800);
+  // Disable the scroll trigger for the modal since we're embedding the form
+  const { isTriggered } = useScrollTrigger(300, 800);
   
-  // Modal state
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // Show feedback form after scrolling
+  const [showFeedback, setShowFeedback] = useState(false);
   
-  // Show modal when scroll trigger activates
   useEffect(() => {
     if (isTriggered) {
-      setIsModalOpen(true);
-      setIsTriggered(false);
+      setShowFeedback(true);
     }
-  }, [isTriggered, setIsTriggered]);
+  }, [isTriggered]);
 
   return (
     <div className="w-full">
@@ -128,11 +126,17 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
         </div>
       )}
       
-      <SubscribeModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)}
-        typeformUrl="https://form.typeform.com/to/Q5fonbTT"
-      />
+      {/* Show the feedback popup when scroll is triggered */}
+      {showFeedback && (
+        <div className="fixed bottom-24 right-8 z-50">
+          <button
+            onClick={() => document.getElementById('feedback-trigger')?.click()}
+            className="bg-primary text-white px-4 py-2 rounded-full shadow-lg flex items-center space-x-2 hover:bg-primary/90 transition-colors"
+          >
+            <span>Share Feedback</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

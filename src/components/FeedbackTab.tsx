@@ -8,7 +8,8 @@ import {
   SheetHeader, 
   SheetTitle,
   SheetDescription,
-  SheetFooter
+  SheetFooter,
+  SheetTrigger
 } from '@/components/ui/sheet';
 import { useToast } from '@/hooks/use-toast';
 import { MessageSquareText, SendIcon, ArrowRightIcon } from 'lucide-react';
@@ -58,7 +59,7 @@ export const FeedbackTab = () => {
   return (
     <>
       <motion.button
-        className="feedback-tab px-5 py-2 bg-primary text-primary-foreground rounded-t-lg shadow-lg"
+        className="feedback-tab px-5 py-2 bg-primary text-primary-foreground rounded-t-lg shadow-lg fixed bottom-0 right-10 transform -translate-x-1/2"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(true)}
@@ -70,6 +71,7 @@ export const FeedbackTab = () => {
       </motion.button>
       
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <SheetTrigger id="feedback-trigger" className="hidden" />
         <SheetContent className="glass-panel" side="right">
           <SheetHeader>
             <SheetTitle>Share Your Feedback</SheetTitle>

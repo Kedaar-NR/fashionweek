@@ -6,6 +6,7 @@ import FeedbackTab from '@/components/FeedbackTab';
 import brands from '@/data/brands';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import SubscribeForm from '@/components/SubscribeForm';
 
 const Index = () => {
   const [viewMode, setViewMode] = useState<'gallery' | 'table'>('table');
@@ -105,20 +106,13 @@ const Index = () => {
           <BrandGallery brands={brands} />
         )}
         
-        {/* Typeform Embed */}
+        {/* Subscribe Form - Embedded on page instead of external */}
         <div className="mt-20 py-10 px-6 bg-muted/30 rounded-xl text-center">
           <h3 className="text-2xl font-bold mb-4">Join Our Fashion Tracker</h3>
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
             Get notified about new drops, collaborations, and exclusive offers from your favorite brands.
           </p>
-          <a 
-            href="https://form.typeform.com/to/Q5fonbTT" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-8 py-3 bg-primary text-white rounded-full font-medium hover:bg-primary/90 transition-all hover:shadow-lg"
-          >
-            Subscribe Now
-          </a>
+          <SubscribeForm formId="Q5fonbTT" />
           <p className="text-xs text-muted-foreground mt-4">
             Join <span className="font-medium">{Math.floor(Math.random() * 500) + 1500}</span> other fashion enthusiasts
           </p>
@@ -130,7 +124,7 @@ const Index = () => {
         <div className="container px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">
-              <h2 className="text-2xl font-bold">Saturn LA</h2>
+              <h2 className="text-2xl font-bold">FashionWeek</h2>
               <p className="text-muted-foreground">Curating the future of fashion</p>
             </div>
             
@@ -142,7 +136,7 @@ const Index = () => {
           </div>
           
           <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Saturn Los Angeles. All rights reserved.
+            &copy; {new Date().getFullYear()} FashionWeek. All rights reserved.
           </div>
         </div>
       </footer>
