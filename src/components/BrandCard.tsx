@@ -17,7 +17,7 @@ const BrandCard = ({ brand, index }: BrandCardProps) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.05 }}
-      className="bg-card rounded-xl overflow-hidden border border-border hover:border-primary/20 hover:shadow-md transition-all group"
+      className="bg-white rounded-lg overflow-hidden border border-[#eaeaea] hover:border-[#ddd] hover:shadow-sm transition-all group"
     >
       <div className="relative h-48 overflow-hidden">
         {brand.logoUrl ? (
@@ -27,18 +27,18 @@ const BrandCard = ({ brand, index }: BrandCardProps) => {
             className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105" 
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-muted/50">
+          <div className="w-full h-full flex items-center justify-center bg-[#f5f5f5]">
             <img 
               src="/placeholder.svg" 
               alt="Placeholder" 
-              className="w-16 h-16 text-muted-foreground opacity-50 transition-all duration-300 group-hover:scale-110" 
+              className="w-16 h-16 text-[#aaa] opacity-50 transition-all duration-300 group-hover:scale-110" 
             />
           </div>
         )}
         <div 
           className="absolute bottom-0 right-0 m-2 px-2.5 py-1 rounded-full text-xs font-medium capitalize"
           style={{ 
-            backgroundColor: `${styleData.color}20`, 
+            backgroundColor: `${styleData.color}15`, 
             color: styleData.color
           }}
         >
@@ -54,12 +54,12 @@ const BrandCard = ({ brand, index }: BrandCardProps) => {
             href={`https://instagram.com/${brand.instagramHandle}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-lg font-medium hover:text-primary transition-colors hover:underline"
+            className="text-base font-medium hover:text-[#f97316] transition-colors hover:underline"
           >
             {brand.name}
           </a>
           {brand.logoUrl ? (
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-border">
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-[#eaeaea]">
               <img 
                 src={brand.logoUrl} 
                 alt={`${brand.name} logo`} 
@@ -67,15 +67,15 @@ const BrandCard = ({ brand, index }: BrandCardProps) => {
               />
             </div>
           ) : (
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full bg-[#f5f5f5] flex items-center justify-center text-[#aaa]">
               {brand.name.charAt(0)}
             </div>
           )}
         </div>
         
         <div className="mt-2">
-          <div className="text-sm text-muted-foreground">Drop date:</div>
-          <div className="font-semibold">
+          <div className="text-sm text-[#777]">Drop date:</div>
+          <div className="font-medium text-[#111]">
             {format(new Date(brand.dropDate), 'MMMM d, yyyy')}
           </div>
         </div>
@@ -85,7 +85,7 @@ const BrandCard = ({ brand, index }: BrandCardProps) => {
             href={`https://instagram.com/${brand.instagramHandle}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-primary transition-colors"
+            className="text-[#777] hover:text-[#f97316] transition-colors"
           >
             @{brand.instagramHandle}
           </a>
