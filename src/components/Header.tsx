@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion';
 import { Shirt, TrendingUp, Sparkles, Calendar } from 'lucide-react';
 import { Brand } from '@/types';
@@ -96,7 +97,7 @@ const Header = ({ brandCount }: HeaderProps) => {
             <div className="text-sm">
               info@fashionweek.com
             </div>
-            <div className="text-sm">©2025 <span className="ml-2 text-[#F97316] font-medium">Join 150,000 readers</span></div>
+            <div className="text-sm">©2025 <span className="text-[#F97316] font-medium">Join 150,000 readers</span></div>
           </motion.div>
         </div>
         
@@ -104,17 +105,35 @@ const Header = ({ brandCount }: HeaderProps) => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.7 }}
-          className="flex flex-col items-center text-center max-w-3xl mx-auto pt-6 pb-10"
+          className="flex flex-col items-center text-center max-w-3xl mx-auto"
         >
+          <motion.h1 
+            className="text-4xl md:text-5xl font-bold mb-4 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+          >
+            Discover What's Next in <span className="text-[#F97316]">Fashion</span>
+          </motion.h1>
+          
+          <motion.p
+            className="text-lg text-[#555] md:text-xl max-w-xl mt-2 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+          >
+            Track upcoming drops and discover emerging designers shaping the future of fashion.
+          </motion.p>
+          
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-            className="py-3 px-6 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full text-white font-medium shadow-md hover:shadow-lg transition-shadow"
+            transition={{ delay: 1, duration: 0.5 }}
+            className="py-2 px-4 bg-[#F97316]/10 rounded-full text-sm text-[#F97316] font-medium"
           >
             <span className="flex items-center">
-              <Calendar size={18} className="mr-2" />
-              {brandCount} brands with upcoming drops 🔥
+              <Calendar size={16} className="mr-2" />
+              {brandCount} brands with upcoming drops
             </span>
           </motion.div>
         </motion.div>
