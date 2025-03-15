@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import BrandGallery from '@/components/BrandGallery';
 import FashionWeekTable from '@/components/FashionWeekTable';
@@ -6,7 +5,7 @@ import brands from '@/data/brands';
 import { motion } from 'framer-motion';
 import SubscribeForm from '@/components/SubscribeForm';
 import FeedbackTab from '@/components/FeedbackTab';
-import { Shirt, TrendingUp, Sparkles, Calendar } from 'lucide-react';
+import { Shirt, TrendingUp, Sparkles, Calendar, Flame } from 'lucide-react';
 
 const Index = () => {
   const [viewMode, setViewMode] = useState<'gallery' | 'table'>('table');
@@ -153,8 +152,12 @@ const Index = () => {
       {/* Main Content */}
       <main className="container py-12 px-4" id="brand-gallery">
         <div className="mb-8 flex justify-between items-center">
-          <h2 className="text-xl font-medium text-[#111]">
-            {viewMode === 'table' ? 'Upcoming Drops' : 'Brand Gallery'}
+          <h2 className="text-xl font-medium text-[#111] flex items-center">
+            {viewMode === 'table' ? (
+              <>
+                Upcoming Drops <Flame className="ml-2 text-[#F97316]" size={18} />
+              </>
+            ) : 'Brand Gallery'}
           </h2>
           
           <div className="flex items-center gap-4">
