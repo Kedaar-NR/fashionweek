@@ -7,28 +7,15 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import SubscribeForm from '@/components/SubscribeForm';
 
 interface SubscribeModalProps {
   isOpen: boolean;
   onClose: () => void;
-  typeformUrl?: string;
+  typeformId?: string;
 }
 
-const SubscribeModal = ({ isOpen, onClose, typeformUrl = "https://form.typeform.com/to/Q5fonbTT" }: SubscribeModalProps) => {
-  // Create a containment div for the Typeform embed
-  useEffect(() => {
-    if (isOpen) {
-      const script = document.createElement('script');
-      script.src = "https://embed.typeform.com/next/embed.js";
-      script.async = true;
-      document.body.appendChild(script);
-
-      return () => {
-        document.body.removeChild(script);
-      };
-    }
-  }, [isOpen]);
-
+const SubscribeModal = ({ isOpen, onClose, typeformId = "Q5fonbTT" }: SubscribeModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-md">
@@ -39,16 +26,12 @@ const SubscribeModal = ({ isOpen, onClose, typeformUrl = "https://form.typeform.
           </DialogDescription>
         </DialogHeader>
         
-        <div className="h-[450px] mt-4 overflow-hidden rounded-md border">
-          <div 
-            data-tf-widget={typeformUrl.split('/').pop()}
-            data-tf-opacity="100" 
-            data-tf-iframe-props="title=FashionWeek Subscription" 
-            data-tf-transitive-search-params 
-            data-tf-medium="snippet" 
-            data-tf-hidden="utm_source=website,utm_medium=subscribe_popup"
-            className="w-full h-full"
-          ></div>
+        <div className="h-[450px] mt-4 overflow-hidden rounded-md">
+          <SubscribeForm 
+            formId={typeformId} 
+            height={450} 
+            showCloseButton={false}
+          />
         </div>
       </DialogContent>
     </Dialog>

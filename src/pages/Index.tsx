@@ -5,6 +5,7 @@ import FashionWeekTable from '@/components/FashionWeekTable';
 import brands from '@/data/brands';
 import { motion } from 'framer-motion';
 import SubscribeForm from '@/components/SubscribeForm';
+import FeedbackTab from '@/components/FeedbackTab';
 
 const Index = () => {
   const [viewMode, setViewMode] = useState<'gallery' | 'table'>('table');
@@ -117,7 +118,7 @@ const Index = () => {
               </motion.span>
             </button>
           </div>
-          <SubscribeForm formId="Q5fonbTT" height={320} onComplete={handleSubscribeComplete} />
+          <SubscribeForm formId="Q5fonbTT" height={350} onComplete={handleSubscribeComplete} />
         </div>
       )}
       
@@ -157,24 +158,8 @@ const Index = () => {
         </div>
       </footer>
       
-      {/* More prominent feedback button */}
-      <div className="fixed bottom-6 right-6 z-40">
-        <div className="relative">
-          <button 
-            className="bg-[#F97316] text-white rounded-full p-4 shadow-lg hover:bg-[#F97316]/90 transition-colors flex items-center justify-center w-14 h-14"
-            onClick={() => window.open('https://forms.gle/feedback', '_blank')}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </button>
-          
-          {/* Added feedback label */}
-          <div className="absolute -top-8 right-0 bg-white text-[#111] px-3 py-1 rounded-lg shadow-lg z-40 text-xs whitespace-nowrap">
-            Give us feedback!
-          </div>
-        </div>
-      </div>
+      {/* Add the Feedback Tab component */}
+      <FeedbackTab />
     </div>
   );
 };
