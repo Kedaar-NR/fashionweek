@@ -6,10 +6,34 @@ import BrandCard from './BrandCard';
 import FilterBar from './FilterBar';
 import { motion } from 'framer-motion';
 import FeedbackTab from './FeedbackTab';
+import { 
+  ShoppingBag, 
+  Crown, 
+  Shirt, 
+  Timer, 
+  Scissors, 
+  Brush, 
+  TrendingUp, 
+  Dumbbell, 
+  Leaf 
+} from 'lucide-react';
 
 interface BrandGalleryProps {
   brands: Brand[];
 }
+
+// Style icon and color mapping
+export const styleConfig: Record<BrandStyle, { icon: JSX.Element, color: string }> = {
+  'streetwear': { icon: <ShoppingBag size={16} />, color: '#F97316' }, // Orange
+  'goth': { icon: <Scissors size={16} />, color: '#6366F1' }, // Indigo
+  'luxury': { icon: <Crown size={16} />, color: '#D946EF' }, // Pink
+  'vintage': { icon: <Timer size={16} />, color: '#8B5CF6' }, // Purple
+  'minimalist': { icon: <Shirt size={16} />, color: '#94A3B8' }, // Slate
+  'contemporary': { icon: <Brush size={16} />, color: '#0EA5E9' }, // Sky
+  'hypebeast': { icon: <TrendingUp size={16} />, color: '#EC4899' }, // Pink
+  'athletic': { icon: <Dumbbell size={16} />, color: '#14B8A6' }, // Teal
+  'sustainable': { icon: <Leaf size={16} />, color: '#10B981' }, // Emerald
+};
 
 export const BrandGallery = ({ brands }: BrandGalleryProps) => {
   // Sort and filter states
@@ -99,6 +123,7 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
         sortConfig={sortConfig}
         onFilterChange={setFilterConfig}
         onSortChange={setSortConfig}
+        styleConfig={styleConfig}
       />
       
       {filteredAndSortedBrands.length === 0 ? (
@@ -121,7 +146,7 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredAndSortedBrands.map((brand, index) => (
-            <BrandCard key={brand.id} brand={brand} index={index} />
+            <BrandCard key={brand.id} brand={brand} index={index} styleConfig={styleConfig} />
           ))}
         </div>
       )}

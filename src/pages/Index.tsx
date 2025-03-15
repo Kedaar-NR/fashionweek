@@ -27,7 +27,7 @@ const Index = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="relative py-16 md:py-24 overflow-hidden"
+        className="relative py-12 md:py-20 overflow-hidden"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-background z-0"></div>
         
@@ -39,7 +39,7 @@ const Index = () => {
             className="flex flex-col items-center text-center max-w-4xl mx-auto px-4"
           >
             <motion.h1 
-              className="text-5xl md:text-7xl font-bold mb-6 tracking-tight text-balance"
+              className="text-6xl md:text-8xl font-bold mb-2 tracking-tight text-balance"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
@@ -50,7 +50,16 @@ const Index = () => {
             </motion.h1>
             
             <motion.p
-              className="text-lg text-muted-foreground mb-8 max-w-2xl"
+              className="text-3xl font-bold text-primary mb-6 max-w-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.5 }}
+            >
+              Drop Tracker
+            </motion.p>
+            
+            <motion.p
+              className="text-lg text-muted-foreground mb-6 max-w-2xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
@@ -62,7 +71,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="flex gap-4"
+              className="flex gap-4 mb-6"
             >
               <button 
                 onClick={() => setViewMode('table')}
@@ -85,6 +94,20 @@ const Index = () => {
                 Gallery View
               </button>
             </motion.div>
+            
+            {/* Subscribe Form at the top */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="w-full max-w-md mt-2 mb-4 bg-card/50 backdrop-blur-sm p-4 rounded-xl shadow-sm"
+            >
+              <h3 className="text-lg font-semibold mb-2">Join Our Community</h3>
+              <SubscribeForm formId="Q5fonbTT" height={220} />
+              <p className="text-sm text-primary font-medium mt-2">
+                Join <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">{Math.floor(Math.random() * 50) + 120}</span> other fashion enthusiasts
+              </p>
+            </motion.div>
           </motion.div>
         </div>
       </motion.header>
@@ -105,18 +128,6 @@ const Index = () => {
         ) : (
           <BrandGallery brands={brands} />
         )}
-        
-        {/* Subscribe Form - Embedded on page instead of external */}
-        <div className="mt-20 py-10 px-6 bg-muted/30 rounded-xl text-center">
-          <h3 className="text-2xl font-bold mb-4">Join Our Fashion Tracker</h3>
-          <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-            Get notified about new drops, collaborations, and exclusive offers from your favorite brands.
-          </p>
-          <SubscribeForm formId="Q5fonbTT" />
-          <p className="text-xs text-muted-foreground mt-4">
-            Join <span className="font-medium">{Math.floor(Math.random() * 500) + 1500}</span> other fashion enthusiasts
-          </p>
-        </div>
       </main>
       
       {/* Footer */}

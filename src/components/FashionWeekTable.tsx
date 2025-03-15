@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { cn } from '@/lib/utils';
 import { ArrowDown, ArrowUp, ShoppingBag } from 'lucide-react';
 import { format, isAfter, isBefore, addDays, addMonths } from 'date-fns';
+import { styleConfig } from './BrandGallery';
 
 interface FashionWeekTableProps {
   brands: Brand[];
@@ -23,7 +24,9 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
     const weekFromNow = addDays(today, 7);
     const monthFromNow = addMonths(today, 1);
 
-    if (isBefore(dropDate, weekFromNow)) {
+    if (isBefore(dropDate, today)) {
+      return "text-muted-foreground line-through"; // Past dates
+    } else if (isBefore(dropDate, weekFromNow)) {
       return "text-[#ea384c] font-medium"; // Red for dates within a week
     } else if (isBefore(dropDate, monthFromNow)) {
       return "text-amber-500 font-medium"; // Yellow/Orange for dates within a month
@@ -98,41 +101,50 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {sortedBrands.map((brand) => (
-            <TableRow key={brand.id} className="hover:bg-muted/20">
-              <TableCell>
-                <div className="w-8 h-8 rounded-full overflow-hidden bg-muted flex items-center justify-center">
-                  {brand.logoUrl ? (
-                    <img 
-                      src={brand.logoUrl} 
-                      alt={`${brand.name} logo`} 
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <ShoppingBag size={16} className="text-muted-foreground" />
-                  )}
-                </div>
-              </TableCell>
-              <TableCell className="font-medium">
-                <a 
-                  href={`https://instagram.com/${brand.instagramHandle}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline transition-all hover:text-primary"
-                >
-                  {brand.name}
-                </a>
-              </TableCell>
-              <TableCell>
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-muted capitalize">
-                  {brand.style}
-                </span>
-              </TableCell>
-              <TableCell className={cn(getDropDateStyle(brand.dropDate))}>
-                {format(new Date(brand.dropDate), 'MMM d, yyyy')}
-              </TableCell>
-            </TableRow>
-          ))}
+          {sortedBrands.map((brand) => {
+            const styleData = styleConfig[brand.style];
+            return (
+              <TableRow key={brand.id} className="hover:bg-muted/20">
+                <TableCell>
+                  <div className="w-8 h-8 rounded-full overflow-hidden bg-muted flex items-center justify-center">
+                    {brand.logoUrl ? (
+                      <img 
+                        src={brand.logoUrl} 
+                        alt={`${brand.name} logo`} 
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <ShoppingBag size={16} className="text-muted-foreground" />
+                    )}
+                  </div>
+                </TableCell>
+                <TableCell className="font-medium">
+                  <a 
+                    href={`https://instagram.com/${brand.instagramHandle}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline transition-all hover:text-primary"
+                  >
+                    {brand.name}
+                  </a>
+                </TableCell>
+                <TableCell>
+                  <span 
+                    className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize"
+                    style={{ 
+                      backgroundColor: `${styleData.color}20`, 
+                      color: styleData.color 
+                    }}
+                  >
+                    {styleData.icon} <span className="ml-1">{brand.style}</span>
+                  </span>
+                </TableCell>
+                <TableCell className={cn(getDropDateStyle(brand.dropDate))}>
+                  {format(new Date(brand.dropDate), 'MMM d, yyyy')}
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </div>

@@ -3,9 +3,10 @@ import { useEffect, useRef } from 'react';
 
 interface SubscribeFormProps {
   formId: string;
+  height?: number;
 }
 
-const SubscribeForm = ({ formId }: SubscribeFormProps) => {
+const SubscribeForm = ({ formId, height = 300 }: SubscribeFormProps) => {
   const formContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const SubscribeForm = ({ formId }: SubscribeFormProps) => {
     <div className="max-w-2xl mx-auto rounded-md overflow-hidden border border-border">
       <div 
         ref={formContainerRef}
-        className="h-[400px]"
+        className={`h-[${height}px]`}
         data-tf-widget={formId}
         data-tf-opacity="100" 
         data-tf-inline-embed

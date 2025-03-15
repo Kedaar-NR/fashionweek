@@ -21,6 +21,7 @@ interface FilterBarProps {
   sortConfig: SortConfig;
   onFilterChange: (newFilter: FilterConfig) => void;
   onSortChange: (newSort: SortConfig) => void;
+  styleConfig?: Record<BrandStyle, { icon: JSX.Element, color: string }>;
 }
 
 const brandStyleLabels: Record<BrandStyle, string> = {
@@ -42,6 +43,7 @@ export const FilterBar = ({
   sortConfig,
   onFilterChange,
   onSortChange,
+  styleConfig,
 }: FilterBarProps) => {
   const [searchValue, setSearchValue] = useState(filterConfig.searchTerm);
   
@@ -148,15 +150,19 @@ export const FilterBar = ({
         </div>
         
         <div className="flex flex-wrap items-center gap-2">
-          {availableStyles.map((style) => (
-            <button
-              key={style}
-              onClick={() => toggleStyle(style)}
-              className={`filter-button ${filterConfig.styles.includes(style) ? 'active' : ''}`}
-            >
-              {brandStyleLabels[style]}
-            </button>
-          ))}
+          {availableStyles.map((style) => {
+            const styleData = styleConfig?.[style];
+            return (
+              <button
+                key={style}
+                onClick={() => toggleStyle(style)}
+                className={`filter-button flex items-center gap-1 ${filterConfig.styles.includes(style) ? 'active' : ''}`}
+                style={styleData && !filterConfig.styles.includes(style) ? {color: styleData.color} : {}}
+              >
+                {styleData?.icon} {brandStyleLabels[style]}
+              </button>
+            );
+          })}
           
           {(filterConfig.styles.length > 0 || filterConfig.searchTerm) && (
             <Button 
@@ -173,15 +179,23 @@ export const FilterBar = ({
         
         {filterConfig.styles.length > 0 && (
           <div className="flex flex-wrap gap-2">
-            {filterConfig.styles.map(style => (
-              <Badge key={style} variant="secondary" className="capitalize">
-                {style}
-                <X 
-                  className="h-3 w-3 ml-1 cursor-pointer" 
-                  onClick={() => toggleStyle(style)}
-                />
-              </Badge>
-            ))}
+            {filterConfig.styles.map(style => {
+              const styleData = styleConfig?.[style];
+              return (
+                <Badge 
+                  key={style} 
+                  variant="secondary" 
+                  className="capitalize flex items-center gap-1"
+                  style={styleData ? {backgroundColor: `${styleData.color}20`, color: styleData.color} : {}}
+                >
+                  {styleData?.icon} {style}
+                  <X 
+                    className="h-3 w-3 ml-1 cursor-pointer" 
+                    onClick={() => toggleStyle(style)}
+                  />
+                </Badge>
+              );
+            })}
           </div>
         )}
       </div>
