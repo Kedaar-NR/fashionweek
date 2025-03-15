@@ -11,9 +11,6 @@ interface BrandCardProps {
 
 const BrandCard = ({ brand, index }: BrandCardProps) => {
   const styleData = styleConfig[brand.style];
-  
-  // Use Instagram image URL if available, otherwise fallback to logo
-  const imageUrl = brand.instagramImageUrl || brand.logoUrl;
 
   return (
     <motion.div
@@ -23,9 +20,9 @@ const BrandCard = ({ brand, index }: BrandCardProps) => {
       className="bg-white rounded-lg overflow-hidden border border-[#eaeaea] hover:border-[#ddd] hover:shadow-sm transition-all group"
     >
       <div className="relative h-48 overflow-hidden">
-        {imageUrl ? (
+        {brand.logoUrl ? (
           <img 
-            src={imageUrl} 
+            src={brand.logoUrl} 
             alt={brand.name} 
             className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105" 
           />

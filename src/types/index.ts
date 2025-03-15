@@ -1,9 +1,19 @@
 
-// Available Brand Styles
+export interface Brand {
+  id: string;
+  name: string;
+  style: BrandStyle;
+  logoUrl: string;
+  instagramHandle: string;
+  dropDate: string; // ISO date string
+  featured: boolean;
+  description?: string;
+}
+
 export type BrandStyle = 
   | 'streetwear' 
-  | 'luxury' 
   | 'goth' 
+  | 'luxury' 
   | 'vintage' 
   | 'minimalist' 
   | 'contemporary' 
@@ -11,25 +21,14 @@ export type BrandStyle =
   | 'athletic' 
   | 'sustainable';
 
-// Brand Data Type
-export interface Brand {
-  id: string;
-  name: string;
-  logoUrl?: string; 
-  instagramHandle: string;
-  instagramImageUrl?: string; // Added Instagram image URL
-  style: BrandStyle;
-  dropDate: string; // Format: "2023-09-15"
-  featured?: boolean;
-}
+export type SortField = 'name' | 'dropDate';
+export type SortDirection = 'asc' | 'desc';
 
-// Sort Configuration
 export interface SortConfig {
-  field: keyof Pick<Brand, 'name' | 'style' | 'dropDate'>;
-  direction: 'asc' | 'desc';
+  field: SortField;
+  direction: SortDirection;
 }
 
-// Filter Configuration
 export interface FilterConfig {
   styles: BrandStyle[];
   searchTerm: string;
