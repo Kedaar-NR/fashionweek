@@ -1,4 +1,3 @@
-
 import { Brand, BrandStyle } from '@/types';
 
 // Helper function to generate random dates within a range
@@ -178,7 +177,7 @@ const saturnLaBrands = [
   { name: "nikbentelstudio", owner: false }
 ];
 
-// Generate a single brand
+// Generate a single brand with more realistic dates
 const generateBrand = (id: number, brandData: { name: string, owner: boolean }): Brand => {
   const style = brandStyles[Math.floor(Math.random() * brandStyles.length)];
   const name = brandData.name;
@@ -186,31 +185,31 @@ const generateBrand = (id: number, brandData: { name: string, owner: boolean }):
   const logoUrl = placeholderImages[id % placeholderImages.length];
   const featured = brandData.owner || Math.random() > 0.85; // Owners or about 15% of brands are featured
   
-  // Generate dates spanning from the next 2 weeks to 6 months from now
-  const today = new Date();
-  const sixMonthsLater = new Date();
-  sixMonthsLater.setMonth(today.getMonth() + 6);
+  // Generate dates starting from 2 weeks from now and going up to 3 months out
+  const twoWeeksFromNow = new Date();
+  twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 14); // Push minimum 2 weeks out
   
-  // Distribute drop dates to show the color coding in action
+  const threeMonthsLater = new Date();
+  threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 3);
+  
+  // Distribute drop dates more realistically
   let dropDate;
   const rand = Math.random();
   if (rand < 0.25) {
-    // 25% of dates within a week (red)
-    const oneWeekLater = new Date();
-    oneWeekLater.setDate(today.getDate() + 7);
-    dropDate = randomDate(today, oneWeekLater);
+    // 25% of dates within 2-3 weeks (red)
+    const threeWeeksLater = new Date();
+    threeWeeksLater.setDate(twoWeeksFromNow.getDate() + 7);
+    dropDate = randomDate(twoWeeksFromNow, threeWeeksLater);
   } else if (rand < 0.60) {
     // 35% of dates within a month (yellow)
-    const oneWeekLater = new Date();
-    oneWeekLater.setDate(today.getDate() + 7);
     const oneMonthLater = new Date();
-    oneMonthLater.setMonth(today.getMonth() + 1);
-    dropDate = randomDate(oneWeekLater, oneMonthLater);
+    oneMonthLater.setDate(twoWeeksFromNow.getDate() + 14); // 4 weeks from now
+    dropDate = randomDate(twoWeeksFromNow, oneMonthLater);
   } else {
     // 40% of dates beyond a month (green)
     const oneMonthLater = new Date();
-    oneMonthLater.setMonth(today.getMonth() + 1);
-    dropDate = randomDate(oneMonthLater, sixMonthsLater);
+    oneMonthLater.setMonth(twoWeeksFromNow.getMonth() + 1);
+    dropDate = randomDate(oneMonthLater, threeMonthsLater);
   }
   
   return {
