@@ -11,20 +11,9 @@ import {
 import { MessageSquareText } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SubscribeForm from '@/components/SubscribeForm';
-import { useToast } from '@/hooks/use-toast';
 
 export const FeedbackTab = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { toast } = useToast();
-  
-  const handleFeedbackComplete = () => {
-    setIsOpen(false);
-    toast({
-      title: "Feedback Submitted",
-      description: "Thank you for your feedback!",
-      duration: 3000,
-    });
-  };
   
   return (
     <>
@@ -47,7 +36,6 @@ export const FeedbackTab = () => {
               formId="Y5r3mjhF" 
               height={600}
               showCloseButton={false}
-              onComplete={handleFeedbackComplete}
             />
           </div>
         </SheetContent>

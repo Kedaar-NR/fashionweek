@@ -39,7 +39,6 @@ const SubscribeForm = ({
         event.data.type === 'form-submit' &&
         event.data.formId === formId
       ) {
-        console.log(`Form ${formId} was successfully submitted`);
         // Call the onComplete callback when the form is submitted
         if (onComplete) {
           onComplete();
@@ -86,7 +85,7 @@ const SubscribeForm = ({
         data-tf-opacity="100" 
         data-tf-inline-embed="true"
         data-tf-auto-focus
-        data-tf-iframe-props={`title=${formId === 'Q5fonbTT' ? 'FashionWeek Subscription' : 'FashionWeek Feedback'}`}
+        data-tf-iframe-props="title=FashionWeek Subscription" 
         data-tf-transitive-search-params 
         data-tf-medium="snippet" 
         data-tf-hidden="utm_source=website,utm_medium=inline_embed"

@@ -1,7 +1,6 @@
 
 import { motion } from 'framer-motion';
 import SubscribeForm from '@/components/SubscribeForm';
-import { useToast } from '@/hooks/use-toast';
 
 interface SubscriptionPanelProps {
   showSubscribe: boolean;
@@ -14,17 +13,6 @@ const SubscriptionPanel = ({
   setShowSubscribe, 
   handleSubscribeComplete 
 }: SubscriptionPanelProps) => {
-  const { toast } = useToast();
-  
-  const onSubscribeComplete = () => {
-    handleSubscribeComplete();
-    toast({
-      title: "Subscription successful!",
-      description: "You've been added to our mailing list.",
-      duration: 3000,
-    });
-  };
-  
   if (!showSubscribe) return null;
   
   return (
@@ -44,7 +32,7 @@ const SubscriptionPanel = ({
           </motion.span>
         </button>
       </div>
-      <SubscribeForm formId="Q5fonbTT" height={350} onComplete={onSubscribeComplete} />
+      <SubscribeForm formId="Q5fonbTT" height={350} onComplete={handleSubscribeComplete} />
     </div>
   );
 };
