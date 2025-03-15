@@ -78,8 +78,8 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
     return result;
   }, [brands, filterConfig, sortConfig]);
   
-  // Scroll trigger for subscribe modal
-  const { isTriggered, setIsTriggered } = useScrollTrigger(100, 1000);
+  // Scroll trigger for subscribe modal - reduced threshold to trigger sooner
+  const { isTriggered, setIsTriggered } = useScrollTrigger(300, 800);
   
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -128,7 +128,11 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
         </div>
       )}
       
-      <SubscribeModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <SubscribeModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)}
+        typeformUrl="https://form.typeform.com/to/Q5fonbTT"
+      />
     </div>
   );
 };
