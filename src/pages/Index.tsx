@@ -9,7 +9,7 @@ import SubscribeForm from '@/components/SubscribeForm';
 import { X } from 'lucide-react';
 
 const Index = () => {
-  const [viewMode, setViewMode] = useState<'gallery' | 'table'>('table');
+  const [viewMode, setViewMode] = useState<'gallery' | 'table'>('gallery');
   const [showSubscribe, setShowSubscribe] = useState(true);
 
   useEffect(() => {
@@ -25,13 +25,18 @@ const Index = () => {
   };
 
   return <div className="min-h-screen bg-[#fafafa] text-[#111]">
-      {/* Hero Section - Modernized design */}
+      {/* Enhanced Hero Section with creative design */}
       <motion.header 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
         className="relative py-10 md:py-16 overflow-hidden border-b border-[#eaeaea] bg-gradient-to-b from-white to-[#f9f9f9]"
       >
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#f97316] via-[#f43f5e] to-[#a855f7]"></div>
+        
+        <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-gradient-to-br from-[#fef9c3] to-[#fef08a] opacity-20 blur-3xl"></div>
+        <div className="absolute top-40 -left-20 w-48 h-48 rounded-full bg-gradient-to-tr from-[#fbcfe8] to-[#f9a8d4] opacity-20 blur-3xl"></div>
+        
         <div className="container relative z-10">
           <div className="flex justify-between items-center mb-8">
             <div>
@@ -84,7 +89,8 @@ const Index = () => {
                 </p>
               </motion.div>
               
-              <div className="text-center md:text-right">
+              <div className="text-center md:text-right relative">
+                <div className="absolute -top-6 -right-6 w-16 h-16 rounded-full bg-gradient-to-br from-[#f97316] to-[#f43f5e] opacity-10 blur-xl"></div>
                 <div className="text-xs text-[#777] uppercase">// JOIN</div>
                 <div className="text-5xl font-bold bg-gradient-to-r from-[#f97316] to-[#f43f5e] bg-clip-text text-transparent">320K</div>
                 <div className="text-xs text-[#555] uppercase">CHANGEMAKERS</div>

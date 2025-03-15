@@ -3,6 +3,18 @@ import { Brand } from '@/types';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { styleConfig } from './BrandGallery';
+import { 
+  ShoppingBag, 
+  Crown, 
+  Shirt, 
+  Clock, 
+  Scissors, 
+  Palette, 
+  Flame, 
+  Dumbbell, 
+  Leaf,
+  Store
+} from 'lucide-react';
 
 interface BrandCardProps {
   brand: Brand;
@@ -11,6 +23,25 @@ interface BrandCardProps {
 
 const BrandCard = ({ brand, index }: BrandCardProps) => {
   const styleData = styleConfig[brand.style];
+  
+  // Brand icon generation based on style
+  const getBrandIcon = () => {
+    const size = 48;
+    const color = styleData.color;
+    
+    switch(brand.style) {
+      case 'streetwear': return <ShoppingBag size={size} color={color} />;
+      case 'goth': return <Scissors size={size} color={color} />;
+      case 'luxury': return <Crown size={size} color={color} />;
+      case 'vintage': return <Clock size={size} color={color} />;
+      case 'minimalist': return <Shirt size={size} color={color} />;
+      case 'contemporary': return <Palette size={size} color={color} />;
+      case 'hypebeast': return <Flame size={size} color={color} />;
+      case 'athletic': return <Dumbbell size={size} color={color} />;
+      case 'sustainable': return <Leaf size={size} color={color} />;
+      default: return <Store size={size} color={color} />;
+    }
+  };
 
   return (
     <motion.div
@@ -19,32 +50,20 @@ const BrandCard = ({ brand, index }: BrandCardProps) => {
       transition={{ duration: 0.3, delay: index * 0.05 }}
       className="bg-white rounded-lg overflow-hidden border border-[#eaeaea] hover:border-[#ddd] hover:shadow-sm transition-all group"
     >
-      <div className="relative h-48 overflow-hidden">
-        {brand.logoUrl ? (
-          <img 
-            src={brand.logoUrl} 
-            alt={brand.name} 
-            className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105" 
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-[#f5f5f5]">
-            <img 
-              src="/placeholder.svg" 
-              alt="Placeholder" 
-              className="w-16 h-16 text-[#aaa] opacity-50 transition-all duration-300 group-hover:scale-110" 
-            />
-          </div>
-        )}
+      <div 
+        className="relative h-48 overflow-hidden flex items-center justify-center"
+        style={{ backgroundColor: styleData.bgColor }}
+      >
+        {getBrandIcon()}
+        
         <div 
-          className="absolute bottom-0 right-0 m-2 px-2.5 py-1 rounded-full text-xs font-medium capitalize"
+          className="absolute bottom-0 right-0 m-2 px-2.5 py-1 rounded-full text-xs font-medium capitalize flex items-center gap-1"
           style={{ 
-            backgroundColor: `${styleData.color}15`, 
+            backgroundColor: `${styleData.color}20`, 
             color: styleData.color
           }}
         >
-          <div className="flex items-center gap-1">
-            {styleData.icon} {brand.style}
-          </div>
+          {styleData.icon} {brand.style}
         </div>
       </div>
       
@@ -58,19 +77,12 @@ const BrandCard = ({ brand, index }: BrandCardProps) => {
           >
             {brand.name}
           </a>
-          {brand.logoUrl ? (
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-[#eaeaea]">
-              <img 
-                src={brand.logoUrl} 
-                alt={`${brand.name} logo`} 
-                className="w-full h-full object-cover" 
-              />
-            </div>
-          ) : (
-            <div className="w-8 h-8 rounded-full bg-[#f5f5f5] flex items-center justify-center text-[#aaa]">
-              {brand.name.charAt(0)}
-            </div>
-          )}
+          <div 
+            className="w-8 h-8 rounded-full flex items-center justify-center text-white"
+            style={{ backgroundColor: styleData.color }}
+          >
+            {brand.name.charAt(0).toUpperCase()}
+          </div>
         </div>
         
         <div className="mt-2">
