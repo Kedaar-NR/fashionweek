@@ -39,7 +39,7 @@ const Index = () => {
             className="flex flex-col items-center text-center max-w-4xl mx-auto px-4"
           >
             <motion.h1 
-              className="text-6xl md:text-8xl font-bold mb-2 tracking-tight text-balance"
+              className="text-7xl md:text-9xl font-bold mb-2 tracking-tight text-balance"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
@@ -50,7 +50,7 @@ const Index = () => {
             </motion.h1>
             
             <motion.p
-              className="text-3xl font-bold text-primary mb-6 max-w-2xl"
+              className="text-4xl font-bold text-primary mb-6 max-w-2xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35, duration: 0.5 }}
@@ -95,17 +95,15 @@ const Index = () => {
               </button>
             </motion.div>
             
-            {/* Subscribe Form at the top */}
+            {/* Updated subscriber count with larger numbers */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="w-full max-w-md mt-2 mb-4 bg-card/50 backdrop-blur-sm p-4 rounded-xl shadow-sm"
+              className="w-full mt-2 mb-6"
             >
-              <h3 className="text-lg font-semibold mb-2">Join Our Community</h3>
-              <SubscribeForm formId="Q5fonbTT" height={220} />
-              <p className="text-sm text-primary font-medium mt-2">
-                Join <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]">{Math.floor(Math.random() * 50) + 120}</span> other fashion enthusiasts
+              <p className="text-lg text-primary font-medium">
+                Join <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#F97316]">150,000+</span> fashion enthusiasts
               </p>
             </motion.div>
           </motion.div>
@@ -130,6 +128,12 @@ const Index = () => {
         )}
       </main>
       
+      {/* Subscribe Form - Now in a fixed position at the bottom right */}
+      <div className="fixed bottom-28 right-6 z-40 bg-card/95 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-border w-[350px] animate-fade-in">
+        <h3 className="text-lg font-semibold mb-4">Subscribe to Updates</h3>
+        <SubscribeForm formId="Q5fonbTT" height={280} />
+      </div>
+      
       {/* Footer */}
       <footer className="bg-card py-10 mt-20">
         <div className="container px-4">
@@ -152,7 +156,7 @@ const Index = () => {
         </div>
       </footer>
       
-      {/* Feedback Tab */}
+      {/* Chat-like Feedback Tab */}
       <FeedbackTab />
     </div>
   );

@@ -6,7 +6,7 @@ interface SubscribeFormProps {
   height?: number;
 }
 
-const SubscribeForm = ({ formId, height = 300 }: SubscribeFormProps) => {
+const SubscribeForm = ({ formId, height = 350 }: SubscribeFormProps) => {
   const formContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const SubscribeForm = ({ formId, height = 300 }: SubscribeFormProps) => {
     <div className="max-w-2xl mx-auto rounded-md overflow-hidden border border-border">
       <div 
         ref={formContainerRef}
-        className={`h-[${height}px]`}
+        style={{ height: `${height}px` }}
         data-tf-widget={formId}
         data-tf-opacity="100" 
         data-tf-inline-embed

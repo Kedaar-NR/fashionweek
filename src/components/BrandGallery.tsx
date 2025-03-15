@@ -1,19 +1,17 @@
-
 import { useState, useMemo, useEffect } from 'react';
 import { Brand, BrandStyle, SortConfig, FilterConfig } from '@/types';
 import { useScrollTrigger } from '@/utils/animations';
 import BrandCard from './BrandCard';
 import FilterBar from './FilterBar';
 import { motion } from 'framer-motion';
-import FeedbackTab from './FeedbackTab';
 import { 
   ShoppingBag, 
   Crown, 
   Shirt, 
-  Timer, 
+  Clock, 
   Scissors, 
-  Brush, 
-  TrendingUp, 
+  Palette, 
+  Flame, 
   Dumbbell, 
   Leaf 
 } from 'lucide-react';
@@ -22,15 +20,15 @@ interface BrandGalleryProps {
   brands: Brand[];
 }
 
-// Style icon and color mapping
+// Style icon and color mapping with improved colors
 export const styleConfig: Record<BrandStyle, { icon: JSX.Element, color: string }> = {
   'streetwear': { icon: <ShoppingBag size={16} />, color: '#F97316' }, // Orange
   'goth': { icon: <Scissors size={16} />, color: '#6366F1' }, // Indigo
   'luxury': { icon: <Crown size={16} />, color: '#D946EF' }, // Pink
-  'vintage': { icon: <Timer size={16} />, color: '#8B5CF6' }, // Purple
+  'vintage': { icon: <Clock size={16} />, color: '#8B5CF6' }, // Purple
   'minimalist': { icon: <Shirt size={16} />, color: '#94A3B8' }, // Slate
-  'contemporary': { icon: <Brush size={16} />, color: '#0EA5E9' }, // Sky
-  'hypebeast': { icon: <TrendingUp size={16} />, color: '#EC4899' }, // Pink
+  'contemporary': { icon: <Palette size={16} />, color: '#0EA5E9' }, // Sky
+  'hypebeast': { icon: <Flame size={16} />, color: '#EC4899' }, // Pink
   'athletic': { icon: <Dumbbell size={16} />, color: '#14B8A6' }, // Teal
   'sustainable': { icon: <Leaf size={16} />, color: '#10B981' }, // Emerald
 };
@@ -146,20 +144,12 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredAndSortedBrands.map((brand, index) => (
-            <BrandCard key={brand.id} brand={brand} index={index} styleConfig={styleConfig} />
+            <BrandCard 
+              key={brand.id} 
+              brand={brand} 
+              index={index} 
+            />
           ))}
-        </div>
-      )}
-      
-      {/* Show the feedback popup when scroll is triggered */}
-      {showFeedback && (
-        <div className="fixed bottom-24 right-8 z-50">
-          <button
-            onClick={() => document.getElementById('feedback-trigger')?.click()}
-            className="bg-primary text-white px-4 py-2 rounded-full shadow-lg flex items-center space-x-2 hover:bg-primary/90 transition-colors"
-          >
-            <span>Share Feedback</span>
-          </button>
         </div>
       )}
     </div>

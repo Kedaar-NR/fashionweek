@@ -59,20 +59,19 @@ export const FeedbackTab = () => {
   return (
     <>
       <motion.button
-        className="feedback-tab px-5 py-2 bg-primary text-primary-foreground rounded-t-lg shadow-lg fixed bottom-0 right-10 transform -translate-x-1/2"
+        className="fixed bottom-6 right-6 bg-primary text-white p-4 rounded-full shadow-lg z-50 hover:scale-105 transition-transform"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(true)}
       >
-        <span className="flex items-center font-medium">
-          <MessageSquareText className="w-4 h-4 mr-2" />
-          Feedback
+        <span className="flex items-center">
+          <MessageSquareText className="w-5 h-5" />
         </span>
       </motion.button>
       
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger id="feedback-trigger" className="hidden" />
-        <SheetContent className="glass-panel" side="right">
+        <SheetContent className="sm:max-w-md">
           <SheetHeader>
             <SheetTitle>Share Your Feedback</SheetTitle>
             <SheetDescription>
@@ -152,6 +151,11 @@ export const FeedbackTab = () => {
           </AnimatePresence>
         </SheetContent>
       </Sheet>
+
+      {/* Tooltip for the feedback button */}
+      <div className="fixed bottom-20 right-10 bg-popover text-popover-foreground px-4 py-2 rounded-lg shadow-lg z-40 text-sm animate-fade-in">
+        Give us feedback!
+      </div>
     </>
   );
 };
