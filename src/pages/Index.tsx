@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import BrandGallery from '@/components/BrandGallery';
 import FashionWeekTable from '@/components/FashionWeekTable';
@@ -6,9 +7,11 @@ import brands from '@/data/brands';
 import { motion } from 'framer-motion';
 import SubscribeForm from '@/components/SubscribeForm';
 import { X } from 'lucide-react';
+
 const Index = () => {
   const [viewMode, setViewMode] = useState<'gallery' | 'table'>('table');
   const [showSubscribe, setShowSubscribe] = useState(true);
+
   useEffect(() => {
     // Add a smooth scroll behavior to the entire page
     document.documentElement.style.scrollBehavior = 'smooth';
@@ -16,22 +19,23 @@ const Index = () => {
       document.documentElement.style.scrollBehavior = '';
     };
   }, []);
+
   const handleSubscribeComplete = () => {
     setShowSubscribe(false);
   };
+
   return <div className="min-h-screen bg-[#fafafa] text-[#111]">
-      {/* Hero Section - Updated design */}
-      <motion.header initial={{
-      opacity: 0
-    }} animate={{
-      opacity: 1
-    }} transition={{
-      duration: 0.5
-    }} className="relative py-6 md:py-8 overflow-hidden border-b border-[#eaeaea]">
+      {/* Hero Section - Modernized design */}
+      <motion.header 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="relative py-10 md:py-16 overflow-hidden border-b border-[#eaeaea] bg-gradient-to-b from-white to-[#f9f9f9]"
+      >
         <div className="container relative z-10">
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-between items-center mb-8">
             <div>
-              <h2 className="text-xl font-medium text-[#111]">FashionWeek</h2>
+              <h2 className="text-2xl font-medium text-[#111]">FashionWeek</h2>
             </div>
             
             <div className="flex items-center gap-4">
@@ -62,59 +66,45 @@ const Index = () => {
             </div>
           </div>
           
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          delay: 0.2,
-          duration: 0.5
-        }} className="flex flex-col items-start max-w-5xl mx-auto">
-            
-            
-            
-            
-            <motion.p className="text-md text-[#555] max-w-xl mt-4" initial={{
-            opacity: 0,
-            y: 20
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            delay: 0.4,
-            duration: 0.5
-          }}>
-              Track upcoming drops and discover emerging designers shaping the future of fashion.
-            </motion.p>
-            
-            <div className="flex gap-8 mt-12 items-end mb-8">
-              <div className="flex -space-x-4">
-                <div className="w-12 h-12 rounded-full border-2 border-white overflow-hidden z-10">
-                  <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&auto=format&fit=crop" alt="Profile" className="w-full h-full object-cover" />
-                </div>
-                <div className="w-12 h-12 rounded-full border-2 border-white overflow-hidden z-20">
-                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&auto=format&fit=crop" alt="Profile" className="w-full h-full object-cover" />
-                </div>
-                <div className="w-12 h-12 rounded-full bg-[#f97316] text-white flex items-center justify-center border-2 border-white z-30">
-                  <span>+</span>
-                </div>
-              </div>
-              
-              <div className="text-lg font-light text-[#777] italic">[©2025]</div>
-              
-              <div className="text-[#f97316] text-3xl">*</div>
-            </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="flex flex-col items-start max-w-5xl mx-auto"
+          >
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="mb-6"
+            >
+              <h1 className="text-5xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-[#f97316] to-[#f43f5e] bg-clip-text text-transparent mb-6">
+                Fashion Week
+              </h1>
+              <motion.p 
+                className="text-xl text-[#555] max-w-xl" 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+              >
+                Track upcoming drops and discover emerging designers shaping the future of fashion.
+              </motion.p>
+            </motion.div>
             
             <div className="flex justify-between w-full items-end mt-8">
-              <div className="max-w-xs">
-                
+              <div className="flex items-start gap-3">
+                <div className="w-1 h-20 bg-gradient-to-b from-[#f97316] to-[#f43f5e] rounded-full"></div>
+                <div>
+                  <div className="text-xs text-[#777] uppercase mb-1">// VISION</div>
+                  <div className="text-[#333] max-w-md">
+                    Curating the future of fashion through discovery, community, and innovative design.
+                  </div>
+                </div>
               </div>
               
               <div className="text-right">
                 <div className="text-xs text-[#777] uppercase">// JOIN</div>
-                <div className="text-5xl font-bold text-[#111]">320K</div>
+                <div className="text-5xl font-bold bg-gradient-to-r from-[#f97316] to-[#f43f5e] bg-clip-text text-transparent">320K</div>
                 <div className="text-xs text-[#555] uppercase">CHANGEMAKERS</div>
               </div>
             </div>
@@ -131,10 +121,16 @@ const Index = () => {
           
           <div className="flex items-center gap-4">
             <div className="flex gap-2">
-              <button onClick={() => setViewMode('table')} className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${viewMode === 'table' ? 'bg-[#111] text-white hover:bg-black' : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'}`}>
+              <button 
+                onClick={() => setViewMode('table')} 
+                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${viewMode === 'table' ? 'bg-[#f43f5e] text-white hover:bg-[#e11d48]' : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'}`}
+              >
                 Table View
               </button>
-              <button onClick={() => setViewMode('gallery')} className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${viewMode === 'gallery' ? 'bg-[#111] text-white hover:bg-black' : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'}`}>
+              <button 
+                onClick={() => setViewMode('gallery')} 
+                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${viewMode === 'gallery' ? 'bg-[#f43f5e] text-white hover:bg-[#e11d48]' : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'}`}
+              >
                 Gallery View
               </button>
             </div>
@@ -148,15 +144,15 @@ const Index = () => {
         {viewMode === 'table' ? <FashionWeekTable brands={brands} /> : <BrandGallery brands={brands} />}
       </main>
       
-      {/* Subscribe Form - Smaller in bottom right with close button */}
-      {showSubscribe && <div className="fixed bottom-24 right-6 z-40 bg-white shadow-lg border border-[#eaeaea] p-3 rounded-lg w-[260px] animate-fade-in">
+      {/* Subscribe Form - Taller with adjusted height */}
+      {showSubscribe && <div className="fixed bottom-24 right-6 z-40 bg-white shadow-lg border border-[#eaeaea] p-3 rounded-lg w-[280px] animate-fade-in">
           <div className="flex justify-between items-center mb-2">
             <h3 className="text-xs font-medium">Subscribe to Updates</h3>
             <button onClick={() => setShowSubscribe(false)} className="p-1 rounded-full hover:bg-[#f5f5f5] transition-colors" aria-label="Close subscription form">
               <X size={12} />
             </button>
           </div>
-          <SubscribeForm formId="Q5fonbTT" height={180} onComplete={handleSubscribeComplete} />
+          <SubscribeForm formId="Q5fonbTT" height={220} onComplete={handleSubscribeComplete} />
         </div>}
       
       {/* Footer */}
@@ -204,9 +200,15 @@ const Index = () => {
         </div>
       </footer>
       
-      {/* Small Chat-like Feedback Tab */}
+      {/* Feedback Tab with blurb */}
       <div className="fixed bottom-6 right-6 z-40">
-        <button className="bg-[#111] text-white rounded-full p-3 shadow-lg hover:bg-black transition-colors text-xs flex items-center justify-center w-10 h-10" onClick={() => window.open('https://forms.gle/feedback', '_blank')}>
+        <div className="absolute -top-8 right-0 bg-white px-3 py-2 rounded-full text-xs shadow-sm border border-[#eaeaea] whitespace-nowrap">
+          Give feedback
+        </div>
+        <button 
+          className="bg-[#111] text-white rounded-full p-3 shadow-lg hover:bg-black transition-colors text-xs flex items-center justify-center w-10 h-10" 
+          onClick={() => window.open('https://form.typeform.com/to/Y5r3mjhF', '_blank')}
+        >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
@@ -214,4 +216,5 @@ const Index = () => {
       </div>
     </div>;
 };
+
 export default Index;
