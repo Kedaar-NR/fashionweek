@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import BrandGallery from '@/components/BrandGallery';
 import FashionWeekTable from '@/components/FashionWeekTable';
@@ -7,33 +6,28 @@ import brands from '@/data/brands';
 import { motion } from 'framer-motion';
 import SubscribeForm from '@/components/SubscribeForm';
 import { X } from 'lucide-react';
-
 const Index = () => {
   const [viewMode, setViewMode] = useState<'gallery' | 'table'>('table');
   const [showSubscribe, setShowSubscribe] = useState(true);
-  
   useEffect(() => {
     // Add a smooth scroll behavior to the entire page
     document.documentElement.style.scrollBehavior = 'smooth';
-    
     return () => {
       document.documentElement.style.scrollBehavior = '';
     };
   }, []);
-
   const handleSubscribeComplete = () => {
     setShowSubscribe(false);
   };
-
-  return (
-    <div className="min-h-screen bg-[#fafafa] text-[#111]">
+  return <div className="min-h-screen bg-[#fafafa] text-[#111]">
       {/* Hero Section - Updated design */}
-      <motion.header
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="relative py-6 md:py-8 overflow-hidden border-b border-[#eaeaea]"
-      >
+      <motion.header initial={{
+      opacity: 0
+    }} animate={{
+      opacity: 1
+    }} transition={{
+      duration: 0.5
+    }} className="relative py-6 md:py-8 overflow-hidden border-b border-[#eaeaea]">
         <div className="container relative z-10">
           <div className="flex justify-between items-center mb-6">
             <div>
@@ -44,7 +38,7 @@ const Index = () => {
               <div className="text-sm">
                 info@fashionweek.com
               </div>
-              <div className="text-sm">(212) 555-1234</div>
+              
               <div className="flex gap-3">
                 <a href="#" aria-label="Instagram" className="w-8 h-8 flex items-center justify-center rounded-full border border-[#eaeaea] hover:bg-[#f5f5f5]">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -68,36 +62,30 @@ const Index = () => {
             </div>
           </div>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="flex flex-col items-start max-w-5xl mx-auto"
-          >
-            <motion.h1 
-              className="text-6xl md:text-7xl font-bold tracking-tight text-[#111] mb-2"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-            >
-              where <span className="text-6xl md:text-7xl font-bold">- a style</span>
-            </motion.h1>
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          delay: 0.2,
+          duration: 0.5
+        }} className="flex flex-col items-start max-w-5xl mx-auto">
             
-            <motion.h1
-              className="text-6xl md:text-7xl font-bold tracking-tight text-[#111] mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.5 }}
-            >
-              moment
-            </motion.h1>
             
-            <motion.p
-              className="text-md text-[#555] max-w-xl mt-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-            >
+            
+            
+            <motion.p className="text-md text-[#555] max-w-xl mt-4" initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 0.4,
+            duration: 0.5
+          }}>
               Track upcoming drops and discover emerging designers shaping the future of fashion.
             </motion.p>
             
@@ -114,22 +102,20 @@ const Index = () => {
                 </div>
               </div>
               
-              <div className="text-lg font-light text-[#777] italic">[©2015]</div>
+              <div className="text-lg font-light text-[#777] italic">[©2025]</div>
               
               <div className="text-[#f97316] text-3xl">*</div>
             </div>
             
             <div className="flex justify-between w-full items-end mt-8">
               <div className="max-w-xs">
-                <p className="text-sm text-[#555] mb-4">
-                  From everyday essentials to statement pieces, our curated collection is designed to celebrate your style, wherever life takes you.
-                </p>
+                
               </div>
               
               <div className="text-right">
-                <div className="text-xs text-[#777] uppercase">// FASHION</div>
+                <div className="text-xs text-[#777] uppercase">// JOIN</div>
                 <div className="text-5xl font-bold text-[#111]">320K</div>
-                <div className="text-xs text-[#555] uppercase">INFLUENCED PEOPLE</div>
+                <div className="text-xs text-[#555] uppercase">CHANGEMAKERS</div>
               </div>
             </div>
           </motion.div>
@@ -145,24 +131,10 @@ const Index = () => {
           
           <div className="flex items-center gap-4">
             <div className="flex gap-2">
-              <button 
-                onClick={() => setViewMode('table')}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
-                  viewMode === 'table' 
-                    ? 'bg-[#111] text-white hover:bg-black'
-                    : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'
-                }`}
-              >
+              <button onClick={() => setViewMode('table')} className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${viewMode === 'table' ? 'bg-[#111] text-white hover:bg-black' : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'}`}>
                 Table View
               </button>
-              <button 
-                onClick={() => setViewMode('gallery')}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
-                  viewMode === 'gallery' 
-                    ? 'bg-[#111] text-white hover:bg-black'
-                    : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'
-                }`}
-              >
+              <button onClick={() => setViewMode('gallery')} className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${viewMode === 'gallery' ? 'bg-[#111] text-white hover:bg-black' : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'}`}>
                 Gallery View
               </button>
             </div>
@@ -173,29 +145,19 @@ const Index = () => {
           </div>
         </div>
         
-        {viewMode === 'table' ? (
-          <FashionWeekTable brands={brands} />
-        ) : (
-          <BrandGallery brands={brands} />
-        )}
+        {viewMode === 'table' ? <FashionWeekTable brands={brands} /> : <BrandGallery brands={brands} />}
       </main>
       
       {/* Subscribe Form - Smaller in bottom right with close button */}
-      {showSubscribe && (
-        <div className="fixed bottom-24 right-6 z-40 bg-white shadow-lg border border-[#eaeaea] p-3 rounded-lg w-[260px] animate-fade-in">
+      {showSubscribe && <div className="fixed bottom-24 right-6 z-40 bg-white shadow-lg border border-[#eaeaea] p-3 rounded-lg w-[260px] animate-fade-in">
           <div className="flex justify-between items-center mb-2">
             <h3 className="text-xs font-medium">Subscribe to Updates</h3>
-            <button 
-              onClick={() => setShowSubscribe(false)} 
-              className="p-1 rounded-full hover:bg-[#f5f5f5] transition-colors"
-              aria-label="Close subscription form"
-            >
+            <button onClick={() => setShowSubscribe(false)} className="p-1 rounded-full hover:bg-[#f5f5f5] transition-colors" aria-label="Close subscription form">
               <X size={12} />
             </button>
           </div>
           <SubscribeForm formId="Q5fonbTT" height={180} onComplete={handleSubscribeComplete} />
-        </div>
-      )}
+        </div>}
       
       {/* Footer */}
       <footer className="bg-white py-8 mt-20 border-t border-[#eaeaea]">
@@ -244,17 +206,12 @@ const Index = () => {
       
       {/* Small Chat-like Feedback Tab */}
       <div className="fixed bottom-6 right-6 z-40">
-        <button 
-          className="bg-[#111] text-white rounded-full p-3 shadow-lg hover:bg-black transition-colors text-xs flex items-center justify-center w-10 h-10"
-          onClick={() => window.open('https://forms.gle/feedback', '_blank')}
-        >
+        <button className="bg-[#111] text-white rounded-full p-3 shadow-lg hover:bg-black transition-colors text-xs flex items-center justify-center w-10 h-10" onClick={() => window.open('https://forms.gle/feedback', '_blank')}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
         </button>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
