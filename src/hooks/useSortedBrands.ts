@@ -9,7 +9,7 @@ interface UseSortedBrandsProps {
 
 export const useSortedBrands = ({ 
   brands, 
-  initialSort = { field: 'dropDate', direction: 'desc' } 
+  initialSort = { field: 'dropDate', direction: 'asc' } // Changed to 'asc' for closest dates first
 }: UseSortedBrandsProps) => {
   const [sortConfig, setSortConfig] = useState<SortConfig>(initialSort);
   const [searchTerm, setSearchTerm] = useState('');
@@ -24,9 +24,9 @@ export const useSortedBrands = ({
     setSortConfig(prevConfig => ({
       field,
       direction: 
-        prevConfig.field === field && prevConfig.direction === 'desc' 
-          ? 'asc' 
-          : 'desc'
+        prevConfig.field === field && prevConfig.direction === 'asc' 
+          ? 'desc' 
+          : 'asc'
     }));
   };
 
@@ -44,6 +44,8 @@ export const useSortedBrands = ({
       );
     }
 
+    const now = new Date().getTime();
+
     return filtered.sort((a, b) => {
       if (sortConfig.field === 'name') {
         const nameA = a.name.toLowerCase();
@@ -52,12 +54,18 @@ export const useSortedBrands = ({
           ? nameA.localeCompare(nameB)
           : nameB.localeCompare(nameA);
       } else {
+        // For dropDate: Calculate absolute difference from today for each date
         const dateA = new Date(a.dropDate).getTime();
         const dateB = new Date(b.dropDate).getTime();
-        // For drop dates: 'desc' shows newest dates first, 'asc' shows oldest dates first
+        
+        // Only consider upcoming dates (not past dates)
+        const diffA = dateA >= now ? dateA - now : Number.MAX_SAFE_INTEGER;
+        const diffB = dateB >= now ? dateB - now : Number.MAX_SAFE_INTEGER;
+        
+        // For drop dates: 'asc' shows closest dates first, 'desc' shows furthest dates first
         return sortConfig.direction === 'asc' 
-          ? dateA - dateB 
-          : dateB - dateA;
+          ? diffA - diffB 
+          : diffB - diffA;
       }
     });
   }, [brands, sortConfig, searchTerm]);

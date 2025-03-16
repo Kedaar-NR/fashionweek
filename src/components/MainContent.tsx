@@ -50,7 +50,7 @@ const MainContent = ({
             <Calendar size={16} className="mr-2" />
             <span>
               <motion.strong 
-                className="font-bold"
+                className="font-bold relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-white after:bottom-0 after:left-0 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 cursor-pointer"
                 animate={{ 
                   scale: [1, 1.1, 1],
                 }}
