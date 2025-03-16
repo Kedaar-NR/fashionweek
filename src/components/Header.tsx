@@ -88,7 +88,7 @@ const Header = ({
             
             {isMobile ? (
               <ScrollArea className="w-[180px]">
-                <div className="flex items-center gap-4 pr-4">
+                <div className="flex items-center gap-4 pr-4 menu-scroll">
                   <a href="#brand-gallery" className="flex items-center gap-1.5 hover:text-[#F97316] transition-colors whitespace-nowrap">
                     <Calendar size={16} />
                     <span className="text-sm font-medium">Drops</span>
@@ -175,7 +175,7 @@ const Header = ({
         }} className="py-2.5 px-5 rounded-full text-white font-medium shadow-lg brand-count-indicator">
             <span className="flex items-center">
               <Calendar size={16} className="mr-2" />
-              <span className="brand-count-number">{brandCount}</span> brands with upcoming drops
+              <span>{brandCount}</span> brands with upcoming drops
             </span>
           </motion.div>
         </motion.div>
