@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import { toast } from 'sonner';
@@ -48,14 +49,14 @@ const SubscribeForm = ({
         await loadTypeformScript();
         
         // Wait for the window.tf object to be available
-        if (window.tf) {
+        if (typeof window !== 'undefined' && 'tf' in window) {
           const embedElement = formContainerRef.current;
           if (embedElement) {
             // Clear any existing content
             embedElement.innerHTML = '';
             
             // Create new embed with updated options
-            window.tf.createWidget(formId, {
+            (window as any).tf.createWidget(formId, {
               container: embedElement,
               height: height,
               width: '100%',
