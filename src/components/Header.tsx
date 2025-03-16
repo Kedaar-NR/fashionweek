@@ -140,7 +140,7 @@ const Header = ({
         }} transition={{
           delay: 1,
           duration: 0.5
-        }} className="py-2 px-4 bg-[#F97316]/10 rounded-full text-sm text-[#F97316] font-medium">
+        }} className="py-2.5 px-5 rounded-full text-white font-medium shadow-lg brand-count-indicator">
             <span className="flex items-center">
               <Calendar size={16} className="mr-2" />
               {brandCount} brands with upcoming drops
