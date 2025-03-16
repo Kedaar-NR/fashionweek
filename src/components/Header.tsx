@@ -21,7 +21,7 @@ const Header = ({ brandCount }: HeaderProps) => {
       transition={{
         duration: 0.5
       }} 
-      className="relative py-12 md:py-16 overflow-hidden border-b border-[#eaeaea] bg-gradient-to-b from-[#ffffff] to-[#fafafa]"
+      className="relative py-12 md:py-16 overflow-hidden border-b border-[#222] bg-black text-white"
     >
       {/* Decorative elements */}
       <DecorativeElements />
