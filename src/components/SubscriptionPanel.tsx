@@ -25,7 +25,7 @@ const SubscriptionPanel = ({
           Sign up!
         </div>
       )}
-      <div className="fixed bottom-24 right-6 z-40 bg-background shadow-lg border rounded-lg w-[320px] animate-fade-in overflow-hidden">
+      <div className="fixed bottom-24 right-6 z-40 bg-background shadow-lg border rounded-lg w-[420px] animate-fade-in overflow-hidden">
         {/* Header with close button */}
         <div className="p-3 border-b flex justify-between items-center bg-primary/5">
           <h3 className="text-sm font-medium">Sign up!</h3>
@@ -39,7 +39,7 @@ const SubscriptionPanel = ({
         </div>
         
         <div className="p-3">
-          <SubscribeForm formId="Q5fonbTT" height={350} onComplete={handleSubscribeComplete} />
+          <SubscribeForm formId="Q5fonbTT" height={450} onComplete={handleSubscribeComplete} />
         </div>
       </div>
     </div>

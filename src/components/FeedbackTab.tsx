@@ -80,13 +80,11 @@ export const FeedbackTab = () => {
         Give feedback
       </div>
       
-      {/* Subscription tooltip - Remove since it's handled by SubscriptionPanel */}
-      
       {/* Feedback Form */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed bottom-20 right-6 z-50 w-full max-w-md md:max-w-lg"
+            className="fixed bottom-20 right-6 z-50 w-full max-w-[500px]"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -108,7 +106,7 @@ export const FeedbackTab = () => {
               <div className="w-full">
                 <SubscribeForm 
                   formId="Y5r3mjhF" 
-                  height={600}
+                  height={650}
                   onClose={() => setIsOpen(false)}
                   onComplete={handleFeedbackComplete}
                   showCloseButton={false}
