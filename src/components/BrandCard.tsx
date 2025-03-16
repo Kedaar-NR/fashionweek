@@ -19,22 +19,12 @@ const BrandCard = ({ brand, index }: BrandCardProps) => {
       transition={{ duration: 0.3, delay: index * 0.05 }}
       className="bg-white rounded-lg overflow-hidden border border-[#eaeaea] hover:border-[#ddd] hover:shadow-sm transition-all group"
     >
-      <div className="relative h-48 overflow-hidden">
-        {brand.logoUrl ? (
-          <img 
-            src={brand.logoUrl} 
-            alt={brand.name} 
-            className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105" 
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-[#f5f5f5]">
-            <img 
-              src="/placeholder.svg" 
-              alt="Placeholder" 
-              className="w-16 h-16 text-[#aaa] opacity-50 transition-all duration-300 group-hover:scale-110" 
-            />
-          </div>
-        )}
+      <div 
+        className="relative h-48 overflow-hidden"
+        style={{ 
+          backgroundColor: `${styleData.color}30`
+        }}
+      >
         <div 
           className="absolute bottom-0 right-0 m-2 px-2.5 py-1 rounded-full text-xs font-medium capitalize"
           style={{ 
@@ -58,19 +48,15 @@ const BrandCard = ({ brand, index }: BrandCardProps) => {
           >
             {brand.name}
           </a>
-          {brand.logoUrl ? (
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-[#eaeaea]">
-              <img 
-                src={brand.logoUrl} 
-                alt={`${brand.name} logo`} 
-                className="w-full h-full object-cover" 
-              />
-            </div>
-          ) : (
-            <div className="w-8 h-8 rounded-full bg-[#f5f5f5] flex items-center justify-center text-[#aaa]">
-              {brand.name.charAt(0)}
-            </div>
-          )}
+          <div 
+            className="w-8 h-8 rounded-full flex items-center justify-center"
+            style={{ 
+              backgroundColor: `${styleData.color}30`, 
+              color: styleData.color
+            }}
+          >
+            {brand.name.charAt(0)}
+          </div>
         </div>
         
         <div className="mt-2">
