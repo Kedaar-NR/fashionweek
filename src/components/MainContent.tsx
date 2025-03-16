@@ -9,7 +9,7 @@ interface MainContentProps {
   brands: Brand[];
 }
 
-const MainContent = ({ brandCount }: MainContentProps) => {
+const MainContent = ({ brands }: MainContentProps) => {
   const [viewMode, setViewMode] = useState<'gallery' | 'table'>('table');
 
   return (
