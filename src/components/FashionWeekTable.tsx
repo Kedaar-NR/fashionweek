@@ -84,6 +84,12 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
     e.preventDefault();
   };
 
+  // Function to handle search without changing sort order
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+    // No sort order changes here
+  };
+
   return (
     <div className="w-full overflow-auto">
       <form onSubmit={handleSearchSubmit} className="relative mb-4 hidden">
@@ -93,7 +99,7 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
           placeholder="Search brands..."
           className="pl-9 w-full md:w-[200px] h-9"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={handleSearch}
         />
       </form>
       
@@ -113,14 +119,14 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
                     : <ArrowDown size={14} />
                 )}
                 
-                <div className="ml-4 relative">
+                <div className="ml-4 relative" onClick={(e) => e.stopPropagation()}>
                   <SearchIcon className="h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
                   <Input
                     type="search"
                     placeholder="Search brands..."
                     className="pl-9 w-[180px] h-8"
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={handleSearch}
                   />
                 </div>
               </div>
