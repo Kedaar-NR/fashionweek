@@ -86,36 +86,43 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
 
   return (
     <div className="w-full overflow-auto">
-      <div className="mb-4 flex items-center justify-between">
-        <div className="text-sm text-muted-foreground">
-          {sortedBrands.length} {sortedBrands.length === 1 ? 'brand' : 'brands'} found
-        </div>
-        <form onSubmit={handleSearchSubmit} className="relative">
-          <SearchIcon className="h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
-          <Input
-            type="search"
-            placeholder="Search brands..."
-            className="pl-9 w-full md:w-[200px] h-9"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </form>
-      </div>
+      <form onSubmit={handleSearchSubmit} className="relative mb-4 hidden">
+        <SearchIcon className="h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+        <Input
+          type="search"
+          placeholder="Search brands..."
+          className="pl-9 w-full md:w-[200px] h-9"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </form>
+      
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[50px]"></TableHead>
             <TableHead 
-              className="cursor-pointer hover:bg-muted/30 transition-colors w-[200px]" 
+              className="cursor-pointer hover:bg-muted/30 transition-colors" 
               onClick={() => toggleSort('name')}
             >
               <div className="flex items-center gap-2">
-                Brand Name
+                <span>Brand Name</span>
                 {sortConfig.field === 'name' && (
                   sortConfig.direction === 'asc' 
                     ? <ArrowUp size={14} /> 
                     : <ArrowDown size={14} />
                 )}
+                
+                <div className="ml-4 relative">
+                  <SearchIcon className="h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    type="search"
+                    placeholder="Search brands..."
+                    className="pl-9 w-[180px] h-8"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
               </div>
             </TableHead>
             <TableHead className="w-[200px]">Style</TableHead>
