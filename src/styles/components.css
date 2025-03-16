@@ -77,4 +77,10 @@
   .menu-scroll::-webkit-scrollbar {
     display: none;
   }
+  
+  /* Gradient text for active buttons */
+  .gradient-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
 }
