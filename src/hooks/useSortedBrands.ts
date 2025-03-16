@@ -9,7 +9,7 @@ interface UseSortedBrandsProps {
 
 export const useSortedBrands = ({ 
   brands, 
-  initialSort = { field: 'dropDate', direction: 'asc' } // Changed to 'asc' for closest dates first
+  initialSort = { field: 'dropDate', direction: 'asc' } // 'asc' for closest upcoming dates first (March, April, May)
 }: UseSortedBrandsProps) => {
   const [sortConfig, setSortConfig] = useState<SortConfig>(initialSort);
   const [searchTerm, setSearchTerm] = useState('');
@@ -58,11 +58,11 @@ export const useSortedBrands = ({
         const dateA = new Date(a.dropDate).getTime();
         const dateB = new Date(b.dropDate).getTime();
         
-        // Only consider upcoming dates (not past dates)
+        // Only consider upcoming dates (past dates get pushed to the end)
         const diffA = dateA >= now ? dateA - now : Number.MAX_SAFE_INTEGER;
         const diffB = dateB >= now ? dateB - now : Number.MAX_SAFE_INTEGER;
         
-        // For drop dates: 'asc' shows closest dates first, 'desc' shows furthest dates first
+        // For drop dates: 'asc' shows closest upcoming dates first, 'desc' shows furthest dates first
         return sortConfig.direction === 'asc' 
           ? diffA - diffB 
           : diffB - diffA;

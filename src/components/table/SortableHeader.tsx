@@ -2,6 +2,7 @@
 import { SortField, SortDirection, SortConfig } from '@/types';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import { TableHead } from '@/components/ui/table';
+import { motion } from 'framer-motion';
 
 interface SortableHeaderProps {
   label: string;
@@ -29,11 +30,16 @@ const SortableHeader = ({
       onClick={() => onSort(field)}
     >
       <div className="flex items-center gap-2">
-        <span>{label}</span>
+        <span className="font-medium">{label}</span>
         {isSorted && (
-          sortDirection === 'asc' 
-            ? <ArrowUp size={14} /> 
-            : <ArrowDown size={14} />
+          <motion.div
+            initial={{ rotate: 0 }}
+            animate={{ rotate: sortDirection === 'asc' ? 0 : 180 }}
+            transition={{ duration: 0.3 }}
+            className="text-primary"
+          >
+            <ArrowUp size={14} />
+          </motion.div>
         )}
         {children}
       </div>

@@ -19,11 +19,11 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
     handleSearch 
   } = useSortedBrands({ 
     brands,
-    initialSort: { field: 'dropDate', direction: 'desc' }  // Show recent dates first by default
+    initialSort: { field: 'dropDate', direction: 'asc' }  // Show closest upcoming dates first by default
   });
 
   return (
-    <div className="w-full overflow-auto rounded-lg p-4 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900/60 dark:to-blue-900/30 backdrop-blur-sm">
+    <div className="w-full overflow-auto rounded-lg p-4 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900/60 dark:to-blue-900/30 backdrop-blur-sm shadow-md">
       <Table>
         <TableHeader>
           <TableRow>
