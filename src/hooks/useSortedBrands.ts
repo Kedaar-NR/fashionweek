@@ -17,7 +17,7 @@ export const useSortedBrands = ({
   // Set initial sort when component mounts
   useEffect(() => {
     setSortConfig(initialSort);
-  }, [initialSort]);
+  }, []);
 
   // Toggle sorting when clicking a column header
   const toggleSort = (field: SortField) => {

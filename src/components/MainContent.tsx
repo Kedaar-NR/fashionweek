@@ -15,46 +15,44 @@ const MainContent = ({ brands }: MainContentProps) => {
   return (
     <main className="container py-12 px-4" id="brand-gallery">
       <div className="mb-8 flex flex-col items-center gap-4">
-        <h2 className="text-2xl md:text-3xl font-medium tracking-tight" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", letterSpacing: "-0.5px" }}>
+        <h2 className="text-xl font-medium text-[#111] flex items-center">
           {viewMode === 'table' ? (
-            <span className="flex items-center justify-center">
-              UPCOMING DROPS <Flame className="ml-2 text-white" size={18} />
-            </span>
-          ) : 'BRAND GALLERY'}
+            <>
+              Upcoming Drops <Flame className="ml-2 text-[#F97316]" size={18} />
+            </>
+          ) : 'Brand Gallery'}
         </h2>
         
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <div className="py-2 px-4 rounded-none text-black font-medium bg-white hover:bg-neutral-100 transition-all shadow-sm animate-[pulse_2s_ease-in-out_infinite] hover:scale-105">
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <div className="py-2 px-4 rounded-full text-white font-medium bg-gradient-to-r from-[#0EA5E9] to-[#10B981] shadow-sm animate-pulse hover:scale-105 transition-transform">
             <span className="flex items-center">
               <Calendar size={16} className="mr-2" />
-              <span style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-                <strong className="font-bold">{brands.length}</strong> brands with upcoming drops
-              </span>
+              <span><strong className="font-bold">{brands.length}</strong> brands with upcoming drops</span>
             </span>
           </div>
         </div>
         
-        {/* Minimal view toggle buttons */}
+        {/* Centered view toggle buttons */}
         <div className="flex justify-center gap-2">
           <button 
             onClick={() => setViewMode('table')}
-            className={`px-4 py-1.5 rounded-none text-sm font-medium transition-all min-w-[110px] uppercase tracking-wider ${
+            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all min-w-[110px] ${
               viewMode === 'table' 
-                ? 'bg-white text-black' 
-                : 'bg-[#333] text-white hover:bg-[#444]'
-            }`}
-            style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", letterSpacing: "1px" }}
+                ? 'bg-white text-transparent bg-clip-text border border-[#eaeaea]' 
+                : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'
+            } ${viewMode === 'table' ? 'gradient-text' : ''}`}
+            style={viewMode === 'table' ? {backgroundImage: 'linear-gradient(to right, #F97316, #FB923C, #FCD34D)'} : {}}
           >
             Table View
           </button>
           <button 
             onClick={() => setViewMode('gallery')}
-            className={`px-4 py-1.5 rounded-none text-sm font-medium transition-all min-w-[110px] uppercase tracking-wider ${
+            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all min-w-[110px] ${
               viewMode === 'gallery' 
-                ? 'bg-white text-black' 
-                : 'bg-[#333] text-white hover:bg-[#444]'
-            }`}
-            style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", letterSpacing: "1px" }}
+                ? 'bg-white text-transparent bg-clip-text border border-[#eaeaea]' 
+                : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'
+            } ${viewMode === 'gallery' ? 'gradient-text' : ''}`}
+            style={viewMode === 'gallery' ? {backgroundImage: 'linear-gradient(to right, #F97316, #FB923C, #FCD34D)'} : {}}
           >
             Gallery View
           </button>
