@@ -73,9 +73,9 @@ const Header = ({
       </div>
 
       <div className="container relative z-10">
-        {/* Navigation menu - no longer fixed position */}
+        {/* Navigation menu - blended with background */}
         <motion.div 
-          className="py-3 px-4 md:px-8 bg-white dark:bg-black shadow-md mb-8"
+          className="py-3 px-4 md:px-8 bg-transparent shadow-sm mb-8 border-b border-[#eaeaea]/50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}
@@ -175,7 +175,7 @@ const Header = ({
         }} className="py-2.5 px-5 rounded-full text-white font-medium shadow-lg brand-count-indicator">
             <span className="flex items-center">
               <Calendar size={16} className="mr-2" />
-              {brandCount} brands with upcoming drops
+              <span className="brand-count-number">{brandCount}</span> brands with upcoming drops
             </span>
           </motion.div>
         </motion.div>

@@ -57,8 +57,27 @@
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
   
+  .brand-count-number {
+    @apply font-bold text-lg;
+    background: linear-gradient(90deg, #ffffff, #ffffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  }
+  
   .brand-count-indicator:hover {
     @apply shadow-xl transform -translate-y-1;
     filter: brightness(1.05);
+  }
+  
+  /* Style filter scrolling */
+  .style-filters-scroll {
+    @apply flex gap-2 overflow-x-auto pb-2;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .style-filters-scroll::-webkit-scrollbar {
+    display: none;
   }
 }

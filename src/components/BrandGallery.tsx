@@ -1,3 +1,4 @@
+
 import { useState, useMemo, useEffect } from 'react';
 import { Brand, BrandStyle, SortConfig, FilterConfig } from '@/types';
 import { useScrollTrigger } from '@/utils/animations';

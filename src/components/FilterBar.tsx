@@ -13,6 +13,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { ArrowDownIcon, ArrowUpIcon, SearchIcon, X } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface FilterBarProps {
   totalBrands: number;
@@ -149,27 +150,31 @@ export const FilterBar = ({
           </div>
         </div>
         
-        <div className="flex flex-wrap items-center gap-2">
-          {availableStyles.map((style) => {
-            const styleData = styleConfig?.[style];
-            return (
-              <button
-                key={style}
-                onClick={() => toggleStyle(style)}
-                className={`filter-button flex items-center gap-1 ${filterConfig.styles.includes(style) ? 'active' : ''}`}
-                style={styleData && !filterConfig.styles.includes(style) ? {color: styleData.color} : {}}
-              >
-                {styleData?.icon} {brandStyleLabels[style]}
-              </button>
-            );
-          })}
+        <div>
+          <ScrollArea className="w-full">
+            <div className="style-filters-scroll pr-4">
+              {availableStyles.map((style) => {
+                const styleData = styleConfig?.[style];
+                return (
+                  <button
+                    key={style}
+                    onClick={() => toggleStyle(style)}
+                    className={`filter-button flex items-center gap-1 ${filterConfig.styles.includes(style) ? 'active' : ''}`}
+                    style={styleData && !filterConfig.styles.includes(style) ? {color: styleData.color} : {}}
+                  >
+                    {styleData?.icon} {brandStyleLabels[style]}
+                  </button>
+                );
+              })}
+            </div>
+          </ScrollArea>
           
           {(filterConfig.styles.length > 0 || filterConfig.searchTerm) && (
             <Button 
               variant="ghost" 
               size="sm" 
               onClick={clearFilters}
-              className="ml-2 text-muted-foreground hover:text-foreground"
+              className="mt-2 text-muted-foreground hover:text-foreground"
             >
               <X className="h-4 w-4 mr-1" />
               Clear
