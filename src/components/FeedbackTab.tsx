@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { MessageSquareText, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SubscribeForm from '@/components/SubscribeForm';
+import { toast } from 'sonner';
 
 export const FeedbackTab = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +19,12 @@ export const FeedbackTab = () => {
     document.addEventListener('keydown', handleEscapeKey);
     return () => document.removeEventListener('keydown', handleEscapeKey);
   }, [isOpen]);
+
+  const handleOpenForm = () => {
+    setIsOpen(true);
+    // Log when the feedback form is opened
+    console.log('Feedback form opened');
+  };
   
   return (
     <>
@@ -25,7 +32,7 @@ export const FeedbackTab = () => {
         className="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow-lg z-50 hover:scale-105 transition-transform"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => setIsOpen(true)}
+        onClick={handleOpenForm}
         aria-label="Open feedback form"
       >
         <span className="flex items-center">

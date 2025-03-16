@@ -1,6 +1,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface SubscribeFormProps {
   formId: string;
@@ -12,7 +13,7 @@ interface SubscribeFormProps {
 
 const SubscribeForm = ({ 
   formId, 
-  height = 350, // Increased height for more space
+  height = 350,
   onClose, 
   onComplete,
   showCloseButton = true 
@@ -31,6 +32,9 @@ const SubscribeForm = ({
       document.body.appendChild(script);
     }
 
+    // Log to track loading
+    console.log(`Loading Typeform with ID: ${formId}`);
+
     // Add event listener for typeform submission
     const handleMessage = (event: MessageEvent) => {
       // Check if the message is from Typeform and is a form submission
@@ -39,10 +43,13 @@ const SubscribeForm = ({
         event.data.type === 'form-submit' &&
         event.data.formId === formId
       ) {
+        console.log('Form submitted successfully');
         // Call the onComplete callback when the form is submitted
         if (onComplete) {
           onComplete();
         }
+        // Show success toast
+        toast.success('Form submitted successfully!');
       }
     };
 
@@ -51,6 +58,7 @@ const SubscribeForm = ({
     // Set a fallback timeout to stop showing the loading state
     const timeoutId = setTimeout(() => {
       setIsLoading(false);
+      console.log('Typeform loading timeout reached');
     }, 3000);
 
     // Cleanup
@@ -59,6 +67,11 @@ const SubscribeForm = ({
       clearTimeout(timeoutId);
     };
   }, [formId, onComplete]);
+
+  // Reset loading state if the form ID changes
+  useEffect(() => {
+    setIsLoading(true);
+  }, [formId]);
 
   return (
     <div className="w-full rounded-md overflow-hidden border border-[#eaeaea] relative bg-white">
@@ -84,12 +97,15 @@ const SubscribeForm = ({
         data-tf-widget={formId}
         data-tf-opacity="100" 
         data-tf-inline-embed="true"
-        data-tf-auto-focus
-        data-tf-iframe-props="title=FashionWeek Subscription" 
+        data-tf-auto-focus="true"
+        data-tf-iframe-props="title=Feedback Form" 
         data-tf-transitive-search-params 
         data-tf-medium="snippet" 
         data-tf-hidden="utm_source=website,utm_medium=inline_embed"
-        onLoad={() => setIsLoading(false)}
+        onLoad={() => {
+          setIsLoading(false);
+          console.log('Typeform loaded successfully');
+        }}
         className={isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-300'}
       ></div>
     </div>
