@@ -22,11 +22,9 @@ const MainContent = ({ brands }: MainContentProps) => {
         className="mb-6 flex flex-col items-center gap-2"
       >
         <h2 className="text-2xl font-bold tracking-tight mb-2">
-          {viewMode === 'table' ? (
-            <span className="flex items-center">
-              Upcoming Drops <Flame className="ml-2 text-[#FCD34D]" size={22} />
-            </span>
-          ) : 'Brand Gallery'}
+          <span className="flex items-center">
+            Upcoming Drops <Flame className="ml-2 text-[#FCD34D]" size={26} />
+          </span>
         </h2>
         
         <div className="py-2 px-4 rounded-full text-white font-medium brand-count-indicator shadow-sm hover:scale-105 transition-transform">

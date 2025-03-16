@@ -115,7 +115,7 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
   }, [isTriggered]);
 
   return (
-    <div className="w-full">
+    <div className="w-full rounded-lg p-4 bg-gradient-to-br from-slate-50 to-violet-50 dark:from-slate-900/60 dark:to-violet-900/30 backdrop-blur-sm">
       <FilterBar 
         totalBrands={filteredAndSortedBrands.length}
         availableStyles={availableStyles}
