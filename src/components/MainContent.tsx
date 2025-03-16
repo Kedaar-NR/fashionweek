@@ -19,9 +19,9 @@ const MainContent = ({ brands }: MainContentProps) => {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="mb-6 flex flex-col items-center gap-2 p-6 rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#10B981] text-white shadow-md"
+        className="mb-6 flex flex-col items-center gap-2"
       >
-        <h2 className="text-2xl font-bold tracking-tight">
+        <h2 className="text-2xl font-bold tracking-tight mb-2">
           {viewMode === 'table' ? (
             <span className="flex items-center">
               Upcoming Drops <Flame className="ml-2 text-[#FCD34D]" size={22} />
@@ -29,23 +29,21 @@ const MainContent = ({ brands }: MainContentProps) => {
           ) : 'Brand Gallery'}
         </h2>
         
-        <div className="flex items-center justify-center gap-2">
-          <div className="py-2 px-4 rounded-full text-white font-medium bg-white/20 backdrop-blur-sm shadow-sm animate-pulse hover:scale-105 transition-transform">
-            <span className="flex items-center">
-              <Calendar size={16} className="mr-2" />
-              <span><strong className="font-bold">{brands.length}</strong> brands with upcoming drops</span>
-            </span>
-          </div>
+        <div className="py-2 px-4 rounded-full text-white font-medium brand-count-indicator shadow-sm hover:scale-105 transition-transform">
+          <span className="flex items-center">
+            <Calendar size={16} className="mr-2" />
+            <span><strong className="font-bold">{brands.length}</strong> brands with upcoming drops</span>
+          </span>
         </div>
         
         {/* Centered view toggle buttons */}
-        <div className="flex justify-center gap-2 mt-2">
+        <div className="flex justify-center gap-2 mt-3">
           <button 
             onClick={() => setViewMode('table')}
             className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all min-w-[110px] ${
               viewMode === 'table' 
-                ? 'bg-white text-[#0EA5E9] border border-transparent' 
-                : 'bg-white/10 text-white hover:bg-white/20'
+                ? 'bg-primary text-white' 
+                : 'bg-muted hover:bg-muted/80'
             }`}
           >
             Table View
@@ -54,8 +52,8 @@ const MainContent = ({ brands }: MainContentProps) => {
             onClick={() => setViewMode('gallery')}
             className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all min-w-[110px] ${
               viewMode === 'gallery' 
-                ? 'bg-white text-[#0EA5E9] border border-transparent' 
-                : 'bg-white/10 text-white hover:bg-white/20'
+                ? 'bg-primary text-white' 
+                : 'bg-muted hover:bg-muted/80'
             }`}
           >
             Gallery View
