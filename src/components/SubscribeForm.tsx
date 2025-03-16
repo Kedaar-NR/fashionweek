@@ -22,7 +22,6 @@ const SubscribeForm = ({
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
   useEffect(() => {
-    // Function to load the Typeform embed script
     const loadTypeformScript = () => {
       return new Promise<void>((resolve) => {
         if (document.querySelector('script[src="https://embed.typeform.com/next/embed.js"]')) {
@@ -42,19 +41,15 @@ const SubscribeForm = ({
       });
     };
 
-    // Function to initialize the form
     const initializeForm = async () => {
       try {
         await loadTypeformScript();
         
-        // Wait for the window.tf object to be available
         if (typeof window !== 'undefined' && 'tf' in window) {
           const embedElement = formContainerRef.current;
           if (embedElement) {
-            // Clear any existing content
             embedElement.innerHTML = '';
             
-            // Create new embed with updated options
             (window as any).tf.createWidget(formId, {
               container: embedElement,
               height: height,
@@ -64,7 +59,6 @@ const SubscribeForm = ({
                 setIsLoading(false);
                 console.log('Typeform loaded successfully');
                 
-                // Add custom styles to the iframe once it's loaded
                 const iframe = embedElement.querySelector('iframe');
                 if (iframe) {
                   iframe.style.width = '100%';
@@ -93,7 +87,6 @@ const SubscribeForm = ({
 
     initializeForm();
 
-    // Cleanup function
     return () => {
       const embedElement = formContainerRef.current;
       if (embedElement) {

@@ -1,9 +1,10 @@
+
 import { motion } from 'framer-motion';
 import { Shirt, TrendingUp, Sparkles, Calendar, Mail, Users } from 'lucide-react';
 import { Brand } from '@/types';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { SubscribeForm } from '@/components/SubscribeForm';
+import SubscribeForm from '@/components/SubscribeForm';
 
 interface HeaderProps {
   brandCount: number;
