@@ -1,9 +1,9 @@
-
 import { motion } from 'framer-motion';
 import { Shirt, TrendingUp, Sparkles, Calendar, Mail, Users } from 'lucide-react';
 import { Brand } from '@/types';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { SubscribeForm } from '@/components/SubscribeForm';
 
 interface HeaderProps {
   brandCount: number;
@@ -83,7 +83,9 @@ const Header = ({
           <div className="container mx-auto flex justify-between items-center">
             <div className="flex items-center gap-1">
               <Sparkles size={18} className="text-[#F97316]" />
-              <span className="font-bold bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FCD34D] bg-clip-text text-transparent">FashionWeek</span>
+              <a href="/" className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FCD34D]">
+                FashionWeek
+              </a>
             </div>
             
             {isMobile ? (
@@ -172,12 +174,45 @@ const Header = ({
         }} transition={{
           delay: 1,
           duration: 0.5
-        }} className="py-2.5 px-5 rounded-full text-white font-medium shadow-lg brand-count-indicator">
-            <span className="flex items-center">
-              <Calendar size={16} className="mr-2" />
-              <span className="font-medium">{brandCount}</span> brands with upcoming drops
-            </span>
+        }} className="flex flex-col items-center gap-4">
+            <div className="py-2.5 px-5 rounded-full text-white font-medium shadow-lg brand-count-indicator">
+              <span className="flex items-center">
+                <Calendar size={16} className="mr-2" />
+                <span className="font-bold">{brandCount}</span>&nbsp;brands with upcoming drops
+              </span>
+            </div>
+            
+            <div className="w-full max-w-md">
+              <SubscribeForm 
+                formId="Q5fonbTT" 
+                height={100} 
+                showCloseButton={false}
+              />
+            </div>
           </motion.div>
+
+          <motion.form 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.5 }}
+            className="flex gap-2 w-full max-w-sm"
+            onSubmit={(e) => {
+              e.preventDefault();
+              // Handle form submission
+            }}
+          >
+            <input
+              type="text"
+              placeholder="Enter email or phone"
+              className="flex-1 px-4 py-2 rounded-full border border-[#eaeaea] focus:outline-none focus:border-[#F97316] text-sm"
+            />
+            <button
+              type="submit"
+              className="px-6 py-2 rounded-full font-medium text-sm text-white shadow-lg transition-transform hover:scale-105 bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FCD34D]"
+            >
+              Join
+            </button>
+          </motion.form>
         </motion.div>
       </div>
     </motion.header>;

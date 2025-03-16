@@ -1,4 +1,3 @@
-
 import { useState, useMemo, useEffect } from 'react';
 import { Brand, BrandStyle, SortConfig, FilterConfig } from '@/types';
 import { useScrollTrigger } from '@/utils/animations';
@@ -83,7 +82,7 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
           const aDate = new Date(aValue).getTime();
           const bDate = new Date(bValue).getTime();
           
-          return sortConfig.direction === 'asc' ? aDate - bDate : bDate - aDate;
+          return sortConfig.direction === 'asc' ? bDate - aDate : aDate - bDate;
         } else {
           // For strings, convert to lowercase for case-insensitive sorting
           aValue = aValue.toLowerCase();

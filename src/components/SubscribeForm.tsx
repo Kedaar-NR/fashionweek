@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import { toast } from 'sonner';
@@ -104,32 +103,36 @@ const SubscribeForm = ({
   }, [formId, height, onComplete]);
 
   return (
-    <div className="w-full rounded-md overflow-hidden border border-[#eaeaea] relative bg-white flex flex-col">
-      {showCloseButton && onClose && (
-        <button 
-          onClick={onClose}
-          className="absolute top-2 right-2 z-10 bg-white/80 rounded-full p-1 hover:bg-[#f5f5f5] transition-colors"
-          aria-label="Close subscription form"
-        >
-          <X size={16} className="text-[#555]" />
-        </button>
-      )}
-      
-      {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
-          <div className="w-6 h-6 border-2 border-[#f97316] border-t-transparent rounded-full animate-spin"></div>
+    <div className="relative">
+      <div className="bg-white p-4 rounded-lg border border-[#eaeaea] shadow-sm">
+        <div className="w-full rounded-md overflow-hidden border border-[#eaeaea] relative bg-white flex flex-col">
+          {showCloseButton && onClose && (
+            <button 
+              onClick={onClose}
+              className="absolute top-2 right-2 z-10 bg-white/80 rounded-full p-1 hover:bg-[#f5f5f5] transition-colors"
+              aria-label="Close subscription form"
+            >
+              <X size={16} className="text-[#555]" />
+            </button>
+          )}
+          
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
+              <div className="w-6 h-6 border-2 border-[#f97316] border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          )}
+          
+          <div 
+            ref={formContainerRef}
+            style={{ 
+              height: `${height}px`,
+              minHeight: '350px',
+              width: '100%'
+            }}
+            className={`flex-1 transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+          />
         </div>
-      )}
-      
-      <div 
-        ref={formContainerRef}
-        style={{ 
-          height: `${height}px`,
-          minHeight: '350px',
-          width: '100%'
-        }}
-        className={`flex-1 transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
-      />
+      </div>
     </div>
   );
 };

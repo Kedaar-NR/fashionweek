@@ -1,11 +1,11 @@
-
 import { useMemo, useState } from 'react';
 import { Brand, SortConfig } from '@/types';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { cn } from '@/lib/utils';
-import { ArrowDown, ArrowUp, ShoppingBag } from 'lucide-react';
+import { ArrowDown, ArrowUp, ShoppingBag, SearchIcon } from 'lucide-react';
 import { format, isAfter, isBefore, addDays, addMonths } from 'date-fns';
 import { styleConfig } from './BrandGallery';
+import { Input } from '@/components/ui/input';
 
 interface FashionWeekTableProps {
   brands: Brand[];
@@ -14,8 +14,9 @@ interface FashionWeekTableProps {
 export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
   const [sortConfig, setSortConfig] = useState<SortConfig>({
     field: 'dropDate',
-    direction: 'asc'
+    direction: 'desc'
   });
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Determine the date style based on how soon the drop date is
   const getDropDateStyle = (dateStr: string) => {
@@ -40,15 +41,27 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
     setSortConfig(prevConfig => ({
       field,
       direction: 
-        prevConfig.field === field && prevConfig.direction === 'asc' 
-          ? 'desc' 
-          : 'asc'
+        prevConfig.field === field && prevConfig.direction === 'desc' 
+          ? 'asc' 
+          : 'desc'
     }));
   };
 
-  // Sort brands based on the current sort configuration
+  // Sort and filter brands
   const sortedBrands = useMemo(() => {
-    return [...brands].sort((a, b) => {
+    let filtered = [...brands];
+    
+    // Apply search filter
+    if (searchTerm) {
+      const searchLower = searchTerm.toLowerCase();
+      filtered = filtered.filter(
+        brand => 
+          brand.name.toLowerCase().includes(searchLower) || 
+          brand.style.toLowerCase().includes(searchLower)
+      );
+    }
+
+    return filtered.sort((a, b) => {
       if (sortConfig.field === 'name') {
         const nameA = a.name.toLowerCase();
         const nameB = b.name.toLowerCase();
@@ -59,14 +72,33 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
         const dateA = new Date(a.dropDate).getTime();
         const dateB = new Date(b.dropDate).getTime();
         return sortConfig.direction === 'asc' 
-          ? dateA - dateB 
-          : dateB - dateA;
+          ? dateB - dateA 
+          : dateA - dateB;
       }
     });
-  }, [brands, sortConfig]);
+  }, [brands, sortConfig, searchTerm]);
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
 
   return (
     <div className="w-full overflow-auto">
+      <div className="mb-4 flex items-center justify-between">
+        <div className="text-sm text-muted-foreground">
+          {sortedBrands.length} {sortedBrands.length === 1 ? 'brand' : 'brands'} found
+        </div>
+        <form onSubmit={handleSearchSubmit} className="relative">
+          <SearchIcon className="h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+          <Input
+            type="search"
+            placeholder="Search brands..."
+            className="pl-9 w-full md:w-[200px] h-9"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </form>
+      </div>
       <Table>
         <TableHeader>
           <TableRow>
@@ -141,7 +173,7 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
                   </span>
                 </TableCell>
                 <TableCell className={cn(getDropDateStyle(brand.dropDate))}>
-                  {format(new Date(brand.dropDate), 'MMM d, yyyy')}
+                  {format(new Date(brand.dropDate), 'MMMM d, yyyy')}
                 </TableCell>
               </TableRow>
             );

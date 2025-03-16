@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { MessageSquareText, X, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import BrandGallery from '@/components/BrandGallery';
 import FashionWeekTable from '@/components/FashionWeekTable';
@@ -14,7 +13,7 @@ const MainContent = ({ brands }: MainContentProps) => {
 
   return (
     <main className="container py-12 px-4" id="brand-gallery">
-      <div className="mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div className="mb-8 flex flex-col items-center gap-4">
         <h2 className="text-xl font-medium text-[#111] flex items-center">
           {viewMode === 'table' ? (
             <>
@@ -23,36 +22,30 @@ const MainContent = ({ brands }: MainContentProps) => {
           ) : 'Brand Gallery'}
         </h2>
         
-        <div className="flex flex-col md:flex-row items-center gap-4">
-          {/* Centered view toggle buttons */}
-          <div className="flex justify-center w-full gap-2">
-            <button 
-              onClick={() => setViewMode('table')}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all min-w-[110px] ${
-                viewMode === 'table' 
-                  ? 'bg-white text-transparent bg-clip-text border border-[#eaeaea]' 
-                  : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'
-              } ${viewMode === 'table' ? 'gradient-text' : ''}`}
-              style={viewMode === 'table' ? {backgroundImage: 'linear-gradient(to right, #F97316, #FB923C, #FCD34D)'} : {}}
-            >
-              Table View
-            </button>
-            <button 
-              onClick={() => setViewMode('gallery')}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all min-w-[110px] ${
-                viewMode === 'gallery' 
-                  ? 'bg-white text-transparent bg-clip-text border border-[#eaeaea]' 
-                  : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'
-              } ${viewMode === 'gallery' ? 'gradient-text' : ''}`}
-              style={viewMode === 'gallery' ? {backgroundImage: 'linear-gradient(to right, #F97316, #FB923C, #FCD34D)'} : {}}
-            >
-              Gallery View
-            </button>
-          </div>
-          
-          <div className="text-sm text-[#777]">
-            <span className="font-medium text-[#111]">{brands.length}</span> brands
-          </div>
+        {/* Centered view toggle buttons */}
+        <div className="flex justify-center gap-2">
+          <button 
+            onClick={() => setViewMode('table')}
+            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all min-w-[110px] ${
+              viewMode === 'table' 
+                ? 'bg-white text-transparent bg-clip-text border border-[#eaeaea]' 
+                : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'
+            } ${viewMode === 'table' ? 'gradient-text' : ''}`}
+            style={viewMode === 'table' ? {backgroundImage: 'linear-gradient(to right, #F97316, #FB923C, #FCD34D)'} : {}}
+          >
+            Table View
+          </button>
+          <button 
+            onClick={() => setViewMode('gallery')}
+            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all min-w-[110px] ${
+              viewMode === 'gallery' 
+                ? 'bg-white text-transparent bg-clip-text border border-[#eaeaea]' 
+                : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'
+            } ${viewMode === 'gallery' ? 'gradient-text' : ''}`}
+            style={viewMode === 'gallery' ? {backgroundImage: 'linear-gradient(to right, #F97316, #FB923C, #FCD34D)'} : {}}
+          >
+            Gallery View
+          </button>
         </div>
       </div>
       
