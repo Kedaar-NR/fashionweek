@@ -69,68 +69,43 @@ const Header = ({
       </div>
 
       <div className="container relative z-10">
-        <div className="flex justify-between items-center mb-8">
-          <motion.div initial={{
-          x: -20,
-          opacity: 0
-        }} animate={{
-          x: 0,
-          opacity: 1
-        }} transition={{
-          delay: 0.2,
-          duration: 0.5
-        }}>
-            <h2 className="text-2xl font-medium text-[#111] flex items-center">
-              <span className="text-[#F97316] mr-2">Fashion</span>Week
-              <motion.span className="ml-2 text-[#F97316]" animate={{
-              rotate: [0, 15, 0]
-            }} transition={{
-              duration: 5,
-              repeat: Infinity
-            }}>
-                <Sparkles size={20} />
-              </motion.span>
-            </h2>
-          </motion.div>
-          
-          {/* Enhanced navigation menu */}
-          <motion.div 
-            className="fixed top-0 left-0 right-0 z-50 py-3 px-4 md:px-8 bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FCD34D] text-white shadow-md"
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5, type: "spring", stiffness: 120 }}
-          >
-            <div className="container mx-auto flex justify-between items-center">
-              <div className="flex items-center gap-1">
-                <Sparkles size={18} className="text-white" />
-                <span className="font-bold">FashionWeek</span>
+        {/* Enhanced navigation menu with gradient text instead of gradient background */}
+        <motion.div 
+          className="fixed top-0 left-0 right-0 z-50 py-3 px-4 md:px-8 bg-white dark:bg-black shadow-md"
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{ delay: 0.4, duration: 0.5, type: "spring", stiffness: 120 }}
+        >
+          <div className="container mx-auto flex justify-between items-center">
+            <div className="flex items-center gap-1">
+              <Sparkles size={18} className="text-[#F97316]" />
+              <span className="font-bold bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FCD34D] bg-clip-text text-transparent">FashionWeek</span>
+            </div>
+            
+            <div className="flex items-center gap-6">
+              <a href="#brand-gallery" className="flex items-center gap-1.5 hover:text-[#F97316] transition-colors">
+                <Calendar size={16} />
+                <span className="text-sm font-medium">Drops</span>
+              </a>
+              
+              <div className="group relative">
+                <a href="mailto:info@fashionweek.com" className="flex items-center gap-1.5 hover:text-[#F97316] transition-colors">
+                  <Mail size={16} />
+                  <span className="text-sm font-medium">Contact</span>
+                </a>
+                <div className="absolute top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity bg-white text-[#111] text-xs p-1.5 rounded shadow-lg pointer-events-none whitespace-nowrap menu-tooltip">
+                  <div className="font-medium bg-gradient-to-r from-[#F97316] to-[#FCD34D] bg-clip-text text-transparent">Sign up!</div>
+                  info@fashionweek.com
+                </div>
               </div>
               
-              <div className="flex items-center gap-6">
-                <a href="#brand-gallery" className="flex items-center gap-1.5 hover:text-white/90 transition-colors">
-                  <Calendar size={16} />
-                  <span className="text-sm font-medium">Drops</span>
-                </a>
-                
-                <div className="group relative">
-                  <a href="mailto:info@fashionweek.com" className="flex items-center gap-1.5 hover:text-white/90 transition-colors">
-                    <Mail size={16} />
-                    <span className="text-sm font-medium">Contact</span>
-                  </a>
-                  <div className="absolute top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity bg-white text-[#111] text-xs p-1.5 rounded shadow-lg pointer-events-none whitespace-nowrap">
-                    <div className="font-medium">Sign up!</div>
-                    info@fashionweek.com
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-1.5 bg-white/20 rounded-full px-3 py-1">
-                  <Users size={16} />
-                  <span className="text-sm font-medium">150,000 readers</span>
-                </div>
+              <div className="flex items-center gap-1.5 bg-[#f5f5f5] rounded-full px-3 py-1">
+                <Users size={16} />
+                <span className="text-sm font-medium bg-gradient-to-r from-[#F97316] via-[#8B5CF6] to-[#10B981] bg-clip-text text-transparent">150,000 readers</span>
               </div>
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
         
         <motion.div initial={{
         opacity: 0,
@@ -142,7 +117,6 @@ const Header = ({
         delay: 0.4,
         duration: 0.7
       }} className="flex flex-col items-center text-center max-w-3xl mx-auto">
-          
           
           <motion.p initial={{
           opacity: 0,

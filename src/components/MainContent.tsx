@@ -30,9 +30,10 @@ const MainContent = ({ brands }: MainContentProps) => {
               onClick={() => setViewMode('table')}
               className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all min-w-[110px] ${
                 viewMode === 'table' 
-                  ? 'bg-gradient-to-r from-[#F97316] to-[#FB923C] text-white hover:shadow-md'
+                  ? 'bg-white text-transparent bg-clip-text border border-[#eaeaea]' 
                   : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'
-              }`}
+              } ${viewMode === 'table' ? 'gradient-text' : ''}`}
+              style={viewMode === 'table' ? {backgroundImage: 'linear-gradient(to right, #F97316, #FB923C, #FCD34D)'} : {}}
             >
               Table View
             </button>
@@ -40,9 +41,10 @@ const MainContent = ({ brands }: MainContentProps) => {
               onClick={() => setViewMode('gallery')}
               className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all min-w-[110px] ${
                 viewMode === 'gallery' 
-                  ? 'bg-gradient-to-r from-[#F97316] to-[#FB923C] text-white hover:shadow-md'
+                  ? 'bg-white text-transparent bg-clip-text border border-[#eaeaea]' 
                   : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'
-              }`}
+              } ${viewMode === 'gallery' ? 'gradient-text' : ''}`}
+              style={viewMode === 'gallery' ? {backgroundImage: 'linear-gradient(to right, #F97316, #FB923C, #FCD34D)'} : {}}
             >
               Gallery View
             </button>

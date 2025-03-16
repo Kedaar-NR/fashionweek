@@ -197,16 +197,48 @@
     animation: float 3s ease-in-out infinite;
   }
   
-  /* Gradient button hover effect */
-  .gradient-button {
-    @apply transition-all duration-300;
+  /* Gradient text effects */
+  .gradient-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
     background-size: 200% auto;
-    background-image: linear-gradient(to right, #F97316 0%, #FB923C 50%, #FCD34D 100%);
+    background-position: 0% center;
+    transition: background-position 0.5s ease;
   }
   
-  .gradient-button:hover {
-    background-position: right center;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.2);
+  .gradient-text:hover {
+    background-position: 100% center;
+  }
+  
+  .orange-gradient-text {
+    background-image: linear-gradient(to right, #F97316, #FB923C, #FCD34D);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  
+  .purple-gradient-text {
+    background-image: linear-gradient(to right, #8B5CF6, #A78BFA, #C4B5FD);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  
+  .multi-gradient-text {
+    background-image: linear-gradient(to right, #F97316, #8B5CF6, #10B981);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  
+  /* Float animation for menu tooltip */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
   }
 }
