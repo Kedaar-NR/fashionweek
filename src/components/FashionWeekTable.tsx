@@ -72,7 +72,7 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
           <TableRow>
             <TableHead className="w-[50px]"></TableHead>
             <TableHead 
-              className="cursor-pointer hover:bg-muted/30 transition-colors"
+              className="cursor-pointer hover:bg-muted/30 transition-colors w-[200px]" 
               onClick={() => toggleSort('name')}
             >
               <div className="flex items-center gap-2">
@@ -118,12 +118,13 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
                     )}
                   </div>
                 </TableCell>
-                <TableCell className="font-medium">
+                <TableCell className="font-medium max-w-[200px] truncate">
                   <a 
                     href={`https://instagram.com/${brand.instagramHandle}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:underline transition-all hover:text-primary"
+                    title={brand.name}
                   >
                     {brand.name}
                   </a>

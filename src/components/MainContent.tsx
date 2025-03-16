@@ -14,7 +14,7 @@ const MainContent = ({ brands }: MainContentProps) => {
 
   return (
     <main className="container py-12 px-4" id="brand-gallery">
-      <div className="mb-8 flex justify-between items-center">
+      <div className="mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
         <h2 className="text-xl font-medium text-[#111] flex items-center">
           {viewMode === 'table' ? (
             <>
@@ -23,8 +23,8 @@ const MainContent = ({ brands }: MainContentProps) => {
           ) : 'Brand Gallery'}
         </h2>
         
-        <div className="flex items-center gap-4">
-          <div className="flex gap-2">
+        <div className="flex flex-col md:flex-row items-center gap-4">
+          <div className="flex justify-center w-full md:w-auto gap-2">
             <button 
               onClick={() => setViewMode('table')}
               className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
