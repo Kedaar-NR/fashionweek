@@ -38,48 +38,39 @@ export const FeedbackTab = () => {
         Give feedback
       </div>
       
-      {/* Overlay Modal for Feedback Form */}
+      {/* Chatbot-like Feedback Form */}
       <AnimatePresence>
         {isOpen && (
-          <>
-            {/* Overlay background */}
-            <motion.div 
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-            />
-            
-            {/* Feedback form container */}
-            <motion.div
-              className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-lg"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ type: "spring", damping: 25 }}
-            >
-              <div className="bg-background rounded-lg shadow-lg overflow-hidden relative border">
-                {/* Close button */}
+          <motion.div
+            className="fixed bottom-20 right-6 z-50 w-full max-w-sm md:max-w-md"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            transition={{ type: "spring", damping: 25 }}
+          >
+            <div className="bg-background rounded-lg shadow-xl overflow-hidden border subscribe-form-appear">
+              {/* Header with close button */}
+              <div className="p-3 border-b flex justify-between items-center bg-primary/5">
+                <h3 className="text-sm font-medium">Give us your feedback</h3>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="absolute top-4 right-4 z-10 bg-white/80 rounded-full p-1 hover:bg-[#f5f5f5] transition-colors"
+                  className="p-1 rounded-full hover:bg-background/80 transition-colors"
                   aria-label="Close feedback form"
                 >
-                  <X size={16} className="text-[#555]" />
+                  <X size={16} className="text-muted-foreground" />
                 </button>
-                
-                <div className="h-[600px] w-full">
-                  <SubscribeForm 
-                    formId="Y5r3mjhF" 
-                    height={600}
-                    onClose={() => setIsOpen(false)}
-                    showCloseButton={false}
-                  />
-                </div>
               </div>
-            </motion.div>
-          </>
+              
+              <div className="h-[500px] w-full">
+                <SubscribeForm 
+                  formId="Y5r3mjhF" 
+                  height={500}
+                  onClose={() => setIsOpen(false)}
+                  showCloseButton={false}
+                />
+              </div>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
