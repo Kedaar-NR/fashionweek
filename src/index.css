@@ -180,4 +180,33 @@
       transform: translateY(0);
     }
   }
+  
+  /* Brand table styling - Add width constraints to the brand name column */
+  .fashion-week-table th:first-child,
+  .fashion-week-table td:first-child {
+    max-width: 200px;
+    min-width: 120px;
+    width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  /* Add a tooltip animation for 'Sign up!' */
+  .menu-tooltip {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  /* Gradient button hover effect */
+  .gradient-button {
+    @apply transition-all duration-300;
+    background-size: 200% auto;
+    background-image: linear-gradient(to right, #F97316 0%, #FB923C 50%, #FCD34D 100%);
+  }
+  
+  .gradient-button:hover {
+    background-position: right center;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.2);
+  }
 }

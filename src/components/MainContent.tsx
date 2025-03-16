@@ -24,12 +24,13 @@ const MainContent = ({ brands }: MainContentProps) => {
         </h2>
         
         <div className="flex flex-col md:flex-row items-center gap-4">
-          <div className="flex justify-center w-full md:w-auto gap-2">
+          {/* Centered view toggle buttons */}
+          <div className="flex justify-center w-full gap-2">
             <button 
               onClick={() => setViewMode('table')}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all min-w-[110px] ${
                 viewMode === 'table' 
-                  ? 'bg-[#F97316] text-white hover:bg-[#F97316]/90'
+                  ? 'bg-gradient-to-r from-[#F97316] to-[#FB923C] text-white hover:shadow-md'
                   : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'
               }`}
             >
@@ -37,9 +38,9 @@ const MainContent = ({ brands }: MainContentProps) => {
             </button>
             <button 
               onClick={() => setViewMode('gallery')}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all min-w-[110px] ${
                 viewMode === 'gallery' 
-                  ? 'bg-[#F97316] text-white hover:bg-[#F97316]/90'
+                  ? 'bg-gradient-to-r from-[#F97316] to-[#FB923C] text-white hover:shadow-md'
                   : 'bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]'
               }`}
             >
