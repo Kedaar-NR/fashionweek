@@ -24,7 +24,7 @@ const MainContent = ({ brands }: MainContentProps) => {
         </h2>
         
         <div className="flex items-center justify-center gap-2 mb-2">
-          <div className="py-2 px-4 rounded-full text-[#F97316] font-medium bg-[#F97316]/10">
+          <div className="py-2 px-4 rounded-full text-white font-medium bg-gradient-to-r from-[#0EA5E9] to-[#10B981] shadow-sm">
             <span className="flex items-center">
               <Calendar size={16} className="mr-2" />
               <span>{brands.length} brands with upcoming drops</span>
