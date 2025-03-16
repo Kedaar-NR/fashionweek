@@ -1,6 +1,5 @@
 
 import { motion } from 'framer-motion';
-import SubscribeForm from '@/components/SubscribeForm';
 
 interface HeroSectionProps {
   brandCount: number;
@@ -36,7 +35,7 @@ const HeroSection = ({ brandCount }: HeroSectionProps) => {
           delay: 0.8,
           duration: 0.5
         }} 
-        className="text-lg md:text-xl max-w-xl mt-2 mb-8 text-zinc-950"
+        className="text-lg md:text-xl max-w-xl text-zinc-950"
       >
         Track upcoming drops and discover emerging designers shaping the future of fashion.
       </motion.p>

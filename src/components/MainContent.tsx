@@ -9,7 +9,7 @@ interface MainContentProps {
   brands: Brand[];
 }
 
-const MainContent = ({ brands }: MainContentProps) => {
+const MainContent = ({ brandCount }: MainContentProps) => {
   const [viewMode, setViewMode] = useState<'gallery' | 'table'>('table');
 
   return (
@@ -27,7 +27,7 @@ const MainContent = ({ brands }: MainContentProps) => {
           <div className="py-2 px-4 rounded-full text-white font-medium bg-gradient-to-r from-[#0EA5E9] to-[#10B981] shadow-sm">
             <span className="flex items-center">
               <Calendar size={16} className="mr-2" />
-              <span><strong>{brands.length}</strong> brands with upcoming drops</span>
+              <span><strong className="font-bold">{brands.length}</strong> brands with upcoming drops</span>
             </span>
           </div>
         </div>

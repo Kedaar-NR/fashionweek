@@ -1,10 +1,10 @@
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { Brand, SortConfig } from '@/types';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { cn } from '@/lib/utils';
 import { ArrowDown, ArrowUp, ShoppingBag, SearchIcon } from 'lucide-react';
-import { format, isAfter, isBefore, addDays, addMonths } from 'date-fns';
+import { format, isAfter, isBefore, addDays, addWeeks, addMonths } from 'date-fns';
 import { styleConfig } from './BrandGallery';
 import { Input } from '@/components/ui/input';
 
@@ -15,23 +15,34 @@ interface FashionWeekTableProps {
 export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
   const [sortConfig, setSortConfig] = useState<SortConfig>({
     field: 'dropDate',
-    direction: 'desc'
+    direction: 'asc'  // Changed to 'asc' to show closest dates first by default
   });
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Determine the date style based on how soon the drop date is
+  // Set initial sort to drop date (closest to furthest) when component mounts
+  useEffect(() => {
+    setSortConfig({
+      field: 'dropDate',
+      direction: 'asc'  // Show closest dates first
+    });
+  }, []);
+
+  // Determine the date style based on how soon the drop date is with updated timeframes
   const getDropDateStyle = (dateStr: string) => {
     const dropDate = new Date(dateStr);
     const today = new Date();
-    const weekFromNow = addDays(today, 7);
-    const monthFromNow = addMonths(today, 1);
+    const oneWeekFromNow = addDays(today, 7);
+    const twoWeeksFromNow = addWeeks(today, 2);
+    const oneMonthFromNow = addMonths(today, 1);
 
     if (isBefore(dropDate, today)) {
       return "text-muted-foreground line-through"; // Past dates
-    } else if (isBefore(dropDate, weekFromNow)) {
-      return "text-[#ea384c] font-medium"; // Red for dates within a week
-    } else if (isBefore(dropDate, monthFromNow)) {
-      return "text-amber-500 font-medium"; // Yellow/Orange for dates within a month
+    } else if (isBefore(dropDate, oneWeekFromNow)) {
+      return "text-[#ea384c] font-bold"; // Bold red for dates within a week
+    } else if (isBefore(dropDate, twoWeeksFromNow)) {
+      return "text-orange-500 font-medium"; // Orange for dates within two weeks
+    } else if (isBefore(dropDate, oneMonthFromNow)) {
+      return "text-pink-500 font-medium"; // Pink for dates within a month
     } else {
       return "text-green-600 font-medium"; // Green for dates over a month away
     }
@@ -72,7 +83,7 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
       } else {
         const dateA = new Date(a.dropDate).getTime();
         const dateB = new Date(b.dropDate).getTime();
-        // Swapped logic: 'asc' now shows newer dates first, 'desc' shows older dates first
+        // For drop dates: 'asc' shows closest dates first (ascending from today), 'desc' shows furthest dates first
         return sortConfig.direction === 'asc' 
           ? dateA - dateB 
           : dateB - dateA;
