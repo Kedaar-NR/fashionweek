@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { MessageSquareText, X, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -54,7 +55,7 @@ export const FeedbackTab = () => {
       
       {/* Subscription Tooltip */}
       <div className="fixed bottom-34 right-6 bg-popover text-popover-foreground px-3 py-1 rounded-lg shadow-lg z-40 text-xs animate-fade-in">
-        Subscribe
+        Sign up!
       </div>
       
       {/* Subscription Panel */}
