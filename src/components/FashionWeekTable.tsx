@@ -29,7 +29,7 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
           <TableRow>
             <TableHead className="w-[50px]"></TableHead>
             <SortableHeader 
-              label="Brand Name" 
+              label={`Brand Name (${brands.length})`}
               field="name" 
               sortConfig={sortConfig} 
               onSort={toggleSort}
