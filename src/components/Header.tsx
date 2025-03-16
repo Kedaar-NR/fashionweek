@@ -175,7 +175,7 @@ const Header = ({
         }} className="py-2.5 px-5 rounded-full text-white font-medium shadow-lg brand-count-indicator">
             <span className="flex items-center">
               <Calendar size={16} className="mr-2" />
-              <span>{brandCount}</span> brands with upcoming drops
+              <span className="font-medium">{brandCount}</span> brands with upcoming drops
             </span>
           </motion.div>
         </motion.div>
