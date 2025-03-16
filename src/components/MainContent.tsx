@@ -11,7 +11,7 @@ const MainContent = ({
   brands
 }: MainContentProps) => {
   const [viewMode, setViewMode] = useState<'gallery' | 'table'>('table');
-  return <main id="brand-gallery" className="container px-4 py-[4px]">
+  return <main id="brand-gallery" className="container px-4 py-[15px] bg-gray-50">
       <motion.div initial={{
       opacity: 0,
       y: 10
