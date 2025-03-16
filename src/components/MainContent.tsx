@@ -32,8 +32,26 @@ const MainContent = ({
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             Upcoming Drops <Flame className="ml-2 text-[#FCD34D]" size={26} />
-            <span className="ml-3 text-base font-medium flex items-center">
-              <Calendar size={16} className="mr-1" />
+          </motion.span>
+        </h2>
+        
+        <motion.div 
+          className="py-2 px-4 rounded-full font-medium"
+          initial={{ opacity: 0 }}
+          animate={{ 
+            opacity: [0, 1, 0.85, 1],
+          }}
+          transition={{ 
+            duration: 1.5,
+            times: [0, 0.3, 0.7, 1],
+            ease: "easeInOut",
+            repeat: 2,
+            repeatDelay: 0.5
+          }}
+        >
+          <span className="flex items-center">
+            <Calendar size={16} className="mr-2" />
+            <span>
               <motion.strong 
                 className="font-bold relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary after:bottom-0 after:left-0 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 cursor-pointer"
                 animate={{ 
@@ -46,10 +64,10 @@ const MainContent = ({
                 }}
               >
                 {brands.length}
-              </motion.strong> brands
+              </motion.strong> brands with upcoming drops
             </span>
-          </motion.span>
-        </h2>
+          </span>
+        </motion.div>
         
         {/* Modernized view toggle buttons */}
         <div className="flex justify-center gap-3 mt-3">
