@@ -1,0 +1,52 @@
+
+@layer components {
+  .brand-card {
+    @apply relative overflow-hidden rounded-lg bg-card shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1;
+    backdrop-filter: blur(10px);
+  }
+  
+  .glass-panel {
+    @apply bg-white/90 dark:bg-black/70 backdrop-blur-xl;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .transition-all-gpu {
+    @apply transition-all transform-gpu;
+  }
+  
+  .filter-button {
+    @apply px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-accent;
+  }
+  
+  .filter-button.active {
+    @apply bg-primary text-primary-foreground;
+  }
+  
+  .dropdown {
+    @apply absolute z-10 mt-1 rounded-lg overflow-hidden shadow-lg;
+    min-width: 10rem;
+  }
+  
+  /* Brand Card Hover Effects */
+  .brand-card:hover .brand-image {
+    @apply scale-105;
+  }
+  
+  .brand-card:hover .brand-overlay {
+    @apply opacity-100;
+  }
+  
+  /* Fashion week table styling */
+  .fashion-week-table th:first-child,
+  .fashion-week-table td:first-child {
+    max-width: 200px;
+    min-width: 120px;
+    width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

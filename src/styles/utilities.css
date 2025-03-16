@@ -1,0 +1,54 @@
+
+@layer components {
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground;
+  }
+  
+  /* Gradient text effects */
+  .gradient-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    background-position: 0% center;
+    transition: background-position 0.5s ease;
+  }
+  
+  .gradient-text:hover {
+    background-position: 100% center;
+  }
+  
+  .orange-gradient-text {
+    background-image: linear-gradient(to right, #F97316, #FB923C, #FCD34D);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  
+  .purple-gradient-text {
+    background-image: linear-gradient(to right, #8B5CF6, #A78BFA, #C4B5FD);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  
+  .multi-gradient-text {
+    background-image: linear-gradient(to right, #F97316, #8B5CF6, #10B981);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
