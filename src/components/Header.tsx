@@ -175,10 +175,10 @@ const Header = ({
           delay: 1,
           duration: 0.5
         }} className="flex flex-col items-center gap-4">
-            <div className="py-2.5 px-5 rounded-full text-white font-medium shadow-lg brand-count-indicator">
+            <div className="py-2.5 px-5 rounded-full text-white font-medium shadow-lg">
               <span className="flex items-center">
                 <Calendar size={16} className="mr-2" />
-                <span className="font-bold">{brandCount}</span>&nbsp;brands with upcoming drops
+                <span>{brandCount}</span>&nbsp;brands with upcoming drops
               </span>
             </div>
             

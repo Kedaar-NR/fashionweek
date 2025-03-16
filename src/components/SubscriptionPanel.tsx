@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion';
 import SubscribeForm from '@/components/SubscribeForm';
 import { X } from 'lucide-react';
@@ -6,14 +7,14 @@ interface SubscriptionPanelProps {
   showSubscribe: boolean;
   setShowSubscribe: (show: boolean) => void;
   handleSubscribeComplete: () => void;
-  showBlurb: boolean;
+  showBlurb?: boolean;
 }
 
 const SubscriptionPanel = ({ 
   showSubscribe, 
   setShowSubscribe, 
   handleSubscribeComplete,
-  showBlurb
+  showBlurb = true
 }: SubscriptionPanelProps) => {
   if (!showSubscribe) return null;
   

@@ -9,6 +9,7 @@ import FeedbackTab from '@/components/FeedbackTab';
 
 const Index = () => {
   const [showSubscribe, setShowSubscribe] = useState(true);
+  const [showBlurb, setShowBlurb] = useState(true);
   
   const handleSubscribeComplete = () => {
     setShowSubscribe(false);
@@ -27,6 +28,7 @@ const Index = () => {
         showSubscribe={showSubscribe}
         setShowSubscribe={setShowSubscribe}
         handleSubscribeComplete={handleSubscribeComplete}
+        showBlurb={showBlurb}
       />
       
       {/* Footer */}

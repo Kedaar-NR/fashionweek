@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { MessageSquareText, X, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,6 +9,7 @@ import { toast } from 'sonner';
 export const FeedbackTab = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showSubscribe, setShowSubscribe] = useState(false);
+  const [showBlurb, setShowBlurb] = useState(true);
   
   // Close on escape key
   useEffect(() => {
@@ -52,16 +54,12 @@ export const FeedbackTab = () => {
         </span>
       </motion.button>
       
-      {/* Subscription Tooltip */}
-      <div className="fixed bottom-34 right-6 bg-popover text-popover-foreground px-3 py-1 rounded-lg shadow-lg z-40 text-xs animate-fade-in">
-        Sign up!
-      </div>
-      
       {/* Subscription Panel */}
       <SubscriptionPanel 
         showSubscribe={showSubscribe} 
         setShowSubscribe={setShowSubscribe}
         handleSubscribeComplete={handleSubscribeComplete}
+        showBlurb={showBlurb}
       />
       
       {/* Feedback Button */}
@@ -81,6 +79,8 @@ export const FeedbackTab = () => {
       <div className="fixed bottom-16 right-6 bg-popover text-popover-foreground px-3 py-1 rounded-lg shadow-lg z-40 text-xs animate-fade-in">
         Give feedback
       </div>
+      
+      {/* Subscription tooltip - Remove since it's handled by SubscriptionPanel */}
       
       {/* Feedback Form */}
       <AnimatePresence>
