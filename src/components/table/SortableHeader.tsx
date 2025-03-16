@@ -3,6 +3,7 @@ import { SortField, SortDirection, SortConfig } from '@/types';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import { TableHead } from '@/components/ui/table';
 import { motion } from 'framer-motion';
+import { memo } from 'react';
 
 interface SortableHeaderProps {
   label: string;
@@ -13,7 +14,7 @@ interface SortableHeaderProps {
   children?: React.ReactNode;
 }
 
-const SortableHeader = ({
+const SortableHeader = memo(({
   label,
   field,
   sortConfig,
@@ -24,10 +25,14 @@ const SortableHeader = ({
   const isSorted = sortConfig.field === field;
   const sortDirection = sortConfig.direction;
 
+  const handleClick = () => {
+    onSort(field);
+  };
+
   return (
     <TableHead
       className={`cursor-pointer hover:bg-muted/30 transition-colors ${className || ''}`}
-      onClick={() => onSort(field)}
+      onClick={handleClick}
     >
       <div className="flex items-center gap-2">
         <span className="font-medium">{label}</span>
@@ -45,6 +50,6 @@ const SortableHeader = ({
       </div>
     </TableHead>
   );
-};
+});
 
 export default SortableHeader;

@@ -5,12 +5,13 @@ import SortableHeader from './table/SortableHeader';
 import TableSearch from './table/TableSearch';
 import BrandTableRow from './table/BrandTableRow';
 import useSortedBrands from '@/hooks/useSortedBrands';
+import { memo } from 'react';
 
 interface FashionWeekTableProps {
   brands: Brand[];
 }
 
-export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
+export const FashionWeekTable = memo(({ brands }: FashionWeekTableProps) => {
   const { 
     sortConfig, 
     searchTerm, 
@@ -55,6 +56,6 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
       </Table>
     </div>
   );
-};
+});
 
 export default FashionWeekTable;

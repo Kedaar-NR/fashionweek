@@ -1,5 +1,5 @@
 
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import { Brand, SortConfig, SortField } from '@/types';
 
 interface UseSortedBrandsProps {
@@ -14,13 +14,8 @@ export const useSortedBrands = ({
   const [sortConfig, setSortConfig] = useState<SortConfig>(initialSort);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Set initial sort when component mounts
-  useEffect(() => {
-    setSortConfig(initialSort);
-  }, [initialSort]);
-
-  // Toggle sorting when clicking a column header
-  const toggleSort = (field: SortField) => {
+  // Toggle sorting when clicking a column header - made into useCallback to prevent unnecessary rerenders
+  const toggleSort = useCallback((field: SortField) => {
     setSortConfig(prevConfig => ({
       field,
       direction: 
@@ -28,7 +23,7 @@ export const useSortedBrands = ({
           ? 'desc' 
           : 'asc'
     }));
-  };
+  }, []);
 
   // Sort and filter brands
   const sortedBrands = useMemo(() => {
@@ -70,9 +65,9 @@ export const useSortedBrands = ({
     });
   }, [brands, sortConfig, searchTerm]);
 
-  const handleSearch = (value: string) => {
+  const handleSearch = useCallback((value: string) => {
     setSearchTerm(value);
-  };
+  }, []);
 
   return {
     sortConfig,
