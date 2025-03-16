@@ -5,6 +5,7 @@ import SortableHeader from './table/SortableHeader';
 import TableSearch from './table/TableSearch';
 import BrandTableRow from './table/BrandTableRow';
 import useSortedBrands from '@/hooks/useSortedBrands';
+import { motion } from 'framer-motion';
 
 interface FashionWeekTableProps {
   brands: Brand[];
@@ -23,7 +24,12 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
   });
 
   return (
-    <div className="w-full overflow-auto">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full overflow-auto"
+    >
       <Table>
         <TableHeader>
           <TableRow>
@@ -47,12 +53,23 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {sortedBrands.map((brand) => (
-            <BrandTableRow key={brand.id} brand={brand} />
+          {sortedBrands.map((brand, index) => (
+            <motion.div
+              key={brand.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.3, 
+                delay: index * 0.02, // Staggered animation
+                ease: "easeOut" 
+              }}
+            >
+              <BrandTableRow key={brand.id} brand={brand} />
+            </motion.div>
           ))}
         </TableBody>
       </Table>
-    </div>
+    </motion.div>
   );
 };
 

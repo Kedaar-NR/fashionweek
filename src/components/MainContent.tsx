@@ -4,6 +4,7 @@ import BrandGallery from '@/components/BrandGallery';
 import FashionWeekTable from '@/components/FashionWeekTable';
 import { Brand } from '@/types';
 import { Flame, Calendar } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface MainContentProps {
   brands: Brand[];
@@ -23,14 +24,46 @@ const MainContent = ({ brands }: MainContentProps) => {
           ) : 'Brand Gallery'}
         </h2>
         
-        <div className="flex items-center justify-center gap-2 mb-2">
-          <div className="py-2 px-4 rounded-full text-white font-medium bg-gradient-to-r from-[#0EA5E9] to-[#10B981] shadow-sm">
-            <span className="flex items-center">
-              <Calendar size={16} className="mr-2" />
-              <span><strong className="font-bold">{brands.length}</strong> brands with upcoming drops</span>
+        {/* Animated brand count indicator */}
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ 
+            type: "spring", 
+            stiffness: 400, 
+            damping: 10,
+            delay: 0.2
+          }}
+          whileHover={{ 
+            scale: 1.05,
+            transition: { duration: 0.2 }
+          }}
+          className="py-2 px-4 rounded-full text-white font-medium bg-gradient-to-r from-[#0EA5E9] to-[#10B981] shadow-sm"
+        >
+          <motion.span 
+            className="flex items-center"
+            initial={{ y: 5, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            <Calendar size={16} className="mr-2" />
+            <span>
+              <motion.strong 
+                className="font-bold"
+                initial={{ color: "#ffffff" }}
+                animate={{ color: "#ffffff" }}
+                whileHover={{ color: "#FCD34D" }}
+                transition={{ 
+                  duration: 0.3,
+                  repeat: 3,
+                  repeatType: "reverse"
+                }}
+              >
+                {brands.length}
+              </motion.strong> brands with upcoming drops
             </span>
-          </div>
-        </div>
+          </motion.span>
+        </motion.div>
         
         {/* Centered view toggle buttons */}
         <div className="flex justify-center gap-2">

@@ -2,10 +2,11 @@
 import { Brand } from '@/types';
 import { TableRow, TableCell } from '@/components/ui/table';
 import { cn } from '@/lib/utils';
-import { ShoppingBag } from 'lucide-react';
+import { ShoppingBag, ExternalLink } from 'lucide-react';
 import { format } from 'date-fns';
 import { styleConfig } from '../BrandGallery';
 import { getDropDateStyle } from '@/utils/dateUtils';
+import { motion } from 'framer-motion';
 
 interface BrandTableRowProps {
   brand: Brand;
@@ -15,9 +16,12 @@ const BrandTableRow = ({ brand }: BrandTableRowProps) => {
   const styleData = styleConfig[brand.style];
   
   return (
-    <TableRow key={brand.id} className="hover:bg-muted/20">
+    <TableRow className="hover:bg-muted/20 group">
       <TableCell>
-        <div className="w-8 h-8 rounded-full overflow-hidden bg-muted flex items-center justify-center">
+        <motion.div 
+          whileHover={{ scale: 1.2, rotate: 5 }}
+          className="w-8 h-8 rounded-full overflow-hidden bg-muted flex items-center justify-center"
+        >
           {brand.logoUrl ? (
             <img 
               src={brand.logoUrl} 
@@ -27,21 +31,29 @@ const BrandTableRow = ({ brand }: BrandTableRowProps) => {
           ) : (
             <ShoppingBag size={16} className="text-muted-foreground" />
           )}
-        </div>
+        </motion.div>
       </TableCell>
       <TableCell className="font-medium max-w-[200px] truncate">
         <a 
           href={`https://instagram.com/${brand.instagramHandle}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:underline transition-all hover:text-primary"
+          className="hover:underline transition-all hover:text-primary flex items-center gap-1"
           title={brand.name}
         >
           {brand.name}
+          <motion.span 
+            initial={{ opacity: 0, scale: 0 }}
+            whileHover={{ opacity: 1, scale: 1 }}
+            className="text-xs text-gray-500"
+          >
+            <ExternalLink size={12} />
+          </motion.span>
         </a>
       </TableCell>
       <TableCell>
-        <span 
+        <motion.span 
+          whileHover={{ scale: 1.05 }}
           className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize"
           style={{ 
             backgroundColor: `${styleData.color}20`, 
@@ -49,10 +61,15 @@ const BrandTableRow = ({ brand }: BrandTableRowProps) => {
           }}
         >
           {styleData.icon} <span className="ml-1">{brand.style}</span>
-        </span>
+        </motion.span>
       </TableCell>
-      <TableCell className={cn(getDropDateStyle(brand.dropDate))}>
-        {format(new Date(brand.dropDate), 'MMMM d, yyyy')}
+      <TableCell>
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          className={cn("px-2 py-1 rounded", getDropDateStyle(brand.dropDate))}
+        >
+          {format(new Date(brand.dropDate), 'MMMM d, yyyy')}
+        </motion.div>
       </TableCell>
     </TableRow>
   );
