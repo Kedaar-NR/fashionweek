@@ -73,12 +73,12 @@ const Header = ({
       </div>
 
       <div className="container relative z-10">
-        {/* Enhanced navigation menu with gradient text instead of gradient background */}
+        {/* Navigation menu - no longer fixed position */}
         <motion.div 
-          className="fixed top-0 left-0 right-0 z-50 py-3 px-4 md:px-8 bg-white dark:bg-black shadow-md"
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-          transition={{ delay: 0.4, duration: 0.5, type: "spring", stiffness: 120 }}
+          className="py-3 px-4 md:px-8 bg-white dark:bg-black shadow-md mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
         >
           <div className="container mx-auto flex justify-between items-center">
             <div className="flex items-center gap-1">
@@ -138,7 +138,7 @@ const Header = ({
           </div>
         </motion.div>
         
-        {/* Adjusted top margin for mobile to prevent overlap with fixed header */}
+        {/* Hero content */}
         <motion.div initial={{
         opacity: 0,
         y: 30
@@ -148,7 +148,7 @@ const Header = ({
       }} transition={{
         delay: 0.4,
         duration: 0.7
-      }} className="flex flex-col items-center text-center max-w-3xl mx-auto mt-10 md:mt-0">
+      }} className="flex flex-col items-center text-center max-w-3xl mx-auto">
           
           <motion.p initial={{
           opacity: 0,
