@@ -16,12 +16,12 @@ export const getDropDateStyle = (dateStr: string) => {
   if (isBefore(dropDate, today)) {
     return "text-muted-foreground line-through"; // Past dates
   } else if (isBefore(dropDate, oneWeekFromNow)) {
-    return "text-red-600 font-bold"; // Within week - red
+    return "text-red-600 font-bold"; // Within week
   } else if (isBefore(dropDate, twoWeeksFromNow)) {
-    return "text-orange-500 font-medium"; // Within two weeks - orange
+    return "text-orange-500 font-medium"; // Within two weeks
   } else if (isBefore(dropDate, oneMonthFromNow)) {
-    return "text-pink-500"; // Within month - pink
+    return "text-yellow-600"; // Within month
   } else {
-    return "text-green-600 font-medium"; // Future dates (over a month) - green
+    return "text-green-600 font-medium"; // Future dates (over a month)
   }
 };
