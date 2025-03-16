@@ -1,12 +1,14 @@
 
 import { useState, useEffect } from 'react';
-import { MessageSquareText, X } from 'lucide-react';
+import { MessageSquareText, X, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SubscribeForm from '@/components/SubscribeForm';
+import SubscriptionPanel from '@/components/SubscriptionPanel';
 import { toast } from 'sonner';
 
 export const FeedbackTab = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showSubscribe, setShowSubscribe] = useState(false);
   
   // Close on escape key
   useEffect(() => {
@@ -25,9 +27,40 @@ export const FeedbackTab = () => {
     // Log when the feedback form is opened
     console.log('Feedback form opened');
   };
+
+  const handleSubscribeComplete = () => {
+    toast.success("Subscribed successfully!");
+    setShowSubscribe(false);
+  };
   
   return (
     <>
+      {/* Subscription Button */}
+      <motion.button
+        className="fixed bottom-24 right-6 bg-primary text-white p-3 rounded-full shadow-lg z-50 hover:scale-105 transition-transform"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => setShowSubscribe(!showSubscribe)}
+        aria-label="Subscribe to updates"
+      >
+        <span className="flex items-center">
+          <Mail className="w-4 h-4" />
+        </span>
+      </motion.button>
+      
+      {/* Subscription Tooltip */}
+      <div className="fixed bottom-34 right-6 bg-popover text-popover-foreground px-3 py-1 rounded-lg shadow-lg z-40 text-xs animate-fade-in">
+        Subscribe
+      </div>
+      
+      {/* Subscription Panel */}
+      <SubscriptionPanel 
+        showSubscribe={showSubscribe} 
+        setShowSubscribe={setShowSubscribe}
+        handleSubscribeComplete={handleSubscribeComplete}
+      />
+      
+      {/* Feedback Button */}
       <motion.button
         className="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow-lg z-50 hover:scale-105 transition-transform"
         whileHover={{ scale: 1.05 }}
@@ -40,12 +73,12 @@ export const FeedbackTab = () => {
         </span>
       </motion.button>
       
-      {/* Smaller tooltip for the feedback button */}
+      {/* Feedback tooltip */}
       <div className="fixed bottom-16 right-6 bg-popover text-popover-foreground px-3 py-1 rounded-lg shadow-lg z-40 text-xs animate-fade-in">
         Give feedback
       </div>
       
-      {/* Chatbot-like Feedback Form */}
+      {/* Feedback Form */}
       <AnimatePresence>
         {isOpen && (
           <motion.div

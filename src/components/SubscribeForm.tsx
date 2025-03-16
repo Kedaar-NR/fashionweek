@@ -59,7 +59,7 @@ const SubscribeForm = ({
     const timeoutId = setTimeout(() => {
       setIsLoading(false);
       console.log('Typeform loading timeout reached');
-    }, 3000);
+    }, 5000); // Increased timeout to 5 seconds for slow connections
 
     // Cleanup
     return () => {
