@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { MessageSquareText, X, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -31,6 +30,11 @@ export const FeedbackTab = () => {
   const handleSubscribeComplete = () => {
     toast.success("Subscribed successfully!");
     setShowSubscribe(false);
+  };
+
+  const handleFeedbackComplete = () => {
+    toast.success("Thank you for your feedback!");
+    setIsOpen(false);
   };
   
   return (
@@ -82,7 +86,7 @@ export const FeedbackTab = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed bottom-20 right-6 z-50 w-full max-w-sm md:max-w-md"
+            className="fixed bottom-20 right-6 z-50 w-full max-w-md md:max-w-lg"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -101,11 +105,12 @@ export const FeedbackTab = () => {
                 </button>
               </div>
               
-              <div className="h-[500px] w-full">
+              <div className="w-full">
                 <SubscribeForm 
                   formId="Y5r3mjhF" 
-                  height={500}
+                  height={600}
                   onClose={() => setIsOpen(false)}
+                  onComplete={handleFeedbackComplete}
                   showCloseButton={false}
                 />
               </div>

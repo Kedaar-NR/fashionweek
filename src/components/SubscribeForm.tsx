@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import { toast } from 'sonner';
@@ -20,61 +19,91 @@ const SubscribeForm = ({
 }: SubscribeFormProps) => {
   const formContainerRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
 
   useEffect(() => {
-    // Load the Typeform embed script
-    const script = document.createElement('script');
-    script.src = "https://embed.typeform.com/next/embed.js";
-    script.async = true;
-    
-    // Only append the script once
-    if (!document.querySelector('script[src="https://embed.typeform.com/next/embed.js"]')) {
-      document.body.appendChild(script);
-    }
-
-    // Log to track loading
-    console.log(`Loading Typeform with ID: ${formId}`);
-
-    // Add event listener for typeform submission
-    const handleMessage = (event: MessageEvent) => {
-      // Check if the message is from Typeform and is a form submission
-      if (
-        event.data && 
-        event.data.type === 'form-submit' &&
-        event.data.formId === formId
-      ) {
-        console.log('Form submitted successfully');
-        // Call the onComplete callback when the form is submitted
-        if (onComplete) {
-          onComplete();
+    // Function to load the Typeform embed script
+    const loadTypeformScript = () => {
+      return new Promise<void>((resolve) => {
+        if (document.querySelector('script[src="https://embed.typeform.com/next/embed.js"]')) {
+          setScriptLoaded(true);
+          resolve();
+          return;
         }
-        // Show success toast
-        toast.success('Form submitted successfully!');
+
+        const script = document.createElement('script');
+        script.src = "https://embed.typeform.com/next/embed.js";
+        script.async = true;
+        script.onload = () => {
+          setScriptLoaded(true);
+          resolve();
+        };
+        document.body.appendChild(script);
+      });
+    };
+
+    // Function to initialize the form
+    const initializeForm = async () => {
+      try {
+        await loadTypeformScript();
+        
+        // Wait for the window.tf object to be available
+        if (window.tf) {
+          const embedElement = formContainerRef.current;
+          if (embedElement) {
+            // Clear any existing content
+            embedElement.innerHTML = '';
+            
+            // Create new embed with updated options
+            window.tf.createWidget(formId, {
+              container: embedElement,
+              height: height,
+              width: '100%',
+              hidden: { utm_source: 'website', utm_medium: 'inline_embed' },
+              onReady: () => {
+                setIsLoading(false);
+                console.log('Typeform loaded successfully');
+                
+                // Add custom styles to the iframe once it's loaded
+                const iframe = embedElement.querySelector('iframe');
+                if (iframe) {
+                  iframe.style.width = '100%';
+                  iframe.style.height = '100%';
+                  iframe.style.border = 'none';
+                }
+              },
+              onSubmit: () => {
+                console.log('Form submitted successfully');
+                if (onComplete) {
+                  onComplete();
+                }
+                toast.success('Form submitted successfully!');
+              },
+            });
+          }
+        } else {
+          console.error('Typeform library not loaded properly');
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error('Error initializing Typeform:', error);
+        setIsLoading(false);
       }
     };
 
-    window.addEventListener('message', handleMessage);
-    
-    // Set a fallback timeout to stop showing the loading state
-    const timeoutId = setTimeout(() => {
-      setIsLoading(false);
-      console.log('Typeform loading timeout reached');
-    }, 5000); // Increased timeout to 5 seconds for slow connections
+    initializeForm();
 
-    // Cleanup
+    // Cleanup function
     return () => {
-      window.removeEventListener('message', handleMessage);
-      clearTimeout(timeoutId);
+      const embedElement = formContainerRef.current;
+      if (embedElement) {
+        embedElement.innerHTML = '';
+      }
     };
-  }, [formId, onComplete]);
-
-  // Reset loading state if the form ID changes
-  useEffect(() => {
-    setIsLoading(true);
-  }, [formId]);
+  }, [formId, height, onComplete]);
 
   return (
-    <div className="w-full rounded-md overflow-hidden border border-[#eaeaea] relative bg-white">
+    <div className="w-full rounded-md overflow-hidden border border-[#eaeaea] relative bg-white flex flex-col">
       {showCloseButton && onClose && (
         <button 
           onClick={onClose}
@@ -93,21 +122,13 @@ const SubscribeForm = ({
       
       <div 
         ref={formContainerRef}
-        style={{ height: `${height}px` }}
-        data-tf-widget={formId}
-        data-tf-opacity="100" 
-        data-tf-inline-embed="true"
-        data-tf-auto-focus="true"
-        data-tf-iframe-props="title=Feedback Form" 
-        data-tf-transitive-search-params 
-        data-tf-medium="snippet" 
-        data-tf-hidden="utm_source=website,utm_medium=inline_embed"
-        onLoad={() => {
-          setIsLoading(false);
-          console.log('Typeform loaded successfully');
+        style={{ 
+          height: `${height}px`,
+          minHeight: '350px',
+          width: '100%'
         }}
-        className={isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-300'}
-      ></div>
+        className={`flex-1 transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+      />
     </div>
   );
 };
