@@ -29,7 +29,7 @@ const BrandTableRow = ({ brand }: BrandTableRowProps) => {
           )}
         </div>
       </TableCell>
-      <TableCell className="font-medium max-w-[200px] truncate">
+      <TableCell className="font-medium truncate text-left">
         <a 
           href={`https://instagram.com/${brand.instagramHandle}`}
           target="_blank"

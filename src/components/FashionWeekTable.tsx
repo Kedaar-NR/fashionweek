@@ -33,6 +33,7 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
               field="name" 
               sortConfig={sortConfig} 
               onSort={toggleSort}
+              className="text-left"
             >
               <TableSearch searchTerm={searchTerm} onSearch={handleSearch} />
             </SortableHeader>
