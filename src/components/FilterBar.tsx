@@ -1,18 +1,11 @@
+
 import { useState } from 'react';
 import { BrandStyle, FilterConfig, SortConfig } from '@/types';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { 
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue 
-} from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
-import { ArrowDownIcon, ArrowUpIcon, SearchIcon, X } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import SearchInput from './filters/SearchInput';
+import SortDropdown from './filters/SortDropdown';
+import StyleFilters from './filters/StyleFilters';
+import SelectedFilters from './filters/SelectedFilters';
 
 interface FilterBarProps {
   totalBrands: number;
@@ -45,17 +38,7 @@ export const FilterBar = ({
   onSortChange,
   styleConfig,
 }: FilterBarProps) => {
-  const [searchValue, setSearchValue] = useState(filterConfig.searchTerm);
   
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-  };
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onFilterChange({ ...filterConfig, searchTerm: searchValue });
-  };
-
   const toggleStyle = (style: BrandStyle) => {
     const isSelected = filterConfig.styles.includes(style);
     let newStyles: BrandStyle[];
@@ -71,19 +54,17 @@ export const FilterBar = ({
 
   const clearFilters = () => {
     onFilterChange({ styles: [], searchTerm: '' });
-    setSearchValue('');
   };
 
-  const handleSortChange = (value: string) => {
-    const [field, direction] = value.split('-') as [any, any];
-    onSortChange({ field, direction });
+  const handleSearchSubmit = (value: string) => {
+    onFilterChange({ ...filterConfig, searchTerm: value });
   };
-
-  const getSortValue = () => `${sortConfig.field}-${sortConfig.direction}`;
 
   const filteredCount = filterConfig.styles.length > 0 || filterConfig.searchTerm
     ? 'Filtered'
     : 'All';
+
+  const hasAnyFilter = filterConfig.styles.length > 0 || filterConfig.searchTerm !== '';
 
   return (
     <motion.div 
@@ -101,107 +82,33 @@ export const FilterBar = ({
           </div>
           
           <div className="flex items-center gap-2">
-            <form onSubmit={handleSearchSubmit} className="relative">
-              <SearchIcon className="h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search brands..."
-                className="pl-9 w-full md:w-[200px] h-9"
-                value={searchValue}
-                onChange={handleSearchChange}
-              />
-            </form>
+            <SearchInput 
+              initialValue={filterConfig.searchTerm} 
+              onSearch={handleSearchSubmit} 
+            />
             
-            <Select
-              value={getSortValue()}
-              onValueChange={handleSortChange}
-            >
-              <SelectTrigger className="w-[160px] h-9">
-                <SelectValue placeholder="Sort by" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="dropDate-desc">
-                  <div className="flex items-center">
-                    <span>Newest First</span>
-                    <ArrowDownIcon className="ml-2 h-3 w-3" />
-                  </div>
-                </SelectItem>
-                <SelectItem value="dropDate-asc">
-                  <div className="flex items-center">
-                    <span>Oldest First</span>
-                    <ArrowUpIcon className="ml-2 h-3 w-3" />
-                  </div>
-                </SelectItem>
-                <SelectItem value="name-asc">
-                  <div className="flex items-center">
-                    <span>Name (A-Z)</span>
-                    <ArrowUpIcon className="ml-2 h-3 w-3" />
-                  </div>
-                </SelectItem>
-                <SelectItem value="name-desc">
-                  <div className="flex items-center">
-                    <span>Name (Z-A)</span>
-                    <ArrowDownIcon className="ml-2 h-3 w-3" />
-                  </div>
-                </SelectItem>
-              </SelectContent>
-            </Select>
+            <SortDropdown 
+              sortConfig={sortConfig} 
+              onSortChange={onSortChange} 
+            />
           </div>
         </div>
         
-        <div>
-          <ScrollArea className="w-full">
-            <div className="style-filters-scroll pr-4">
-              {availableStyles.map((style) => {
-                const styleData = styleConfig?.[style];
-                return (
-                  <button
-                    key={style}
-                    onClick={() => toggleStyle(style)}
-                    className={`filter-button flex items-center gap-1 ${filterConfig.styles.includes(style) ? 'active' : ''}`}
-                    style={styleData && !filterConfig.styles.includes(style) ? {color: styleData.color} : {}}
-                  >
-                    {styleData?.icon} {brandStyleLabels[style]}
-                  </button>
-                );
-              })}
-            </div>
-          </ScrollArea>
-          
-          {(filterConfig.styles.length > 0 || filterConfig.searchTerm) && (
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={clearFilters}
-              className="mt-2 text-muted-foreground hover:text-foreground"
-            >
-              <X className="h-4 w-4 mr-1" />
-              Clear
-            </Button>
-          )}
-        </div>
+        <StyleFilters 
+          availableStyles={availableStyles}
+          selectedStyles={filterConfig.styles}
+          styleLabels={brandStyleLabels}
+          onToggleStyle={toggleStyle}
+          onClearFilters={clearFilters}
+          styleConfig={styleConfig}
+          hasAnyFilter={hasAnyFilter}
+        />
         
-        {filterConfig.styles.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {filterConfig.styles.map(style => {
-              const styleData = styleConfig?.[style];
-              return (
-                <Badge 
-                  key={style} 
-                  variant="secondary" 
-                  className="capitalize flex items-center gap-1"
-                  style={styleData ? {backgroundColor: `${styleData.color}20`, color: styleData.color} : {}}
-                >
-                  {styleData?.icon} {style}
-                  <X 
-                    className="h-3 w-3 ml-1 cursor-pointer" 
-                    onClick={() => toggleStyle(style)}
-                  />
-                </Badge>
-              );
-            })}
-          </div>
-        )}
+        <SelectedFilters 
+          selectedStyles={filterConfig.styles} 
+          onToggleStyle={toggleStyle}
+          styleConfig={styleConfig}
+        />
       </div>
     </motion.div>
   );
