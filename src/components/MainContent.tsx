@@ -31,15 +31,37 @@ const MainContent = ({
         <motion.div 
           className="py-2 px-4 rounded-full text-white font-medium brand-count-indicator shadow-sm"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7 }}
+          animate={{ 
+            opacity: [0, 1, 0.85, 1],
+          }}
+          transition={{ 
+            duration: 1.5,
+            times: [0, 0.3, 0.7, 1],
+            ease: "easeInOut",
+            repeat: 2,
+            repeatDelay: 0.5
+          }}
+          whileHover={{ 
+            scale: 1.05,
+            transition: { duration: 0.3 }
+          }}
         >
           <span className="flex items-center">
             <Calendar size={16} className="mr-2" />
             <span>
-              <strong className="font-bold">
+              <motion.strong 
+                className="font-bold"
+                animate={{ 
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{ 
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              >
                 {brands.length}
-              </strong> brands with upcoming drops
+              </motion.strong> brands with upcoming drops
             </span>
           </span>
         </motion.div>
