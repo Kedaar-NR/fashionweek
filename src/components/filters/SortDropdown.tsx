@@ -29,13 +29,13 @@ const SortDropdown = ({ sortConfig, onSortChange }: SortDropdownProps) => {
         <SelectValue placeholder="Sort by" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="dropDate-desc">
+        <SelectItem value="dropDate-asc">
           <div className="flex items-center">
             <span>Newest First</span>
             <ArrowDownIcon className="ml-2 h-3 w-3" />
           </div>
         </SelectItem>
-        <SelectItem value="dropDate-asc">
+        <SelectItem value="dropDate-desc">
           <div className="flex items-center">
             <span>Oldest First</span>
             <ArrowUpIcon className="ml-2 h-3 w-3" />
