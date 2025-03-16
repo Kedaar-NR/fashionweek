@@ -17,7 +17,7 @@ export const useSortedBrands = ({
   // Set initial sort when component mounts
   useEffect(() => {
     setSortConfig(initialSort);
-  }, [initialSort]);
+  }, []);
 
   // Toggle sorting when clicking a column header
   const toggleSort = (field: SortField) => {
@@ -51,14 +51,15 @@ export const useSortedBrands = ({
         return sortConfig.direction === 'asc' 
           ? nameA.localeCompare(nameB)
           : nameB.localeCompare(nameA);
-      } else {
+      } else if (sortConfig.field === 'dropDate') {
         const dateA = new Date(a.dropDate).getTime();
         const dateB = new Date(b.dropDate).getTime();
-        // For drop dates: 'asc' shows closest dates first, 'desc' shows furthest dates first
+        // Fix drop date sorting: 'asc' shows older dates first, 'desc' shows newer dates first
         return sortConfig.direction === 'asc' 
           ? dateA - dateB 
           : dateB - dateA;
       }
+      return 0;
     });
   }, [brands, sortConfig, searchTerm]);
 
