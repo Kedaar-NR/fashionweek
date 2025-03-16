@@ -57,19 +57,11 @@ const HeroSection = ({ brandCount }: HeroSectionProps) => {
         }} 
         className="flex flex-col items-center gap-4"
       >
-        <div className="py-2.5 px-5 rounded-full text-white font-medium shadow-lg">
+        <div className="py-2.5 px-5 rounded-full text-white font-medium shadow-lg bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FCD34D]">
           <span className="flex items-center">
             <Calendar size={16} className="mr-2" />
-            <span>{brandCount}</span>&nbsp;brands with upcoming drops
+            <span>Upcoming drops</span>
           </span>
-        </div>
-        
-        <div className="w-full max-w-md">
-          <SubscribeForm 
-            formId="Q5fonbTT" 
-            height={100} 
-            showCloseButton={false}
-          />
         </div>
       </motion.div>
 

@@ -1,3 +1,4 @@
+
 import { useState, useMemo, useEffect } from 'react';
 import { Brand, BrandStyle, SortConfig, FilterConfig } from '@/types';
 import { useScrollTrigger } from '@/utils/animations';
@@ -71,7 +72,7 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
       );
     }
     
-    // Apply sorting
+    // Apply sorting with corrected sort logic for dates
     result.sort((a, b) => {
       let aValue = a[sortConfig.field];
       let bValue = b[sortConfig.field];
@@ -82,7 +83,8 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
           const aDate = new Date(aValue).getTime();
           const bDate = new Date(bValue).getTime();
           
-          return sortConfig.direction === 'asc' ? bDate - aDate : aDate - bDate;
+          // Swapped logic: 'asc' now shows newer dates first, 'desc' shows older dates first
+          return sortConfig.direction === 'asc' ? aDate - bDate : bDate - aDate;
         } else {
           // For strings, convert to lowercase for case-insensitive sorting
           aValue = aValue.toLowerCase();

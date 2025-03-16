@@ -1,3 +1,4 @@
+
 import { useMemo, useState } from 'react';
 import { Brand, SortConfig } from '@/types';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -47,7 +48,7 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
     }));
   };
 
-  // Sort and filter brands
+  // Sort and filter brands with corrected sort logic
   const sortedBrands = useMemo(() => {
     let filtered = [...brands];
     
@@ -71,9 +72,10 @@ export const FashionWeekTable = ({ brands }: FashionWeekTableProps) => {
       } else {
         const dateA = new Date(a.dropDate).getTime();
         const dateB = new Date(b.dropDate).getTime();
+        // Swapped logic: 'asc' now shows newer dates first, 'desc' shows older dates first
         return sortConfig.direction === 'asc' 
-          ? dateB - dateA 
-          : dateA - dateB;
+          ? dateA - dateB 
+          : dateB - dateA;
       }
     });
   }, [brands, sortConfig, searchTerm]);

@@ -1,8 +1,9 @@
+
 import { useState } from 'react';
 import BrandGallery from '@/components/BrandGallery';
 import FashionWeekTable from '@/components/FashionWeekTable';
 import { Brand } from '@/types';
-import { Flame } from 'lucide-react';
+import { Flame, Calendar } from 'lucide-react';
 
 interface MainContentProps {
   brands: Brand[];
@@ -21,6 +22,15 @@ const MainContent = ({ brands }: MainContentProps) => {
             </>
           ) : 'Brand Gallery'}
         </h2>
+        
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <div className="py-2 px-4 rounded-full text-[#F97316] font-medium bg-[#F97316]/10">
+            <span className="flex items-center">
+              <Calendar size={16} className="mr-2" />
+              <span>{brands.length} brands with upcoming drops</span>
+            </span>
+          </div>
+        </div>
         
         {/* Centered view toggle buttons */}
         <div className="flex justify-center gap-2">
