@@ -29,12 +29,12 @@ const BrandTableRow = ({ brand }: BrandTableRowProps) => {
           )}
         </div>
       </TableCell>
-      <TableCell className="font-medium truncate text-left">
+      <TableCell className="font-medium truncate text-left max-w-[250px]">
         <a 
           href={`https://instagram.com/${brand.instagramHandle}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:underline transition-all hover:text-primary"
+          className="hover:underline transition-all hover:text-primary truncate block"
           title={brand.name}
         >
           {brand.name}

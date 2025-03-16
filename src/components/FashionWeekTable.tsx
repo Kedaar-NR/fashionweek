@@ -34,7 +34,7 @@ export const FashionWeekTable = memo(({ brands }: FashionWeekTableProps) => {
               field="name" 
               sortConfig={sortConfig} 
               onSort={toggleSort}
-              className="text-left"
+              className="text-left w-[250px]"
             >
               <TableSearch searchTerm={searchTerm} onSearch={handleSearch} />
             </SortableHeader>
