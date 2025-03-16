@@ -83,7 +83,7 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
           const aDate = new Date(aValue).getTime();
           const bDate = new Date(bValue).getTime();
           
-          // Swapped logic: 'asc' now shows newer dates first, 'desc' shows older dates first
+          // Corrected logic: 'desc' shows newest dates first, 'asc' shows oldest dates first
           return sortConfig.direction === 'asc' ? aDate - bDate : bDate - aDate;
         } else {
           // For strings, convert to lowercase for case-insensitive sorting

@@ -9,7 +9,7 @@ interface UseSortedBrandsProps {
 
 export const useSortedBrands = ({ 
   brands, 
-  initialSort = { field: 'dropDate', direction: 'asc' } 
+  initialSort = { field: 'dropDate', direction: 'desc' } 
 }: UseSortedBrandsProps) => {
   const [sortConfig, setSortConfig] = useState<SortConfig>(initialSort);
   const [searchTerm, setSearchTerm] = useState('');
@@ -54,7 +54,7 @@ export const useSortedBrands = ({
       } else {
         const dateA = new Date(a.dropDate).getTime();
         const dateB = new Date(b.dropDate).getTime();
-        // For drop dates: 'asc' shows closest dates first, 'desc' shows furthest dates first
+        // For drop dates: 'desc' shows newest dates first, 'asc' shows oldest dates first
         return sortConfig.direction === 'asc' 
           ? dateA - dateB 
           : dateB - dateA;

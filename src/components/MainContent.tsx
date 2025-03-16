@@ -29,7 +29,7 @@ const MainContent = ({
         </h2>
         
         <motion.div 
-          className="py-2 px-4 rounded-full text-white font-medium brand-count-indicator shadow-sm"
+          className="py-2 px-4 rounded-full text-white font-medium shadow-sm bg-gradient-to-r from-[#ea384c] to-[#F97316]"
           initial={{ opacity: 0 }}
           animate={{ 
             opacity: [0, 1, 0.85, 1],
