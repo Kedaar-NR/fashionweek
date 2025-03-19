@@ -9,7 +9,7 @@ const NavigationBar = () => {
   
   return (
     <motion.div 
-      className="py-4 px-4 md:px-8 bg-black shadow-md mb-8 border-b border-white/10"
+      className="py-4 px-4 md:px-8 bg-gradient-to-r from-black via-black to-[#222] shadow-md mb-8 border-b border-white/10"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.4, duration: 0.5 }}
