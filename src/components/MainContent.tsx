@@ -25,8 +25,9 @@ const MainContent = ({
     }} transition={{
       duration: 0.5
     }} className="mb-6 flex flex-col items-center gap-2">
-        <h2 className="text-2xl font-bold tracking-tight mb-2">
-          <span className="px-5 py-2">Brand Directory</span>
+        <h2 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-2">
+          <span className="px-5 py-2">Upcoming Drops</span>
+          <Flame size={32} className="text-orange-500" />
         </h2>
         
         {/* View toggle buttons */}
