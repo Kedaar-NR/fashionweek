@@ -9,13 +9,18 @@ import { getDropDateStyle } from '@/utils/dateUtils';
 
 interface BrandTableRowProps {
   brand: Brand;
+  onClick?: () => void;
 }
 
-const BrandTableRow = ({ brand }: BrandTableRowProps) => {
+const BrandTableRow = ({ brand, onClick }: BrandTableRowProps) => {
   const styleData = styleConfig[brand.style];
   
   return (
-    <TableRow key={brand.id} className="hover:bg-muted/20">
+    <TableRow 
+      key={brand.id} 
+      className="hover:bg-muted/20 cursor-pointer"
+      onClick={onClick}
+    >
       <TableCell>
         <div className="w-8 h-8 rounded-full overflow-hidden bg-muted flex items-center justify-center">
           {brand.logoUrl ? (
@@ -30,15 +35,12 @@ const BrandTableRow = ({ brand }: BrandTableRowProps) => {
         </div>
       </TableCell>
       <TableCell className="font-medium truncate text-left max-w-[250px]">
-        <a 
-          href={`https://instagram.com/${brand.instagramHandle}`}
-          target="_blank"
-          rel="noopener noreferrer"
+        <span 
           className="hover:underline transition-all hover:text-primary truncate block"
           title={brand.name}
         >
           {brand.name}
-        </a>
+        </span>
       </TableCell>
       <TableCell>
         <span 
