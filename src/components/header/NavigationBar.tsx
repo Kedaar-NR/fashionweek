@@ -1,4 +1,3 @@
-
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Sparkles, Calendar, Mail, Users, Shirt } from 'lucide-react';
@@ -23,6 +22,7 @@ const NavigationBar = () => {
         </div>
         
         {isMobile ? (
+          
           <ScrollArea className="w-[180px]">
             <div className="flex items-center gap-4 pr-4 menu-scroll">
               <a href="#brand-gallery" className="flex items-center gap-1.5 hover:text-[#F97316] transition-colors whitespace-nowrap">
@@ -48,6 +48,7 @@ const NavigationBar = () => {
             </div>
           </ScrollArea>
         ) : (
+          
           <div className="flex items-center gap-6">
             <a href="#brand-gallery" className="flex items-center gap-1.5 hover:text-[#F97316] transition-colors">
               <Calendar size={16} />
