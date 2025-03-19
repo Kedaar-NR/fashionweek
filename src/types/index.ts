@@ -8,6 +8,7 @@ export interface Brand {
   dropDate: string; // ISO date string
   featured: boolean;
   description?: string;
+  website?: string; // Added the optional website property
 }
 
 export type BrandStyle = 
