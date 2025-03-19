@@ -1,6 +1,7 @@
+
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Sparkles, Calendar, Mail, Users, Shirt } from 'lucide-react';
+import { Calendar, Mail, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const NavigationBar = () => {
@@ -14,8 +15,12 @@ const NavigationBar = () => {
       transition={{ delay: 0.4, duration: 0.5 }}
     >
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center gap-1">
-          <Shirt size={18} className="text-[#F97316]" />
+        <div className="flex items-center gap-2">
+          <img 
+            src="/lovable-uploads/50ee2037-166b-42e9-8e45-1d758b567bb5.png" 
+            alt="FashionWeek Logo" 
+            className="w-8 h-8"
+          />
           <a href="/" className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FCD34D]">
             FashionWeek
           </a>
