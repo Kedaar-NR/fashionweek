@@ -1,7 +1,7 @@
 
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Sparkles, Calendar, Mail, Users } from 'lucide-react';
+import { TShirt, Calendar, Mail, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const NavigationBar = () => {
@@ -16,7 +16,7 @@ const NavigationBar = () => {
     >
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center gap-1">
-          <Sparkles size={18} className="text-[#F97316]" />
+          <TShirt size={20} className="text-[#F97316]" />
           <a href="/" className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FCD34D]">
             FashionWeek
           </a>
