@@ -4,12 +4,12 @@
   "short_name": "FashionWeek",
   "icons": [
     {
-      "src": "/lovable-uploads/609f11de-e0fa-4d9b-98c2-26f24df8183b.png",
+      "src": "/lovable-uploads/50ee2037-166b-42e9-8e45-1d758b567bb5.png",
       "sizes": "192x192",
       "type": "image/png"
     }
   ],
-  "theme_color": "#000000",
-  "background_color": "#000000",
+  "theme_color": "#F97316",
+  "background_color": "#ffffff",
   "display": "standalone"
 } 

@@ -8,7 +8,7 @@ import FeedbackTab from '@/components/FeedbackTab';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-[#fafafa] text-[#111]">
       {/* Page Header */}
       <Header brandCount={brands.length} />
       
