@@ -1,31 +1,22 @@
-import { motion } from 'framer-motion';
-import { Brand } from '@/types';
+
+import React from 'react';
 import NavigationBar from './header/NavigationBar';
 import HeroSection from './header/HeroSection';
 import DecorativeElements from './header/DecorativeElements';
+
 interface HeaderProps {
   brandCount: number;
+  children?: React.ReactNode;
 }
-const Header = ({
-  brandCount
-}: HeaderProps) => {
-  return <motion.header initial={{
-    opacity: 0
-  }} animate={{
-    opacity: 1
-  }} transition={{
-    duration: 0.5
-  }} className="relative py-12 overflow-hidden border-b border-[#eaeaea] bg-gradient-to-b from-[#ffffff] to-[#fafafa] md:py-[35px]">
-      {/* Decorative elements */}
-      <DecorativeElements />
 
-      <div className="container relative z-10">
-        {/* Navigation menu - blended with background */}
-        <NavigationBar />
-        
-        {/* Hero content */}
-        <HeroSection brandCount={brandCount} />
-      </div>
-    </motion.header>;
+const Header: React.FC<HeaderProps> = ({ brandCount, children }) => {
+  return (
+    <header className="relative">
+      <NavigationBar userActions={children} />
+      <HeroSection brandCount={brandCount} />
+      <DecorativeElements />
+    </header>
+  );
 };
+
 export default Header;
