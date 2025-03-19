@@ -17,9 +17,9 @@ const NavigationBar = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center gap-3">
           <img 
-            src="/lovable-uploads/50ee2037-166b-42e9-8e45-1d758b567bb5.png" 
+            src="/lovable-uploads/609f11de-e0fa-4d9b-98c2-26f24df8183b.png" 
             alt="FashionWeek Logo" 
-            className="w-12 h-12"
+            className="w-16 h-16"
           />
           <a href="/" className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-100 via-gray-300 to-white">
             FashionWeek
@@ -29,49 +29,49 @@ const NavigationBar = () => {
         {isMobile ? (
           <ScrollArea className="w-[180px]">
             <div className="flex items-center gap-4 pr-4 menu-scroll">
-              <a href="#brand-gallery" className="flex items-center gap-1.5 text-white hover:text-[#F97316] transition-colors whitespace-nowrap">
+              <a href="#brand-gallery" className="flex items-center gap-1.5 text-white hover:text-gray-300 transition-colors whitespace-nowrap">
                 <Calendar size={16} />
                 <span className="text-sm font-medium">Drops</span>
               </a>
               
               <div className="group relative">
-                <a href="mailto:info@fashionweek.com" className="flex items-center gap-1.5 text-white hover:text-[#F97316] transition-colors whitespace-nowrap">
+                <a href="mailto:info@fashionweek.com" className="flex items-center gap-1.5 text-white hover:text-gray-300 transition-colors whitespace-nowrap">
                   <Mail size={16} />
                   <span className="text-sm font-medium">Contact</span>
                 </a>
-                <div className="absolute top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity bg-white text-[#111] text-xs p-1.5 rounded shadow-lg pointer-events-none whitespace-nowrap menu-tooltip">
-                  <div className="font-medium bg-gradient-to-r from-[#F97316] to-[#FCD34D] bg-clip-text text-transparent">Sign up!</div>
+                <div className="absolute top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs p-1.5 rounded shadow-lg pointer-events-none whitespace-nowrap menu-tooltip">
+                  <div className="font-medium bg-gradient-to-r from-gray-300 to-white bg-clip-text text-transparent">Sign up!</div>
                   info@fashionweek.com
                 </div>
               </div>
               
               <div className="flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-1 whitespace-nowrap">
                 <Users size={16} className="text-white" />
-                <span className="text-sm font-medium bg-gradient-to-r from-[#F97316] via-[#8B5CF6] to-[#10B981] bg-clip-text text-transparent">150,000 readers</span>
+                <span className="text-sm font-medium bg-gradient-to-r from-gray-100 to-white bg-clip-text text-transparent">150,000 readers</span>
               </div>
             </div>
           </ScrollArea>
         ) : (
           <div className="flex items-center gap-6">
-            <a href="#brand-gallery" className="flex items-center gap-1.5 text-white hover:text-[#F97316] transition-colors">
+            <a href="#brand-gallery" className="flex items-center gap-1.5 text-white hover:text-gray-300 transition-colors">
               <Calendar size={16} />
               <span className="text-sm font-medium">Drops</span>
             </a>
             
             <div className="group relative">
-              <a href="mailto:info@fashionweek.com" className="flex items-center gap-1.5 text-white hover:text-[#F97316] transition-colors">
+              <a href="mailto:info@fashionweek.com" className="flex items-center gap-1.5 text-white hover:text-gray-300 transition-colors">
                 <Mail size={16} />
                 <span className="text-sm font-medium">Contact</span>
               </a>
-              <div className="absolute top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity bg-white text-[#111] text-xs p-1.5 rounded shadow-lg pointer-events-none whitespace-nowrap menu-tooltip">
-                <div className="font-medium bg-gradient-to-r from-[#F97316] to-[#FCD34D] bg-clip-text text-transparent">Sign up!</div>
+              <div className="absolute top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs p-1.5 rounded shadow-lg pointer-events-none whitespace-nowrap menu-tooltip">
+                <div className="font-medium bg-gradient-to-r from-gray-300 to-white bg-clip-text text-transparent">Sign up!</div>
                 info@fashionweek.com
               </div>
             </div>
             
             <div className="flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-1">
               <Users size={16} className="text-white" />
-              <span className="text-sm font-medium bg-gradient-to-r from-[#F97316] via-[#8B5CF6] to-[#10B981] bg-clip-text text-transparent">150,000 readers</span>
+              <span className="text-sm font-medium bg-gradient-to-r from-gray-100 to-white bg-clip-text text-transparent">150,000 readers</span>
             </div>
           </div>
         )}
