@@ -25,12 +25,17 @@ const MainContent = ({
     }} transition={{
       duration: 0.5
     }} className="mb-6 flex flex-col items-center gap-2">
-        <h2 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-2">
-          <span className="px-5 py-2">Upcoming Drops</span>
-          <Flame size={32} className="text-orange-500" />
+        <h2 className="text-2xl font-bold tracking-tight mb-2">
+          <motion.span 
+            className="flex items-center px-5 py-2 rounded-full bg-gradient-to-r from-[#ea384c] to-[#F97316] text-white shadow-md"
+            whileHover={{ scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            Upcoming Drops <Flame className="ml-2 text-[#FCD34D]" size={26} />
+          </motion.span>
         </h2>
         
-        {/* View toggle buttons */}
+        {/* Modernized view toggle buttons */}
         <div className="flex justify-center gap-3 mt-3">
           <motion.button 
             onClick={() => setViewMode('table')} 
