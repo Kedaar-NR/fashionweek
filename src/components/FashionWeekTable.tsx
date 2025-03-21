@@ -21,7 +21,7 @@ export const FashionWeekTable = memo(({ brands }: FashionWeekTableProps) => {
     handleSearch 
   } = useSortedBrands({ 
     brands,
-    initialSort: { field: 'dropDate', direction: 'asc' }  // Show closest upcoming dates first by default
+    initialSort: { field: 'dropDate', direction: 'desc' }  // Changed to show newest dates first by default
   });
 
   const [selectedBrand, setSelectedBrand] = useState<Brand | null>(null);

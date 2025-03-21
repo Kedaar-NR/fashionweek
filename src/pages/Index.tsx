@@ -5,7 +5,6 @@ import Header from '@/components/Header';
 import MainContent from '@/components/MainContent';
 import Footer from '@/components/Footer';
 import FeedbackTab from '@/components/FeedbackTab';
-import { AuthProvider } from '@/context/AuthContext';
 import { SavedBrandsProvider } from '@/context/SavedBrandsContext';
 import SavedBrandsDrawer from '@/components/SavedBrandsDrawer';
 import UserButton from '@/components/auth/UserButton';
@@ -14,31 +13,29 @@ const Index = () => {
   const [savedBrandsOpen, setSavedBrandsOpen] = useState(false);
 
   return (
-    <AuthProvider>
-      <SavedBrandsProvider brands={brands}>
-        <div className="min-h-screen bg-[#fafafa] text-[#111]">
-          {/* Page Header */}
-          <Header brandCount={brands.length}>
-            <UserButton openSavedBrands={() => setSavedBrandsOpen(true)} />
-          </Header>
-          
-          {/* Main Content */}
-          <MainContent brands={brands} />
-          
-          {/* Footer */}
-          <Footer />
-          
-          {/* Add the Feedback Tab component */}
-          <FeedbackTab />
-          
-          {/* Saved Brands Drawer */}
-          <SavedBrandsDrawer
-            open={savedBrandsOpen}
-            onClose={() => setSavedBrandsOpen(false)}
-          />
-        </div>
-      </SavedBrandsProvider>
-    </AuthProvider>
+    <SavedBrandsProvider brands={brands}>
+      <div className="min-h-screen bg-[#fafafa] text-[#111]">
+        {/* Page Header */}
+        <Header brandCount={brands.length}>
+          <UserButton openSavedBrands={() => setSavedBrandsOpen(true)} />
+        </Header>
+        
+        {/* Main Content */}
+        <MainContent brands={brands} />
+        
+        {/* Footer */}
+        <Footer />
+        
+        {/* Add the Feedback Tab component */}
+        <FeedbackTab />
+        
+        {/* Saved Brands Drawer - Now correctly inside the SavedBrandsProvider */}
+        <SavedBrandsDrawer
+          open={savedBrandsOpen}
+          onClose={() => setSavedBrandsOpen(false)}
+        />
+      </div>
+    </SavedBrandsProvider>
   );
 };
 

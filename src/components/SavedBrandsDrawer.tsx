@@ -1,7 +1,6 @@
 
 import { useState } from 'react';
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@/components/ui/drawer';
 import { useSavedBrands } from '@/context/SavedBrandsContext';
 import { Brand } from '@/types';
 import BrandSidebar from './BrandSidebar';
@@ -65,11 +64,14 @@ export default function SavedBrandsDrawer({ open, onClose }: SavedBrandsDrawerPr
         </div>
       </DrawerContent>
 
-      <BrandSidebar 
-        brand={selectedBrand} 
-        open={sidebarOpen} 
-        onClose={() => setSidebarOpen(false)} 
-      />
+      {/* We need to check if the BrandSidebar is correctly wrapped in the context */}
+      {selectedBrand && (
+        <BrandSidebar 
+          brand={selectedBrand} 
+          open={sidebarOpen} 
+          onClose={() => setSidebarOpen(false)} 
+        />
+      )}
     </Drawer>
   );
 }

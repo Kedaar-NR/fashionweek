@@ -13,7 +13,8 @@ interface MainContentProps {
 const MainContent = ({
   brands
 }: MainContentProps) => {
-  const [viewMode, setViewMode] = useState<'gallery' | 'table'>('table');
+  // Change default view to gallery instead of table
+  const [viewMode, setViewMode] = useState<'gallery' | 'table'>('gallery');
 
   return <main id="brand-gallery" className="container px-4 py-[15px] bg-gray-50">
       <motion.div initial={{
