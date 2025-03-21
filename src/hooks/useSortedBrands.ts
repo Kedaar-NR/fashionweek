@@ -9,7 +9,7 @@ interface UseSortedBrandsProps {
 
 export const useSortedBrands = ({ 
   brands, 
-  initialSort = { field: 'dropDate', direction: 'asc' } // 'asc' for closest upcoming dates first (March, April, May)
+  initialSort = { field: 'dropDate', direction: 'desc' } // Changed to 'desc' for newest dates first
 }: UseSortedBrandsProps) => {
   const [sortConfig, setSortConfig] = useState<SortConfig>(initialSort);
   const [searchTerm, setSearchTerm] = useState('');
@@ -41,7 +41,28 @@ export const useSortedBrands = ({
 
     const now = new Date().getTime();
 
+    // Check for LIVE drops (happening today)
+    filtered = filtered.map(brand => {
+      const dropDate = new Date(brand.dropDate);
+      const today = new Date();
+      
+      // Check if the drop is today (same day, month, and year)
+      const isLive = dropDate.getDate() === today.getDate() && 
+                     dropDate.getMonth() === today.getMonth() && 
+                     dropDate.getFullYear() === today.getFullYear();
+      
+      // Add isLive property
+      return {
+        ...brand,
+        isLive
+      };
+    });
+
     return filtered.sort((a, b) => {
+      // Always prioritize LIVE drops
+      if (a.isLive && !b.isLive) return -1;
+      if (!a.isLive && b.isLive) return 1;
+      
       if (sortConfig.field === 'name') {
         const nameA = a.name.toLowerCase();
         const nameB = b.name.toLowerCase();
@@ -53,14 +74,11 @@ export const useSortedBrands = ({
         const dateA = new Date(a.dropDate).getTime();
         const dateB = new Date(b.dropDate).getTime();
         
-        // Only consider upcoming dates (past dates get pushed to the end)
-        const diffA = dateA >= now ? dateA - now : Number.MAX_SAFE_INTEGER;
-        const diffB = dateB >= now ? dateB - now : Number.MAX_SAFE_INTEGER;
-        
-        // For drop dates: 'asc' shows closest upcoming dates first, 'desc' shows furthest dates first
+        // Changed sort order logic to match the requested behavior
+        // For drop dates: 'desc' shows newest dates first, 'asc' shows oldest dates first
         return sortConfig.direction === 'asc' 
-          ? diffA - diffB 
-          : diffB - diffA;
+          ? dateA - dateB 
+          : dateB - dateA;
       }
     });
   }, [brands, sortConfig, searchTerm]);
