@@ -35,7 +35,7 @@ const HeroSection = ({ brandCount }: HeroSectionProps) => {
           delay: 0.8,
           duration: 0.5
         }} 
-        className="text-lg md:text-xl max-w-xl text-zinc-950"
+        className="text-lg md:text-xl max-w-xl text-zinc-950 border-b-2 border-primary pb-2"
       >
         Track upcoming drops and discover emerging designers shaping the future of fashion.
       </motion.p>

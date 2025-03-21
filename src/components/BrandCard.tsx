@@ -2,14 +2,15 @@
 import { Brand } from '@/types';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { styleConfig } from './BrandGallery';
-import { ShoppingBag, Instagram, Bookmark, BookmarkCheck } from 'lucide-react';
+import { ShoppingBag, Instagram, Bookmark, BookmarkCheck, Image } from 'lucide-react';
 import { format, formatDistanceToNow, isPast } from 'date-fns';
 import { cn } from '@/lib/utils';
 import BrandSidebar from './BrandSidebar';
 import { useSavedBrands } from '@/context/SavedBrandsContext';
 import { Button } from './ui/button';
+import { Skeleton } from './ui/skeleton';
 
 interface BrandCardProps {
   brand: Brand;
@@ -23,10 +24,23 @@ export default function BrandCard({ brand, index }: BrandCardProps) {
   const dropDate = new Date(brand.dropDate);
   const isReleased = isPast(dropDate);
   const [open, setOpen] = useState(false);
+  const [instagramPreview, setInstagramPreview] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   
   // Access saved brands state
   const { savedBrands, toggleSavedBrand } = useSavedBrands();
   const isSaved = !!savedBrands[brand.id];
+
+  // Fetch Instagram preview if handle exists
+  useEffect(() => {
+    if (brand.instagramHandle) {
+      setIsLoading(true);
+      // We'll use the embed preview as a simplified approach
+      const embedUrl = `https://www.instagram.com/${brand.instagramHandle}/embed`;
+      setInstagramPreview(embedUrl);
+      setIsLoading(false);
+    }
+  }, [brand.instagramHandle]);
 
   const handleSaveClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -111,7 +125,31 @@ export default function BrandCard({ brand, index }: BrandCardProps) {
           )}
         </div>
 
-        <div className="mt-auto p-4 pt-0">
+        {/* Instagram Preview */}
+        {brand.instagramHandle && (
+          <div className="w-full h-48 bg-gray-100 dark:bg-gray-700 overflow-hidden relative">
+            {isLoading ? (
+              <div className="flex items-center justify-center h-full">
+                <Skeleton className="w-full h-full" />
+              </div>
+            ) : instagramPreview ? (
+              <iframe
+                src={instagramPreview}
+                className="w-full h-[400px] -mt-32 pointer-events-none"
+                title={`${brand.name} Instagram`}
+                frameBorder="0"
+                scrolling="no"
+              />
+            ) : (
+              <div className="flex flex-col items-center justify-center h-full">
+                <Image size={32} className="text-gray-400 mb-2" />
+                <p className="text-sm text-gray-500">Instagram preview not available</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        <div className="mt-auto p-4">
           <div className={cn(
             "text-sm font-medium",
             isReleased ? "text-gray-500" : "text-green-600 dark:text-green-400"
