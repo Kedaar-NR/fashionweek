@@ -1,20 +1,19 @@
-
 import { Brand } from '@/types';
 import { generateRealisticDate } from '@/utils/dateGenerators';
 import { saturnLaBrands } from './brandsList';
 import { placeholderImages, brandStyles } from './styleResources';
 
 // Generate a single brand with realistic dates
-const generateBrand = (id: number, brandData: { name: string, owner: boolean }, totalBrands: number): Brand => {
+const generateBrand = (id: number, brandData: { name: string, owner: boolean, instagramHandle?: string, dropDate?: string }, totalBrands: number): Brand => {
   const style = brandStyles[Math.floor(Math.random() * brandStyles.length)];
   const name = brandData.name;
-  const instagramHandle = name.toLowerCase().replace(/\s+|[^a-z0-9_]/g, '');
+  const instagramHandle = brandData.instagramHandle || name.toLowerCase().replace(/\s+|[^a-z0-9_]/g, '');
   const logoUrl = placeholderImages[id % placeholderImages.length];
   const featured = brandData.owner || Math.random() > 0.85; // Owners or about 15% of brands are featured
-  
-  // Generate a realistic drop date
-  const dropDate = generateRealisticDate(id, totalBrands);
-  
+
+  // Use provided drop date or generate a realistic one
+  const dropDate = brandData.dropDate || generateRealisticDate(id, totalBrands);
+
   return {
     id: `brand-${id}`,
     name,

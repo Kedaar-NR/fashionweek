@@ -1,4 +1,3 @@
-
 import { Brand } from '@/types';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
@@ -23,6 +22,23 @@ export default function BrandCard({ brand, index }: BrandCardProps) {
   const styleData = styleConfig[brand.style];
   const dropDate = new Date(brand.dropDate);
   const isReleased = isPast(dropDate);
+  const today = new Date();
+  const isLive = dropDate.getDate() === today.getDate() && 
+                 dropDate.getMonth() === today.getMonth() && 
+                 dropDate.getFullYear() === today.getFullYear();
+  
+  // Calculate date differences
+  const oneWeekFromNow = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+  const oneMonthFromNow = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000);
+  
+  // Determine date color based on proximity
+  const getDateColor = () => {
+    if (isLive) return "text-red-500 font-bold";
+    if (dropDate <= oneWeekFromNow) return "text-pink-500 font-medium";
+    if (dropDate <= oneMonthFromNow) return "text-yellow-500";
+    return "text-green-500";
+  };
+
   const [open, setOpen] = useState(false);
   const [instagramPreview, setInstagramPreview] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -164,13 +180,24 @@ export default function BrandCard({ brand, index }: BrandCardProps) {
         <div className="mt-auto p-4">
           <div className={cn(
             "text-sm font-medium",
-            isReleased ? "text-gray-500" : "text-green-600 dark:text-green-400"
+            getDateColor()
           )}>
-            {isReleased ? 'Released ' : 'Dropping '}
-            {isReleased
-              ? formatDistanceToNow(dropDate, { addSuffix: true })
-              : format(dropDate, 'MMMM d, yyyy')}
+            {isLive ? (
+              <span className="text-red-500 font-bold">LIVE NOW</span>
+            ) : (
+              format(dropDate, 'MMM d, yyyy')
+            )}
           </div>
+          
+          {isReleased && (
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-muted-foreground">
+                  ({formatDistanceToNow(dropDate, { addSuffix: true })})
+                </span>
+              </div>
+            </div>
+          )}
           
           {brand.website && (
             <a

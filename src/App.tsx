@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,8 +8,9 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { ClerkProvider } from "@clerk/clerk-react";
 
-// Use the environment variable from main.tsx
-const PUBLISHABLE_KEY = "pk_test_b25lLXNuaXBlLTI2LmNsZXJrLmFjY291bnRzLmRldiQ";
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+console.log('Current Clerk key:', PUBLISHABLE_KEY);
 
 const queryClient = new QueryClient();
 

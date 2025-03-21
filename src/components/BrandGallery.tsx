@@ -1,4 +1,3 @@
-
 import { useState, useMemo, useEffect } from 'react';
 import { Brand, BrandStyle, SortConfig, FilterConfig } from '@/types';
 import { useScrollTrigger } from '@/utils/animations';
@@ -82,9 +81,14 @@ export const BrandGallery = ({ brands }: BrandGalleryProps) => {
           // For dates, convert to timestamp for comparison
           const aDate = new Date(aValue).getTime();
           const bDate = new Date(bValue).getTime();
+          const today = new Date().getTime();
           
-          // Corrected logic: 'desc' shows newest dates first, 'asc' shows oldest dates first
-          return sortConfig.direction === 'asc' ? aDate - bDate : bDate - aDate;
+          // Calculate absolute difference from today for each date
+          const aDiff = Math.abs(aDate - today);
+          const bDiff = Math.abs(bDate - today);
+          
+          // For drop dates: 'desc' shows closest dates first, 'asc' shows furthest dates first
+          return sortConfig.direction === 'desc' ? aDiff - bDiff : bDiff - aDiff;
         } else {
           // For strings, convert to lowercase for case-insensitive sorting
           aValue = aValue.toLowerCase();

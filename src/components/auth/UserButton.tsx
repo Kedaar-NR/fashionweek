@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { LogIn, Bookmark } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -37,6 +36,11 @@ export default function UserButton({ openSavedBrands }: UserButtonProps) {
             <DropdownMenuItem onClick={openSavedBrands} className="cursor-pointer">
               <Bookmark className="mr-2 h-4 w-4" />
               <span>Saved Brands</span>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => signOut()} className="cursor-pointer text-red-600">
+              <LogIn className="mr-2 h-4 w-4" />
+              <span>Sign Out</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
