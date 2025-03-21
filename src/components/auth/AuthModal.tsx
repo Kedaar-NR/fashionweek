@@ -4,7 +4,7 @@ import { X } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useSignIn, useSignUp } from '@clerk/clerk-react';
+import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { Separator } from '@/components/ui/separator';
 
@@ -20,8 +20,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
-  const { signIn, isLoaded: signInLoaded, setActive } = useSignIn();
-  const { signUp, isLoaded: signUpLoaded } = useSignUp();
+  const { login, signup, resetPassword } = useAuth();
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -30,35 +29,19 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
     try {
       if (mode === 'login') {
-        if (!signInLoaded) return;
-        const result = await signIn.create({
-          identifier: email,
-          password,
+        await login(email, password);
+        toast({
+          title: "Logged in successfully",
+          description: "Welcome back to FashionWeek!"
         });
-        
-        if (result.status === "complete") {
-          await setActive({ session: result.createdSessionId });
-          toast({
-            title: "Logged in successfully",
-            description: "Welcome back to FashionWeek!"
-          });
-          onClose();
-        }
+        onClose();
       } else {
-        if (!signUpLoaded) return;
-        const result = await signUp.create({
-          emailAddress: email,
-          password,
+        await signup(email, password);
+        toast({
+          title: "Signed up successfully",
+          description: "Welcome to FashionWeek!"
         });
-        
-        if (result.status === "complete") {
-          await setActive({ session: result.createdSessionId });
-          toast({
-            title: "Signed up successfully",
-            description: "Welcome to FashionWeek!"
-          });
-          onClose();
-        }
+        onClose();
       }
     } catch (error) {
       toast({
@@ -76,21 +59,16 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     setIsSubmitting(true);
 
     try {
-      if (!signInLoaded) return;
-      await signIn.create({
-        strategy: "reset_password_email_code",
-        identifier: resetEmail,
-      });
-      
+      await resetPassword(resetEmail);
       toast({
-        title: "Password reset email sent",
-        description: "Check your email for instructions to reset your password."
+        title: "Password reset",
+        description: "If your email is in our system, we've sent you instructions to reset your password."
       });
       setShowForgotPassword(false);
     } catch (error) {
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Failed to send reset email",
+        description: error instanceof Error ? error.message : "Failed to reset password",
         variant: "destructive"
       });
     } finally {

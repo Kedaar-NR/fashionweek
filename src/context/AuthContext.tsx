@@ -12,6 +12,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   signup: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  resetPassword: (email: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -76,8 +77,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem(STORAGE_KEY);
   };
 
+  const resetPassword = async (email: string) => {
+    setIsLoading(true);
+    
+    // Add a small delay to simulate network
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    const userKey = email.toLowerCase();
+    if (!mockUsers[userKey]) {
+      setIsLoading(false);
+      throw new Error('User not found');
+    }
+    
+    // In a real app, we would send an email with a reset link
+    // For this mock implementation, we'll just reset to a default password
+    mockUsers[userKey].password = 'resetpassword123';
+    setIsLoading(false);
+    return;
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, isLoading, login, signup, logout, resetPassword }}>
       {children}
     </AuthContext.Provider>
   );

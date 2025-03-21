@@ -35,8 +35,14 @@ export default function BrandCard({ brand, index }: BrandCardProps) {
   useEffect(() => {
     if (brand.instagramHandle) {
       setIsLoading(true);
-      // We'll use the embed preview as a simplified approach
-      const embedUrl = `https://www.instagram.com/${brand.instagramHandle}/embed`;
+      
+      // Clean the handle (remove @ if present)
+      const cleanHandle = brand.instagramHandle.startsWith('@') 
+        ? brand.instagramHandle.substring(1) 
+        : brand.instagramHandle;
+        
+      // We'll use the embed preview
+      const embedUrl = `https://www.instagram.com/${cleanHandle}/embed`;
       setInstagramPreview(embedUrl);
       setIsLoading(false);
     }
@@ -55,6 +61,12 @@ export default function BrandCard({ brand, index }: BrandCardProps) {
       delay: index * 0.1,
       ease: [0.22, 1, 0.36, 1],
     }
+  };
+
+  const getInstagramUrl = (handle: string) => {
+    // Remove @ if present
+    const cleanHandle = handle.startsWith('@') ? handle.substring(1) : handle;
+    return `https://instagram.com/${cleanHandle}`;
   };
 
   return (
@@ -113,7 +125,7 @@ export default function BrandCard({ brand, index }: BrandCardProps) {
 
           {brand.instagramHandle && (
             <a 
-              href={`https://instagram.com/${brand.instagramHandle}`}
+              href={getInstagramUrl(brand.instagramHandle)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
@@ -125,9 +137,9 @@ export default function BrandCard({ brand, index }: BrandCardProps) {
           )}
         </div>
 
-        {/* Instagram Preview */}
+        {/* Instagram Preview - increased height */}
         {brand.instagramHandle && (
-          <div className="w-full h-48 bg-gray-100 dark:bg-gray-700 overflow-hidden relative">
+          <div className="w-full h-60 bg-gray-100 dark:bg-gray-700 overflow-hidden relative">
             {isLoading ? (
               <div className="flex items-center justify-center h-full">
                 <Skeleton className="w-full h-full" />
@@ -135,7 +147,7 @@ export default function BrandCard({ brand, index }: BrandCardProps) {
             ) : instagramPreview ? (
               <iframe
                 src={instagramPreview}
-                className="w-full h-[400px] -mt-32 pointer-events-none"
+                className="w-full h-[500px] -mt-32 pointer-events-none"
                 title={`${brand.name} Instagram`}
                 frameBorder="0"
                 scrolling="no"

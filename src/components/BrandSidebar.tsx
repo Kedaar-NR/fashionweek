@@ -29,6 +29,12 @@ const BrandSidebar = ({ brand, open, onClose }: BrandSidebarProps) => {
 
   if (!brand) return null;
 
+  const getProperInstagramUrl = (handle: string) => {
+    // Remove @ if present
+    const cleanHandle = handle.startsWith('@') ? handle.substring(1) : handle;
+    return `https://instagram.com/${cleanHandle}`;
+  };
+
   return (
     <Sheet open={open} onOpenChange={onClose}>
       <SheetContent className="w-full sm:max-w-md md:max-w-lg overflow-auto">
@@ -67,13 +73,13 @@ const BrandSidebar = ({ brand, open, onClose }: BrandSidebarProps) => {
             
             {brand.instagramHandle && (
               <a 
-                href={`https://instagram.com/${brand.instagramHandle}`} 
+                href={getProperInstagramUrl(brand.instagramHandle)} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-full bg-pink-50 px-3 py-1 text-sm font-medium text-pink-700 hover:bg-pink-100 transition-colors"
               >
                 <Instagram size={14} />
-                @{brand.instagramHandle}
+                @{brand.instagramHandle.replace('@', '')}
               </a>
             )}
           </div>
@@ -87,7 +93,6 @@ const BrandSidebar = ({ brand, open, onClose }: BrandSidebarProps) => {
               height="750"
               frameBorder="0"
               scrolling="no"
-              allowTransparency={true}
               title={`${brand.name} Instagram`}
               className="rounded-md border border-border"
             ></iframe>

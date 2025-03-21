@@ -20,7 +20,7 @@ const HeroSection = ({ brandCount }: HeroSectionProps) => {
         delay: 0.4,
         duration: 0.7
       }} 
-      className="flex flex-col items-center text-center max-w-3xl mx-auto"
+      className="flex flex-col items-center text-center max-w-3xl mx-auto pt-12"
     >
       <motion.p 
         initial={{
