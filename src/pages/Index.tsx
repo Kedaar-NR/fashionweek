@@ -29,7 +29,7 @@ const Index = () => {
         {/* Add the Feedback Tab component */}
         <FeedbackTab />
         
-        {/* Saved Brands Drawer */}
+        {/* Saved Brands Drawer - Now correctly inside the SavedBrandsProvider */}
         <SavedBrandsDrawer
           open={savedBrandsOpen}
           onClose={() => setSavedBrandsOpen(false)}
