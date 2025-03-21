@@ -8,7 +8,7 @@ import { styleConfig } from '../BrandGallery';
 import { getDropDateStyle } from '@/utils/dateUtils';
 import { useSavedBrands } from '@/context/SavedBrandsContext';
 import { Button } from '@/components/ui/button';
-import { useUser } from '@clerk/clerk-react';
+import { useAuth } from '@/context/AuthContext';
 
 interface BrandTableRowProps {
   brand: Brand;
@@ -18,7 +18,7 @@ interface BrandTableRowProps {
 const BrandTableRow = ({ brand, onClick }: BrandTableRowProps) => {
   const styleData = styleConfig[brand.style];
   const { savedBrands, toggleSavedBrand } = useSavedBrands();
-  const { user } = useUser();
+  const { user } = useAuth();
   const isSaved = !!savedBrands[brand.id];
   
   const handleSaveClick = (e: React.MouseEvent) => {

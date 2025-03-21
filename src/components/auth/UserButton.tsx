@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { LogIn, UserCircle2, LogOut, Bookmark } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { useUser, useAuth, useClerk } from '@clerk/clerk-react';
+import { useAuth } from '@/context/AuthContext';
 import AuthModal from './AuthModal';
 
 interface UserButtonProps {
@@ -11,22 +11,20 @@ interface UserButtonProps {
 }
 
 export default function UserButton({ openSavedBrands }: UserButtonProps) {
-  const { user } = useUser();
-  const { signOut } = useClerk();
-  const { isLoaded, isSignedIn } = useAuth();
+  const { user, logout, isLoading } = useAuth();
   const [authModalOpen, setAuthModalOpen] = useState(false);
 
   const handleLogout = async () => {
-    await signOut();
+    await logout();
   };
 
-  if (!isLoaded) {
+  if (isLoading) {
     return <Button variant="ghost" size="sm" disabled>Loading...</Button>;
   }
 
   return (
     <>
-      {isSignedIn ? (
+      {user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full" aria-label="User menu">
@@ -35,7 +33,7 @@ export default function UserButton({ openSavedBrands }: UserButtonProps) {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
             <div className="flex flex-col space-y-1 p-2">
-              <p className="text-sm font-medium leading-none">{user?.primaryEmailAddress?.emailAddress}</p>
+              <p className="text-sm font-medium leading-none">{user.email}</p>
             </div>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={openSavedBrands} className="cursor-pointer">

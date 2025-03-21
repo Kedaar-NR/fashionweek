@@ -1,7 +1,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Brand } from '@/types';
-import { useUser } from '@clerk/clerk-react';
+import { useAuth } from '@/context/AuthContext';
 import { toast } from '@/hooks/use-toast';
 
 interface SavedBrandsContextType {
@@ -13,7 +13,7 @@ interface SavedBrandsContextType {
 const SavedBrandsContext = createContext<SavedBrandsContextType | undefined>(undefined);
 
 export const SavedBrandsProvider = ({ children, brands }: { children: ReactNode; brands: Brand[] }) => {
-  const { user, isLoaded } = useUser();
+  const { user } = useAuth();
   const [savedBrands, setSavedBrands] = useState<Record<string, boolean>>({});
 
   // Load saved brands from localStorage on mount and when user changes
@@ -23,10 +23,10 @@ export const SavedBrandsProvider = ({ children, brands }: { children: ReactNode;
       if (storedBrands) {
         setSavedBrands(JSON.parse(storedBrands));
       }
-    } else if (isLoaded) {
+    } else {
       setSavedBrands({});
     }
-  }, [user, isLoaded]);
+  }, [user]);
 
   // Save to localStorage whenever savedBrands changes
   useEffect(() => {
